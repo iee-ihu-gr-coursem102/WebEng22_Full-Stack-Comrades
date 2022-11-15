@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/nikolasTsakiris/FullStackComrades-UniView/issues"
   },
-  "homepage": "https://github.com/nikolasTsakiris/FullStackComrades-UniView#readme"
+  "homepage": "https://github.com/nikolasTsakiris/FullStackComrades-UniView#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
 }
