@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+ <head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Test Data Dashboard">
+  <meta name="author" content="Nikolas Tsakiris">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+  <title>Development Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href={{ url_for('static', filename='css/main.css') }} rel="stylesheet" media="screen">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+ </head>
+
+
+ <body>
+
+  <canvas id="myChart"></canvas>
+
+  <!--<script src='/static/js/main.js'}></script>-->
+  <script>
+    const ctx = document.getElementById('myChart');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: [
+          {% for item in labels %}
+          "{{ item }}",
+          {% endfor %}
+        ],
+        datasets: [{
+          label: '# of Votes',
+          data: [
+            {% for item in values %}
+            "{{ item }}",
+            {% endfor %}
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  </script>
+
+  </body>
+
+
+</html>
