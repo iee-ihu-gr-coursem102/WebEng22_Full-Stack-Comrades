@@ -68,17 +68,17 @@ def get_bases_departments_year() -> list:
    
 @app.route('/')
 def index():
-   cols_bs_d = ['year', 'department','baseLast']
-   cols_bs_ds_y = ['departments','baseLast']
-   df_bs_d = to_dataFrame(get_bases_department(), cols_bs_d)
-   df_bs_ds_y = to_dataFrame(get_bases_departments_year(), cols_bs_ds_y)
+   cols_bs_d: list = ['year', 'department','baseLast']
+   cols_bs_ds_y: list = ['departments','baseLast']
+   df_bs_d: pd.core.frame.DataFrame  = to_dataFrame(get_bases_department(), cols_bs_d)
+   df_bs_ds_y: pd.core.frame.DataFrame = to_dataFrame(get_bases_departments_year(), cols_bs_ds_y)
 
-   line_labels = df_bs_d['year']
-   line_values = df_bs_d['baseLast']
-   line_title = df_bs_d['department'][0]
+   line_labels: int = df_bs_d['year']
+   line_values: int = df_bs_d['baseLast']
+   line_title: str = df_bs_d['department'][0]
 
-   bar_labels = df_bs_ds_y['departments']
-   bar_values = df_bs_ds_y['baseLast']
+   bar_labels: str = df_bs_ds_y['departments']
+   bar_values: int = df_bs_ds_y['baseLast']
    return render_template('index.html',
                            labels = bar_labels,
                            values = bar_values,
