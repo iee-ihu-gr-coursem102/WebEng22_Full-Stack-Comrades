@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+ <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Test Data Dashboard">
+  <meta name="author" content="Nikolas Tsakiris">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+  <title>Development Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href={{ url_for('static', filename='css/main.css') }} rel="stylesheet" media="screen">
+  <!--<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+</script>
+ </head>
+
+
+ <body>
+
+  <canvas id="bar_chart"></canvas>
+  <canvas id="line_chart"></canvas>
+  <h5>{{department_name}}</h5>
+
+  <!--<script src='/static/js/main.js'}></script>-->
+
+  <script type="text/javascript">
+    const cbx = document.getElementById('bar_chart');
+    new Chart(cbx, {
+      type: 'bar',
+      data: {
+        labels: [
+          {% for item in labels %}
+          "{{ item }}",
+          {% endfor %}
+        ],
+        datasets: [{
+          label: 'Base of Last',
+          data: [
+            {% for item in values %}
+            "{{ item }}",
+            {% endfor %}
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  </script>
+
+<script type="text/javascript">
+  const clx = document.getElementById('line_chart');
+    new Chart(clx, {
+      type: 'line',
+      data : {
+        labels: [
+          {% for item in labels2 %}
+          "{{ item }}",
+          {% endfor %}
+        ],
+        datasets: [{
+          label: 'Bases throught the Years',
+          data: [
+            {% for item in values2 %}
+            "{{ item }}",
+            {% endfor %}
+          ],
+          fill: false,
+          borderColor: 'rgb(75, 192, 192)',
+          tension: 0.1
+        }]
+      }
+    });
+</script>
+
+
+</body>
+
+
+</html>
