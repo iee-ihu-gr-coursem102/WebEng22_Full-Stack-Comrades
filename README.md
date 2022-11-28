@@ -21,7 +21,7 @@
 - Install the project dependencies. The command below generates the  *requirements.txt* file:\
 ```pip freeze > requirements.txt```
 ___
-###### Generated *requirements.txt* file must contain the following packages:\
+###### Generated *requirements.txt* file must contain the following packages:
 - certifi==2021.10.8
 - click==8.0.3
 -  Flask==2.0.2
@@ -40,6 +40,12 @@ ___
 
 #### You are Set!
 ___
+
+###### How to run:
+- Navigate to the folder *before* WebEng22_Full-Stack-Comrades and execute:\
+```flask run```
+___
+
 ## License
 
 MIT
