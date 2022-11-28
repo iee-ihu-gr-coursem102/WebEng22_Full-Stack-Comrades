@@ -46,7 +46,7 @@ ___
 - Set global variable for the project:\
 ```export FLASK_APP=WebEng22_Full-Stack-Comrades```
 
-- Navigate to the folder **before** *WebEng22_Full-Stack-Comrades* and execute:\
+- Navigate to the folder **containing** the *WebEng22_Full-Stack-Comrades* project and execute:\
 ```flask run```
 ___
 
