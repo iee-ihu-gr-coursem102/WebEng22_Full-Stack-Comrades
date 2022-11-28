@@ -42,7 +42,11 @@ ___
 ___
 
 ###### How to run:
-- Navigate to the folder **before** WebEng22_Full-Stack-Comrades and execute:\
+
+- Set global variable for the project:\
+```export FLASK_APP=WebEng22_Full-Stack-Comrades```
+
+- Navigate to the folder **before** *WebEng22_Full-Stack-Comrades* and execute:\
 ```flask run```
 ___
 
