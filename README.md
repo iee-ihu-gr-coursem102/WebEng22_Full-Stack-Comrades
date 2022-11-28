@@ -42,7 +42,7 @@ ___
 ___
 
 ###### How to run:
-- Navigate to the folder *before* WebEng22_Full-Stack-Comrades and execute:\
+- Navigate to the folder **before** WebEng22_Full-Stack-Comrades and execute:\
 ```flask run```
 ___
 
