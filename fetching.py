@@ -1,12 +1,6 @@
-from flask import Flask, jsonify, render_template
-import pandas as pd
-import numpy as np
 import json
 import requests
-# import re, os
-
-app = Flask(__name__)
-
+import pandas as pd
 
 # Utility Functions --------------------------
 
@@ -26,6 +20,7 @@ def uni_titles(res: dict) -> list:
 
    return uni_titles
 
+# Extract Bases of Department Throughout Years
 def bases_department(res: dict) -> list:
    bs_d: list = []
    for i in range(len(res['records'])):
@@ -33,7 +28,7 @@ def bases_department(res: dict) -> list:
 
    return bs_d
 
-# Extract Bases, of Year, of Department
+# Extract Bases, of Year, of Departments
 def bases_departments_year(res: dict) -> list:
    bs_ds_y: list = []
    for i in range(len(res['records'])):
@@ -47,7 +42,7 @@ def to_dataFrame(modded_data: list, cols: list) -> pd.core.frame.DataFrame:
 
    return df
 
-# GET Functions
+# GET Functions --------------------------
 def get_name() -> list:
    data: dict = uni_titles(call_api())
 
@@ -62,40 +57,3 @@ def get_bases_departments_year() -> list:
    data: dict = bases_departments_year(call_api('https://vaseis.iee.ihu.gr/api/index.php/bases/search/?base=15000&department=πληροφορική&year=2020&details=full&type=gel-ime-gen'))
 
    return data
-
-
-# Routes --------------------------
-   
-@app.route('/')
-def index():
-   cols_bs_d: list = ['year', 'department','baseLast']
-   cols_bs_ds_y: list = ['departments','baseLast']
-   df_bs_d: pd.core.frame.DataFrame  = to_dataFrame(get_bases_department(), cols_bs_d)
-   df_bs_ds_y: pd.core.frame.DataFrame = to_dataFrame(get_bases_departments_year(), cols_bs_ds_y)
-
-   line_labels: int = df_bs_d['year']
-   line_values: int = df_bs_d['baseLast']
-   line_title: str = df_bs_d['department'][0]
-
-   bar_labels: str = df_bs_ds_y['departments']
-   bar_values: int = df_bs_ds_y['baseLast']
-   return render_template('index.html',
-                           labels = bar_labels,
-                           values = bar_values,
-                           department_name = line_title,
-                           labels2 = line_labels,
-                           values2 = line_values,
-                           )
-
-
-
-if __name__ == '__main__':
-   app.run(debug=True)
-
-
-
-
-
-
-
-   
