@@ -20,6 +20,7 @@ def uni_titles(res: dict) -> list:
 
    return uni_titles
 
+# Extract Bases of Department Throughout Years
 def bases_department(res: dict) -> list:
    bs_d: list = []
    for i in range(len(res['records'])):
@@ -27,7 +28,7 @@ def bases_department(res: dict) -> list:
 
    return bs_d
 
-# Extract Bases, of Year, of Department
+# Extract Bases, of Year, of Departments
 def bases_departments_year(res: dict) -> list:
    bs_ds_y: list = []
    for i in range(len(res['records'])):
@@ -56,4 +57,3 @@ def get_bases_departments_year() -> list:
    data: dict = bases_departments_year(call_api('https://vaseis.iee.ihu.gr/api/index.php/bases/search/?base=15000&department=πληροφορική&year=2020&details=full&type=gel-ime-gen'))
 
    return data
-
