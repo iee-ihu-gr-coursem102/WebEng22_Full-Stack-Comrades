@@ -1,0 +1,12 @@
+Git Repository
+https://github.com/iee-ihu-gr-coursem102/WebEng22_Full-Stack-Comrades
+
+Mockups
+https://miro.com/app/board/uXjVPGDwnos=/?share_link_id=835801284813
+
+UMLs
+https://lucid.app/lucidchart/87749989-53b8-4c23-a05a-579bc5095184/edit?viewport_loc=-395%2C-247%2C2692%2C1794%2C0_0&invitationId=inv_755f0a0b-1784-44be-9f39-874aa31d2d1d
+https://lucid.app/lucidchart/b2a4ba68-3b7a-4f11-9d05-b0e672f3eb6e/edit?viewport_loc=-87%2C-202%2C2692%2C1794%2C0_0&invitationId=inv_d99623f9-5cee-4540-a6de-bc4b85024e5c
+
+Trello
+Link can be shared after private request.
