@@ -1,16 +1,17 @@
-from flask import render_template
+from flask import render_template, request
 from flask import Blueprint
 import pandas as pd
+from flask_login import login_required, current_user
 from . import fetching as ftc
 
 main = Blueprint('main', __name__)
 
-@main.route('/')
+@main.route('/', methods = ['GET', 'POST'])
 def index():
-    cols_bs_d: list = ['year', 'department','baseLast']
+    cols_bs_d: list = ['year','department','baseLast']
     cols_bs_ds_y: list = ['departments','baseLast']
     df_bs_d: pd.core.frame.DataFrame  = ftc.to_dataFrame(ftc.get_bases_department(), cols_bs_d)
-    df_bs_ds_y: pd.core.frame.DataFrame = ftc.to_dataFrame(ftc.get_bases_departments_year(), cols_bs_ds_y)
+    df_bs_ds_y: pd.core.frame.DataFrame = ftc.to_dataFrame(ftc.get_bases_departments_year(request.form.get('operator')), cols_bs_ds_y)
 
     line_labels: int = df_bs_d['year']
     line_values: int = df_bs_d['baseLast']
@@ -23,9 +24,10 @@ def index():
                             values = bar_values,
                             department_name = line_title,
                             labels2 = line_labels,
-                            values2 = line_values,
+                            values2 = line_values
                             )
 
 @main.route('/profile')
+@login_required
 def profile():
-    return 'Profile'
+    return render_template('profile.html', username = current_user.username)

@@ -53,7 +53,10 @@ def get_bases_department() -> list:
 
    return data
 
-def get_bases_departments_year() -> list:
-   data: dict = bases_departments_year(call_api('https://vaseis.iee.ihu.gr/api/index.php/bases/search/?base=15000&department=πληροφορική&year=2020&details=full&type=gel-ime-gen'))
+def get_bases_departments_year(department) -> list:
+   print(f'this is the dept: {department}')
+   if department == None: link: str = 'https://vaseis.iee.ihu.gr/api/index.php/bases/search/?base=20000&department=πληροφορική&year=2020&details=full&type=gel-ime-gen'
+   else: link = f'https://vaseis.iee.ihu.gr/api/index.php/bases/search/?base=20000&department={department}&year=2020&details=full&type=gel-ime-gen'
+   data: dict = bases_departments_year(call_api(link))
 
    return data
