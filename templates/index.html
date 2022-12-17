@@ -19,6 +19,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
  </head>
 
+
+
+
  <body>
 
   <div class="form-group">
@@ -30,16 +33,35 @@
           <option value="λογιστική">Λογιστική</option>
         </select>
       <input type="submit" value="Submit" class="btn btn-primary btn-sm">
+      <button type="button" class="btn btn-info" id="save_selections" onclick="myFunction()">Save Selections</button>
+      <p id="demo"></p>
     </form> 
   </div>
+  
+
+
 
   <canvas id="bar_chart"></canvas>
   <canvas id="line_chart"></canvas>
   <h5>{{department_name}}</h5>
 
+
+
+
   <script type="text/javascript">
-    
+    function myFunction() {
+      let text = "This action will save all your preferences!";
+      if (confirm(text) == true) {
+        text = "Your preference(s) have been saved!";
+      } else {
+        text = "You canceled!";
+      }
+      document.getElementById("demo").innerHTML = text;
+    }
   </script>
+
+
+
 
   <script type="text/javascript">
     const cbx = document.getElementById('bar_chart');
@@ -95,6 +117,9 @@
       }
     });
 </script>
+
+
+
 
 </body>
 
