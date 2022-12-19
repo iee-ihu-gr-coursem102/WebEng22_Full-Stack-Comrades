@@ -1,16 +1,19 @@
-CREATE TABLE IF NOT EXISTS User(
-	"user_id"	INTEGER NOT NULL,
+CREATE TABLE "User" (
+	"id"	INTEGER NOT NULL,
 	"mail"	TEXT NOT NULL,
 	"username"	TEXT NOT NULL,
 	"password"	TEXT NOT NULL,
-	PRIMARY KEY("user_id")
+	PRIMARY KEY("id")
 );
 
-CREATE TABLE IF NOT EXISTS Preferences(
-	"preference_id"	INTEGER NOT NULL,
-	"user_id"	INTEGER NOT NULL,
+CREATE TABLE "Preference" (
+	"id"	INTEGER NOT NULL,
 	"city"	TEXT,
 	"university"	TEXT,
 	"department"	TEXT,
-	PRIMARY KEY("preference_id")
+	"year"	INTEGER,
+	"base"	BLOB,
+	"user_id"	TEXT,
+	PRIMARY KEY("id"),
+	FOREIGN KEY("user_id") REFERENCES "User"("id")
 );
