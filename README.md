@@ -13,6 +13,11 @@
 - Activate before installing packages (you must always activate your environment before working on your project):\
 ```source flask/bin/activate```
 
+- For Windows:\
+```Set-ExecutionPolicy RemoteSigned```
+```flask\Scripts\activate```
+```Set-ExecutionPolicy Restricted```
+
 - Install Flask and corresponding useful libraries:\
 ```pip install Flask```\
 ```pip install pandas```\
@@ -45,6 +50,14 @@ ___
 
 - Set global variable for the project:\
 ```export FLASK_APP=WebEng22_Full-Stack-Comrades```
+- For Windows:\
+```powershell```
+```$env:FLASK_APP = "__init__.py"```
+
+- Install more things
+```pip install Flask-SQLAlchemy```
+```pip install requests```
+```pip install flask_login```
 
 - Navigate to the folder **containing** the *WebEng22_Full-Stack-Comrades* project and execute:\
 ```flask run```

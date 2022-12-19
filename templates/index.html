@@ -35,7 +35,14 @@
 
   <canvas id="bar_chart"></canvas>
   <canvas id="line_chart"></canvas>
+  <canvas id="line_chart2"></canvas>
+  <canvas id="doughnutArea"></canvas>
+  <canvas id="bar_chart2"></canvas>
+
   <h5>{{department_name}}</h5>
+  <h1>Max Year: {{max_y}}</h1>
+  <h1>Department Sum: {{dept_sum}}</h1>
+  <h1>Uni Sum: {{uni_sum}}</h1>
 
   <script type="text/javascript">
     
@@ -94,6 +101,113 @@
         }]
       }
     });
+</script>
+
+<script type="text/javascript">
+  const cl2x = document.getElementById('line_chart2');
+    new Chart(cl2x, {
+      type: 'line',
+      data : {
+        labels: [
+          {% for item in labels3 %}
+          "{{ item }}",
+          {% endfor %}
+        ],
+        datasets: [
+          {
+          label: 'Top 3 Preferences',
+          data: [
+            {% for item in pref_top3 %}
+            "{{ item }}",
+            {% endfor %}
+          ],
+          fill: false,
+          borderColor: 'rgb(75, 192, 192)',
+          tension: 0.1
+          },
+          {
+          label: 'Top 3 Successful Preferences',
+          data: [
+            {% for item in su_pref_top3 %}
+            "{{ item }}",
+            {% endfor %}
+          ],
+          fill: false,
+          borderColor: 'rgb(255, 99, 132)',
+          tension: 0.1
+          }
+        ]
+      }
+    });
+</script>
+
+<script type="text/javascript">
+  const cpx = document.getElementById('doughnutArea');
+    new Chart(cpx, {
+      type: 'doughnut',
+      data : {
+        labels: [
+          {% for item in pol_lab %}
+          "{{ item }}",
+          {% endfor %}
+        ],
+        datasets: [{
+          label: 'Bases throught the Years',
+          data: [
+            {% for item in pol_val %}
+            "{{ item }}",
+            {% endfor %}
+          ],
+          backgroundColor: [
+          'rgb(255, 99, 132)',
+          'rgb(54, 162, 235)',
+          'rgb(78, 73, 226)',
+          'rgb(16, 152, 75)',
+          'rgb(132, 155, 15)',
+          'rgb(102, 135, 115)',
+          'rgb(75, 192, 192)',
+          'rgb(163, 46, 230)',
+          'rgb(255, 205, 86)'
+          ],
+          fill: true,
+          borderColor: 'rgb(75, 192, 192)',
+          tension: 0.1
+        }]
+      }
+    });
+</script>
+
+<script type="text/javascript">
+  const cb2x = document.getElementById('bar_chart2');
+  new Chart(cb2x, {
+    type: 'bar',
+    data: {
+      labels: [
+        {% for item in labels5 %}
+        "{{ item }}",
+        {% endfor %}
+      ],
+      datasets: [{
+        label: 'Departments by University',
+        data: [
+          {% for item in values5 %}
+          "{{ item }}",
+          {% endfor %}
+        ],
+        backgroundColor: 'rgb(75, 192, 192)',
+        borderWidth: 1,
+        borderRadius: 5,
+        borderSkipped: false
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
 </script>
 
 </body>

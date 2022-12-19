@@ -20,6 +20,40 @@ def uni_titles(res: dict) -> list:
 
    return uni_titles
 
+# Extract Maximum Year
+def max_Year(res: int) -> int:
+   m_Year: int = res['maxYear']
+
+   return m_Year
+
+# Extract Sum of Departments
+def department_sum(res: dict) -> int:
+   dp_s = len(res)
+
+   return dp_s
+
+# Extract Sum of Universities
+def university_sum(res: dict) -> int:
+   uni_s = len(res['records'])
+
+   return uni_s
+
+# Extract List of Universities
+def university_list(res: dict) -> list:
+   uni_s: list = []
+   for i in range(len(res['records'])):
+      uni_s.append([res['records'][i]['id'], res['records'][i]['title']])
+
+   return uni_s
+
+
+# Extract Exam types
+def exam_types(res: dict) -> list:
+   ex_t: list = []
+   for i in range(len(res['records'])):
+      ex_t.append([res['records'][i]['examType'], res['records'][i]['positions']])
+   return ex_t
+
 # Extract Bases of Department Throughout Years
 def bases_department(res: dict) -> list:
    bs_d: list = []
@@ -36,6 +70,7 @@ def bases_departments_year(res: dict) -> list:
 
    return bs_ds_y
 
+
 # Turn to DataFrame
 def to_dataFrame(modded_data: list, cols: list) -> pd.core.frame.DataFrame:
    df: pd.core.frame.DataFrame = pd.DataFrame(modded_data, columns = cols)
@@ -46,6 +81,44 @@ def to_dataFrame(modded_data: list, cols: list) -> pd.core.frame.DataFrame:
 def get_name() -> list:
    data: dict = uni_titles(call_api())
 
+   return data
+
+def get_maxYear() -> int:
+   data: int = max_Year(call_api('https://vaseis.iee.ihu.gr/api/index.php/bases/?year=max'))
+
+   return data
+
+theURL: str = "https://vaseis.iee.ihu.gr/api/index.php/bases/search/?base=15000&department=πληροφορική&year=" + str(get_maxYear()) + "&details=full&type=gel-ime-gen"
+
+uniIDs: list = university_list(call_api('https://vaseis.iee.ihu.gr/api/index.php/universities'))
+
+def get_dptSum() -> int:
+   data: int = department_sum(call_api('https://vaseis.iee.ihu.gr/api/index.php/departments'))
+
+   return data
+
+def get_uniSum() -> int:
+   data: int = university_sum(call_api('https://vaseis.iee.ihu.gr/api/index.php/universities'))
+
+   return data
+
+def get_uniList() -> list:
+   data: list = university_list(call_api('https://vaseis.iee.ihu.gr/api/index.php/universities'))
+   #print(data)
+   return data
+
+def get_depts_by_uni() -> list:
+   data: list = []
+   for i in range(len(uniIDs)):
+      myURL: str = 'https://vaseis.iee.ihu.gr/api/index.php/departments/university/'+ str(uniIDs[i][0])
+      theSum: int = department_sum(call_api(myURL))
+      data.append([uniIDs[i][1], theSum])
+   #print(data)
+   return data
+
+def get_examTypes() -> str:
+   data: str = exam_types(call_api('https://vaseis.iee.ihu.gr/api/index.php/bases/2022/department/1625'))
+   #print(data)
    return data
 
 def get_bases_department() -> list:
@@ -59,4 +132,45 @@ def get_bases_departments_year(department) -> list:
    else: link = f'https://vaseis.iee.ihu.gr/api/index.php/bases/search/?base=20000&department={department}&year=2020&details=full&type=gel-ime-gen'
    data: dict = bases_departments_year(call_api(link))
 
+   return data
+
+
+def preferences_top_3(res: dict) -> list:
+   pr_t_3: list = []
+   f= s= t = 0
+   for i in range(len(res[0]['statistics'])):
+      if ((res[0]['statistics'][i]['year'])==2022):
+         theList = res[0]['statistics'][i]['candidatePreferences']
+         f += int(theList['first'])
+         s += int(theList['second'])
+         t += int(theList['third'])
+   theDict: dict = {'First': f, 'Second': s, 'Third' : t}
+   pr_t_3 = list(theDict.items())
+   return pr_t_3
+
+def successful_preferences_top_3(res: dict) -> list:
+   su_pr_t_3: list = []
+   f= s= t = 0
+   for i in range(len(res[0]['statistics'])):
+      if ((res[0]['statistics'][i]['year'])==2022):
+         theList = res[0]['statistics'][i]['successfulPreferences']
+         f += int(theList['first'])
+         s += int(theList['second'])
+         t += int(theList['third'])
+   theDict: dict = {'first': f, 'second': s, 'third' : t}
+   su_pr_t_3 = list(theDict.items())
+   return su_pr_t_3
+
+def get_preferences_top_3() -> list:
+   
+   link = 'https://vaseis.iee.ihu.gr/api/index.php/v1.0/statistics/department/1625'
+   data: list = preferences_top_3(call_api(link))
+   #print(data)
+   return data
+
+def get_successful_preferences_top_3() -> list:
+   
+   link = 'https://vaseis.iee.ihu.gr/api/index.php/v1.0/statistics/department/1625'
+   data: list = successful_preferences_top_3(call_api(link))
+   #print(data)
    return data
