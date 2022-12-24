@@ -2,6 +2,9 @@
 
 ### UniView Website
 
+#### Functionality Requirements Report is at the link below -> 
+https://docs.google.com/spreadsheets/d/1GqqP_t0dQVbJOB64EJoC6flGX8PWPmG5JRZP1xR_mP8/edit?usp=sharing
+
 ###### Project Environment Setup
 
 - Create a virtual Python environment:\
