@@ -8,12 +8,11 @@ CREATE TABLE "User" (
 
 CREATE TABLE "Preference" (
 	"id"	INTEGER NOT NULL,
-	"city"	TEXT,
-	"university"	TEXT,
+	"positions"	INTEGER,
 	"department"	TEXT,
 	"year"	INTEGER,
 	"base"	BLOB,
-	"user_id"	TEXT,
+	"user_id"	TEXT NOT NULL,
 	PRIMARY KEY("id"),
 	FOREIGN KEY("user_id") REFERENCES "User"("id")
 );
