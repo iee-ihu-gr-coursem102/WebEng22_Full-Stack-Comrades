@@ -20,10 +20,17 @@ def index():
     dp_s: int = ftc.get_dptSum()
     un_s: int = ftc.get_uniSum()
 
-    cols_dp_uni: list = ['uni', 'depts']
-    dp_uni: pd.core.frame.DataFrame  = ftc.to_dataFrame(ftc.get_depts_by_uni(), cols_dp_uni)
-    du_labels: str = dp_uni['uni']
-    du_values: int = dp_uni['depts']
+    # cols_dp_uni: list = ['uni', 'depts']
+    # dp_uni: pd.core.frame.DataFrame  = ftc.to_dataFrame(ftc.get_depts_by_uni(), cols_dp_uni)
+    # du_labels: str = dp_uni['uni']
+    # du_values: int = dp_uni['depts']
+
+    cols_uni: list = ['id', 'title']
+    un_ti: pd.core.frame.DataFrame = ftc.to_dataFrame(ftc.get_uniList(), cols_uni)
+    un_ids: int = un_ti['id']
+    un_titles: str = un_ti['title']
+
+    un_dps: list = ftc.get_depts_by_uni(request.form.get('uni-sl'))
 
     cols_pr_t3: list = ['position', 'prefs']
     pr_t3: pd.core.frame.DataFrame  = ftc.to_dataFrame(ftc.get_preferences_top_3(), cols_pr_t3)
@@ -60,8 +67,10 @@ def index():
                             su_pref_top3 = su_pr_values,
                             pol_val = polar_values,
                             pol_lab = polar_labels,
-                            labels5 = du_labels,
-                            values5 = du_values
+                            uni_tit = un_titles,
+                            uni_dps = un_dps
+                            #labels5 = du_labels,
+                            #values5 = du_values
                             )
 
 @main.route('/profile')

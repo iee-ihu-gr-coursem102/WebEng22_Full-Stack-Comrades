@@ -32,6 +32,14 @@ def department_sum(res: dict) -> int:
 
    return dp_s
 
+# Extract List of Departments
+def department_list(res: dict) -> list:
+   dept_l: list = []
+   for i in res:
+      dept_l.append(i['name'])
+
+   return dept_l   
+
 # Extract Sum of Universities
 def university_sum(res: dict) -> int:
    uni_s = len(res['records'])
@@ -104,16 +112,34 @@ def get_uniSum() -> int:
 
 def get_uniList() -> list:
    data: list = university_list(call_api('https://vaseis.iee.ihu.gr/api/index.php/universities'))
-   #print(data)
+   print(data)
    return data
 
-def get_depts_by_uni() -> list:
+# def get_uni_titles() -> list:
+#    data: list = []
+#    for i in range(len(uniIDs)):
+#       data.append(uniIDs[i][1])
+#    print(data)
+#    return data
+
+def get_uni_id_by_title(theTitle) -> int:
+   data: int = 0
+   theList = get_uniList()
+   for i in range(len(theList)):
+      if(theList[i][1]==theTitle):
+         data = theList[i][0]
+   print(data)
+   return data
+
+
+def get_depts_by_uni(theTitle) -> list:
    data: list = []
-   for i in range(len(uniIDs)):
-      myURL: str = 'https://vaseis.iee.ihu.gr/api/index.php/departments/university/'+ str(uniIDs[i][0])
-      theSum: int = department_sum(call_api(myURL))
-      data.append([uniIDs[i][1], theSum])
-   #print(data)
+   theID: int = get_uni_id_by_title(theTitle)
+   myURL: str = 'https://vaseis.iee.ihu.gr/api/index.php/departments/university/'+ str(theID)
+   theDepts: list = department_list(call_api(myURL))
+   for i in range(len(theDepts)):
+      data.append(theDepts[i])
+   print(data)
    return data
 
 def get_examTypes() -> str:
