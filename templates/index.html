@@ -67,6 +67,7 @@
 <canvas id="line_chart"></canvas>
 <canvas id="line_chart2"></canvas>
 <canvas id="doughnutArea"></canvas>
+<canvas id="line_chart3"></canvas>
 
 <div class="uni-slct">
   <form method="post">
@@ -254,6 +255,33 @@
           borderColor: 'rgb(75, 192, 192)',
           tension: 0.1
         }]
+      }
+    });
+</script>
+
+<script type="text/javascript">
+  const cl3x = document.getElementById('line_chart3');
+    new Chart(cl3x, {
+      type: 'line',
+      data : {
+        labels: [
+          {% for item in po_labels %}
+          "{{ item }}",
+          {% endfor %}
+        ],
+        datasets: [
+          {
+          label: 'Positions',
+          data: [
+            {% for item in po_values %}
+            "{{ item }}",
+            {% endfor %}
+          ],
+          fill: false,
+          borderColor: 'rgb(75, 192, 192)',
+          tension: 0.1
+          }
+        ]
       }
     });
 </script>

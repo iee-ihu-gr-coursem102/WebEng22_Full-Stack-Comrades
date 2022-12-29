@@ -51,6 +51,12 @@ def index():
     polar_labels: str = ex_ty['examType']
     polar_values: int = ex_ty['positions']
 
+    cols_po_y_ex: list = ['positions', 'year', 'examType']
+    po_y_ex: pd.core.frame.DataFrame  = ftc.to_dataFrame(ftc.get_positions_year_examType(), cols_po_y_ex)
+    po_y_ex_labels: int = po_y_ex['year']
+    po_y_ex_values: int = po_y_ex['positions']
+    po_y_ex_titles: str = po_y_ex['examType']
+
     line_labels: int = df_bs_d['year']
     line_values: int = df_bs_d['baseLast']
     line_title: str = df_bs_d['department'][0]
@@ -73,7 +79,10 @@ def index():
                             pol_val = polar_values,
                             pol_lab = polar_labels,
                             uni_tit = un_titles,
-                            uni_dps = un_dps
+                            uni_dps = un_dps,
+                            po_labels = po_y_ex_labels,
+                            po_values = po_y_ex_values,
+                            po_titles = po_y_ex_titles
                             #labels5 = du_labels,
                             #values5 = du_values
                             )
