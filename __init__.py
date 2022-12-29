@@ -8,8 +8,8 @@ def create_app():
    app = Flask(__name__)
    
    app.config['SECRET_KEY'] = 'secret-key-goes-here'
-   app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////home/nikolai/Downloads/Github/WebEng22_Full-Stack-Comrades/db.sqlite'
-   #sqlite:///C:\\Users\\Stella\\Documents\\GitHub\\WebEng22_Full-Stack-Comrades\\db.sqlite
+   app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///C:\\Users\\Stella\\Documents\\GitHub\\WebEng22_Full-Stack-Comrades\\db.sqlite'
+   #sqlite:////home/nikolai/Downloads/Github/WebEng22_Full-Stack-Comrades/db.sqlite
 
    #from . import db
    database.init_app(app)
