@@ -17,41 +17,46 @@ def insert_user(mail, username, password) -> bool:
         db.close()
     return True
 
+def insert_department(db, cursor, uni, uid) -> bool:
+    statement: str
+    statement = "INSERT INTO Preference(department, user_id) VALUES(?, ?);"
+    cursor.execute(statement, [uni, uid])
 
-def insert_preference(cr_usnm) -> None:
+    return True
+
+def insert_base(db, cursor, uni, uid) -> bool:
+    statement: str
+    statement = "INSERT INTO Preference(base, user_id) VALUES(?, ?);"
+    cursor.execute(statement, [uni, uid])
+
+    return True
+
+def insert_positions(db, cursor, uni, uid) -> bool:
+    statement: str
+    statement = "INSERT INTO Preference(positions, user_id) VALUES(?, ?);"
+    cursor.execute(statement, [uni, uid])
+
+    return True
+
+def insert_year(db, cursor, uni, uid) -> bool:
+    statement: str
+    statement = "INSERT INTO Preference(year, user_id) VALUES(?, ?);"
+    cursor.execute(statement, [uni, uid])
+    
+    return True
+
+def insert_preference(cr_usnm, uid, op1, op2, op3, op4) -> None:
     db = get_db()
     cursor = db.cursor()
     statement: str
-    statement = "SELECT username FROM User WHERE username = (?);"
+    statement = "SELECT id FROM User WHERE username = (?);"
     cursor.execute(statement, [cr_usnm])
     exist = cursor.fetchone()
     
     if exist is not None:
-        insert_university(db, cursor, "ΑΠΘ", cr_usnm)
+        statement: str
+        statement = "INSERT INTO Preference(positions,department,year,base,user_id) VALUES(?,?,?,?,?);"
+        cursor.execute(statement, [op1,op2,op3,op4,uid])
 
-
-#def insert_city():
-#
-#
-
-def insert_university(db, cursor, uni, cr_usnm) -> bool:
-    statement: str
-    statement = "INSERT INTO Preference(university, user_id) VALUES(?, ?);"
-    cursor.execute(statement, [uni, cr_usnm])
     db.commit()
     db.close()
-    return True
-
-
-
-#def insert_department():
-#
-#
-
-#def insert_year():
-#
-#
-
-#def insert_base():
-
-

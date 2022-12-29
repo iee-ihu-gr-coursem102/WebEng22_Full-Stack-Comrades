@@ -71,6 +71,7 @@ def index():
 
 @main.route('/save', methods = ['GET', 'POST'])
 def save_selections() -> None:
+    print('ohGod...')
     op1 = request.form.get('pos')
     op2 = request.form.get('dept')
     op3 = request.form.get('yr')
