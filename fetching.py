@@ -78,6 +78,14 @@ def bases_departments_year(res: dict) -> list:
 
    return bs_ds_y
 
+# Extract Positions, of Year, by ExamType
+def positions_year_examType(res: dict) -> list:
+   po_y_ex: list = []
+   for i in range(len(res['records'])):
+      po_y_ex.append([res['records'][i]['year'], res['records'][i]['positions'], res['records'][i]['specialCat']])
+      
+   return po_y_ex
+
 
 # Turn to DataFrame
 def to_dataFrame(modded_data: list, cols: list) -> pd.core.frame.DataFrame:
@@ -128,7 +136,7 @@ def get_uni_id_by_title(theTitle) -> int:
    for i in range(len(theList)):
       if(theList[i][1]==theTitle):
          data = theList[i][0]
-   print(data)
+   #print(data)
    return data
 
 
@@ -139,7 +147,7 @@ def get_depts_by_uni(theTitle) -> list:
    theDepts: list = department_list(call_api(myURL))
    for i in range(len(theDepts)):
       data.append(theDepts[i])
-   print(data)
+   #print(data)
    return data
 
 def get_examTypes() -> str:
@@ -198,5 +206,11 @@ def get_successful_preferences_top_3() -> list:
    
    link = 'https://vaseis.iee.ihu.gr/api/index.php/v1.0/statistics/department/1625'
    data: list = successful_preferences_top_3(call_api(link))
+   #print(data)
+   return data
+
+def get_positions_year_examType(tType) -> list:
+   link = 'https://vaseis.iee.ihu.gr/api/index.php/bases/department/98?type=' + tType
+   data: list = positions_year_examType(call_api(link))
    #print(data)
    return data
