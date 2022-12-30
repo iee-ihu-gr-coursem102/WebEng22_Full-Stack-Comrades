@@ -51,11 +51,20 @@ def index():
     polar_labels: str = ex_ty['examType']
     polar_values: int = ex_ty['positions']
 
-    cols_po_y_ex: list = ['positions', 'year', 'examType']
-    po_y_ex: pd.core.frame.DataFrame  = ftc.to_dataFrame(ftc.get_positions_year_examType(), cols_po_y_ex)
-    po_y_ex_labels: int = po_y_ex['year']
-    po_y_ex_values: int = po_y_ex['positions']
-    po_y_ex_titles: str = po_y_ex['examType']
+    cols_po_y_ex: list = ['year', 'positions', 'specialCat']
+    years: list = ['2019', '2020', '2021', '2022']
+    po_y_ex1: pd.core.frame.DataFrame  = ftc.to_dataFrame(ftc.get_positions_year_examType("gel-ime-gen"), cols_po_y_ex)
+    po_y_ex2: pd.core.frame.DataFrame  = ftc.to_dataFrame(ftc.get_positions_year_examType("epal-ime-gen"), cols_po_y_ex)
+    po_y_ex3: pd.core.frame.DataFrame  = ftc.to_dataFrame(ftc.get_positions_year_examType("gel-ime-ten"), cols_po_y_ex)
+    po_y_ex4: pd.core.frame.DataFrame  = ftc.to_dataFrame(ftc.get_positions_year_examType("epal-ime-ten"), cols_po_y_ex)
+    
+    po_y_ex_title: str = po_y_ex1['specialCat']
+    po_y_ex_labels: int = po_y_ex1['year']
+    
+    po_y_ex_values1: int = po_y_ex1['positions']
+    po_y_ex_values2: int = po_y_ex2['positions']
+    po_y_ex_values3: int = po_y_ex3['positions']
+    po_y_ex_values4: int = po_y_ex4['positions']
 
     line_labels: int = df_bs_d['year']
     line_values: int = df_bs_d['baseLast']
@@ -81,8 +90,11 @@ def index():
                             uni_tit = un_titles,
                             uni_dps = un_dps,
                             po_labels = po_y_ex_labels,
-                            po_values = po_y_ex_values,
-                            po_titles = po_y_ex_titles
+                            po_title = po_y_ex_title,
+                            po_values1 = po_y_ex_values1,
+                            po_values2 = po_y_ex_values2,
+                            po_values3 = po_y_ex_values3,
+                            po_values4 = po_y_ex_values4,
                             #labels5 = du_labels,
                             #values5 = du_values
                             )
