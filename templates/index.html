@@ -77,8 +77,9 @@
 </form>
 
 <canvas id="line_chart"></canvas>
-<canvas id="line_chart2"></canvas>
+<canvas id="radar_chart"></canvas>
 <canvas id="doughnutArea"></canvas>
+<canvas id="line_chart3"></canvas>
 
 <div class="uni-slct">
   <form method="post">
@@ -93,7 +94,6 @@
   </form> 
 </div>
 
-<!--<canvas id="bar_chart2"></canvas>-->
 
 <h5>{{department_name}}</h5>
 <h1>Max Year: {{max_y}}</h1>
@@ -158,7 +158,10 @@
           "{{ item }}",
           {% endfor %}
         ],
-        borderWidth: 1
+        borderColor: 'rgb(75, 192, 192)',
+        backgroundColor: 'rgba(75, 192, 192, 0.5)',
+        borderWidth: 3,
+        borderRadius: 10
       }]
     },
     options: {
@@ -190,16 +193,19 @@
           ],
           fill: false,
           borderColor: 'rgb(75, 192, 192)',
-          tension: 0.1
+          backgroundColor: 'rgba(75, 192, 192, 0.5)',
+          pointStyle: 'circle',
+          pointRadius: 10,
+          pointHoverRadius: 15
         }]
       }
     });
 </script>
 
 <script type="text/javascript">
-  const cl2x = document.getElementById('line_chart2');
+  const cl2x = document.getElementById('radar_chart');
     new Chart(cl2x, {
-      type: 'line',
+      type: 'radar',
       data : {
         labels: [
           {% for item in labels3 %}
@@ -208,26 +214,26 @@
         ],
         datasets: [
           {
-          label: 'Top 3 Preferences',
-          data: [
-            {% for item in pref_top3 %}
-            "{{ item }}",
-            {% endfor %}
-          ],
-          fill: false,
-          borderColor: 'rgb(75, 192, 192)',
-          tension: 0.1
-          },
-          {
           label: 'Top 3 Successful Preferences',
           data: [
             {% for item in su_pref_top3 %}
             "{{ item }}",
             {% endfor %}
           ],
-          fill: false,
+          fill: true,
           borderColor: 'rgb(255, 99, 132)',
-          tension: 0.1
+          backgroundColor: 'rgba(255, 99, 132, 0.7)',
+          },
+          {
+          label: 'Top 3 Preferences',
+          data: [
+            {% for item in pref_top3 %}
+            "{{ item }}",
+            {% endfor %}
+          ],
+          fill: true,
+          borderColor: 'rgb(75, 192, 192)',
+          backgroundColor: 'rgba(75, 192, 192, 0.5)'
           }
         ]
       }
@@ -252,20 +258,84 @@
             {% endfor %}
           ],
           backgroundColor: [
-          'rgb(255, 99, 132)',
-          'rgb(54, 162, 235)',
-          'rgb(78, 73, 226)',
-          'rgb(16, 152, 75)',
-          'rgb(132, 155, 15)',
-          'rgb(102, 135, 115)',
-          'rgb(75, 192, 192)',
-          'rgb(163, 46, 230)',
-          'rgb(255, 205, 86)'
+          'rgba(255, 99, 132, 0.7)',
+          'rgba(54, 162, 235, 0.7)',
+          'rgba(78, 73, 226, 0.7)',
+          'rgba(16, 152, 75, 0.7)',
+          'rgba(132, 155, 15, 0.7)',
+          'rgba(102, 135, 115, 0.7)',
+          'rgba(75, 192, 192, 0.7)',
+          'rgba(163, 46, 230, 0.7)',
+          'rgba(255, 205, 86, 0.7)'
           ],
           fill: true,
           borderColor: 'rgb(75, 192, 192)',
           tension: 0.1
         }]
+      }
+    });
+</script>
+
+<script type="text/javascript">
+  const cl3x = document.getElementById('line_chart3');
+    new Chart(cl3x, {
+      type: 'line',
+      data : {
+        labels: [
+          {% for item in po_labels %}
+          "{{ item }}",
+          {% endfor %}
+        ],
+        datasets: [
+        {
+          label: 'ΕΠΑΛ ΗΜΕΡΗΣΙΑ 10%',
+          data: [
+            {% for item in po_values4 %}
+            "{{ item }}",
+            {% endfor %}
+          ],
+          fill: true,
+          borderColor: 'rgb(255,205,86)',
+          backgroundColor: 'rgba(255,205,86, 0.5)',
+          tension: 0.1
+          },
+          {
+          label: 'ΓΕΛ ΗΜΕΡΗΣΙΑ 10%',
+          data: [
+            {% for item in po_values3 %}
+            "{{ item }}",
+            {% endfor %}
+          ],
+          fill: true,
+          borderColor: 'rgb(54,162,235)',
+          backgroundColor: 'rgba(54,162,235, 0.5)',
+          tension: 0.1
+          },
+          {
+          label: 'ΕΠΑΛ ΗΜΕΡΗΣΙΑ 90%',
+          data: [
+            {% for item in po_values2 %}
+            "{{ item }}",
+            {% endfor %}
+          ],
+          fill: true,
+          borderColor: 'rgb(251,100,132)',
+          backgroundColor: 'rgba(251,100,132, 0.5)',
+          tension: 0.1
+          },
+          {
+          label: 'ΓΕΛ ΗΜΕΡΗΣΙΑ 90%',
+          data: [
+            {% for item in po_values1 %}
+            "{{ item }}",
+            {% endfor %}
+          ],
+          fill: true,
+          borderColor: 'rgb(75, 192, 192)',
+          backgroundColor: 'rgba(75, 192, 192, 0.5)',
+          tension: 0.1
+          }
+        ]
       }
     });
 </script>
