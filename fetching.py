@@ -140,15 +140,15 @@ def get_uni_id_by_title(theTitle) -> int:
    return data
 
 
-def get_depts_by_uni(theTitle) -> list:
-   data: list = []
-   theID: int = get_uni_id_by_title(theTitle)
-   myURL: str = 'https://vaseis.iee.ihu.gr/api/index.php/departments/university/'+ str(theID)
-   theDepts: list = department_list(call_api(myURL))
-   for i in range(len(theDepts)):
-      data.append(theDepts[i])
-   #print(data)
-   return data
+#def get_depts_by_uni(theTitle) -> list:
+#   data: list = []
+#   theID: int = get_uni_id_by_title(theTitle)
+#   myURL: str = 'https://vaseis.iee.ihu.gr/api/index.php/departments/university/'+ str(theID)
+#   theDepts: list = department_list(call_api(myURL))
+#   for i in range(len(theDepts)):
+#      data.append(theDepts[i])
+#   #print(data)
+#   return data
 
 def get_examTypes() -> str:
    data: str = exam_types(call_api('https://vaseis.iee.ihu.gr/api/index.php/bases/2022/department/1625'))

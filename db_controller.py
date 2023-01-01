@@ -17,34 +17,6 @@ def insert_user(mail, username, password) -> bool:
         db.close()
     return True
 
-def insert_department(db, cursor, uni, uid) -> bool:
-    statement: str
-    statement = "INSERT INTO Preference(department, user_id) VALUES(?, ?);"
-    cursor.execute(statement, [uni, uid])
-
-    return True
-
-def insert_base(db, cursor, uni, uid) -> bool:
-    statement: str
-    statement = "INSERT INTO Preference(base, user_id) VALUES(?, ?);"
-    cursor.execute(statement, [uni, uid])
-
-    return True
-
-def insert_positions(db, cursor, uni, uid) -> bool:
-    statement: str
-    statement = "INSERT INTO Preference(positions, user_id) VALUES(?, ?);"
-    cursor.execute(statement, [uni, uid])
-
-    return True
-
-def insert_year(db, cursor, uni, uid) -> bool:
-    statement: str
-    statement = "INSERT INTO Preference(year, user_id) VALUES(?, ?);"
-    cursor.execute(statement, [uni, uid])
-    
-    return True
-
 def insert_preference(cr_usnm, uid, op1, op2, op3, op4) -> None:
     db = get_db()
     cursor = db.cursor()
@@ -60,3 +32,28 @@ def insert_preference(cr_usnm, uid, op1, op2, op3, op4) -> None:
 
     db.commit()
     db.close()
+
+def get_preferences(uid) -> None:
+    db = get_db()
+    cursor = db.cursor()
+    s1: str
+    s2: str
+    s3: str
+    s4: str
+    s1 = "SELECT DISTINCT positions FROM Preference WHERE user_id = (?);"
+    cursor.execute(s1, [uid])
+    ps = cursor.fetchall()
+    s2 = "SELECT DISTINCT department FROM Preference WHERE user_id = (?);"
+    cursor.execute(s2, [uid])
+    de = cursor.fetchall()
+    s3 = "SELECT DISTINCT year FROM Preference WHERE user_id = (?);"
+    cursor.execute(s3, [uid])
+    ye = cursor.fetchall()
+    s4 = "SELECT DISTINCT base FROM Preference WHERE user_id = (?);"
+    cursor.execute(s4, [uid])
+    ba = cursor.fetchall()
+    
+    db.commit()
+    db.close()
+
+    return ps, de, ye, ba

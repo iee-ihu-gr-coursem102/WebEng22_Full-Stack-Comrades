@@ -36,7 +36,7 @@ def index():
     un_ids: int = un_ti['id']
     un_titles: str = un_ti['title']
 
-    un_dps: list = ftc.get_depts_by_uni(request.form.get('uni-sl'))
+    #un_dps: list = ftc.get_depts_by_uni(request.form.get('uni-sl'))
 
     cols_pr_t3: list = ['position', 'prefs']
     pr_t3: pd.core.frame.DataFrame  = ftc.to_dataFrame(ftc.get_preferences_top_3(), cols_pr_t3)
