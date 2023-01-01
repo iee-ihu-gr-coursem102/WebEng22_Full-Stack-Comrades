@@ -6,6 +6,7 @@ from . import db_controller
 from . import fetching as ftc
 
 main = Blueprint('main', __name__)
+auth = Blueprint('auth', __name__)
 
 @main.route('/', methods = ['GET', 'POST'])
 def index():
@@ -14,7 +15,7 @@ def index():
     sl_op3 = request.form.get('position_operator')
     sl_op4 = request.form.get('year_operator')
     print(f'Submission operators  are: {sl_op1, sl_op2, sl_op3, sl_op4}')
-    print(f'user now is: {current_user.username}, with id: {current_user.id}')
+    #if current_user is not None: print(f'user now is: {current_user.username}, with id: {current_user.id}')
 
     cols_bs_d: list = ['year','department','baseLast']
     cols_bs_ds_y: list = ['departments','baseLast']
@@ -35,7 +36,7 @@ def index():
     un_ids: int = un_ti['id']
     un_titles: str = un_ti['title']
 
-    un_dps: list = ftc.get_depts_by_uni(request.form.get('uni-sl'))
+    #un_dps: list = ftc.get_depts_by_uni(request.form.get('uni-sl'))
 
     cols_pr_t3: list = ['position', 'prefs']
     pr_t3: pd.core.frame.DataFrame  = ftc.to_dataFrame(ftc.get_preferences_top_3(), cols_pr_t3)
@@ -73,7 +74,7 @@ def index():
     bar_labels: str = df_bs_ds_y['departments']
     bar_values: int = df_bs_ds_y['baseLast']
 
-    return render_template('index.html',
+    return render_template('dashboard_non_auth.html',
                             labels = bar_labels,
                             values = bar_values,
                             department_name = line_title,
@@ -88,7 +89,7 @@ def index():
                             pol_val = polar_values,
                             pol_lab = polar_labels,
                             uni_tit = un_titles,
-                            uni_dps = un_dps,
+                            #uni_dps = un_dps,
                             po_labels = po_y_ex_labels,
                             po_title = po_y_ex_title,
                             po_values1 = po_y_ex_values1,
@@ -120,5 +121,14 @@ def save_selections() -> None:
 @main.route('/profile')
 @login_required
 def profile():
+    ps, de, ye, ba = db_controller.get_preferences(current_user.id)
+    return render_template('profile.html',
+                           username = current_user.username,
+                           ps = ps,
+                           de = de,
+                           ye = ye,
+                           ba = ba)
 
-    return render_template('profile.html', username = current_user.username)
+@main.route('/startpage', methods = ['GET'])
+def start():
+    return render_template('startpage.html')

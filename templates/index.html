@@ -27,7 +27,7 @@
 <div class="form-group">
   <form method="post">
     <select class="form-control" aria-label="Default select example" id="department_operator" name="department_operator" onchange="fill_dept()">
-      <option value="#">Tμήματα</option>
+      <option value="#">Σχολές</option>
       <option value="πληροφορική">Πληροφορική</option>
       <option value="ιατρική">Ιατρική</option>
       <option value="λογιστική">Λογιστική</option>
@@ -64,6 +64,18 @@
 </div>
 
 <canvas id="bar_chart"></canvas>
+<form>
+  <select class="form-control" aria-label="Default select example" id="more_depts" name="more_depts">
+    
+    {% for item in labels %}
+    <option>{{ item }}"</option>"
+    {% endfor %}
+
+  </select>
+  <input type="submit" value="Διαλέξτε Τμήμα" class="btn btn-primary btn-sm">
+  
+</form>
+
 <canvas id="line_chart"></canvas>
 <canvas id="radar_chart"></canvas>
 <canvas id="doughnutArea"></canvas>
