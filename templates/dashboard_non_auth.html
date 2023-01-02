@@ -175,14 +175,22 @@
 </head>
 
 <body>
-    
+
   <div class="header">
 
     <a href="startpage" class="button button1" style="float:left">Uniview</a>
-    <a href="login" style="float:right"class="button button3">Log in</a>
-    <a href="signup" style="float:right"; class="button button3">Sign up</a>
+    <a href="{{ url_for('main.profile') }}" style="float:right"class="button button3">Profile</a>
 
     <div class="form-group">
+      <form method="POST" action="/save">
+        <input type="text" id="school" name="school">
+        <input type="text" id="base" name="base">
+        <input type="text" id="pos" name="pos">
+        <input type="text" id="yr" name="yr">
+        <input type="text" id="dept" name="dept" onchange="checkForm()">
+        <input type="submit" id="saveDash" value="Save Selections" class="btn btn-info" onclick="save_subs()">
+        <p id="demo"></p>
+      </form>
       <form method="post">
         <div class="btn-group">
           <!--
@@ -195,33 +203,33 @@
             <a class="dropdown-item" href="#">Λογιστική</a>
           </div>
           -->
-          <select class="form-control" aria-label="Default select example" id="school_operator" name="school_operator" onchange="fill_dept()">
+          <select class="form-control" aria-label="Default select example" id="school_operator" name="school_operator" onchange="fill_school()">
             <optgroup>
               <option value="#">{{ persistent1 }}</option>
             </optgroup>
               <optgroup label="_________">
-              <option value="πληροφορικής">Πληροφορικών</option>
-              <option value="ιατρικής">Ιατρών</option>
-              <option value="λογιστικής">Λογιστών</option>
-              <option value="θεολογίας">Θεολόγων</option>
-              <option value="φιλοσοφίας">Φιλολόγων</option>
-              <option value="οικονομικών">Οικονομολόγων</option>
-              <option value="μηχανολόγων μηχανικών">Μηχανολόγων Μηχανικών</option>
-              <option value="ηλεκτρολόγων μηχανικών">Ηλεκτρολόγων Μηχανικών</option>
-              <option value="ηλεκτρονικών">Ηλεκτρονικών</option>
-              <option value="χημικών">Χημικών Μηχανικών</option>
-              <option value="χημείας">Χημικών</option>
-              <option value="αρχιτεκτόνων">Αρχιτεκτόνων</option>
-              <option value="μουσικών">Μουσικών</option>
-              <option value="γεωπονίας">Γεωπόνων</option>
-              <option value="νομικής">Νομικών</option>
-              <option value="διατροφής">Διατροφολόγων</option>
-              <option value="κοινωνικής εργασίας">Κοινωνικών Λειτουργών</option>
-              <option value="νοσηλευτικής">Νοσηλευτών</option>
-              <option value="δασολογίας">Δασολόγων</option>
-              <option value="φυσικής">Φυσικών</option>
-              <option value="μαθηματικών">Μαθηματικών</option>
-              <option value="βιολογίας">Βιολόγων</option>
+              <option value="Πληροφορικής">Πληροφορικής</option>
+              <option value="Ιατρικής">Ιατρικής</option>
+              <option value="Λογιστικής">Λογιστικής</option>
+              <option value="Θεολογίας">Θεολογίας</option>
+              <option value="Φιλοσοφίας">Φιλοσοφίας</option>
+              <option value="Οικονομικών">Οικονομικών</option>
+              <option value="Μηχανολόγων Μηχανικών">Μηχανολόγων Μηχανικών</option>
+              <option value="Ηλεκτρολόγων Μηχανικών">Ηλεκτρολόγων Μηχανικών</option>
+              <option value="Ηλεκτρονικών">Ηλεκτρονικών</option>
+              <option value="Χημικών Μηχανικών">Χημικών Μηχανικών</option>
+              <option value="Χημείας">Χημείας</option>
+              <option value="Αρχιτεκτόνων">Αρχιτεκτόνων</option>
+              <option value="Μουσικών">Μουσικών</option>
+              <option value="Γεωπονίας">Γεωπονίας</option>
+              <option value="Νομικής">Νομικής</option>
+              <option value="Διατροφής">Διατροφής</option>
+              <option value="Κοινωνικής Εργασίας">Κοινωνικής Εργασίας</option>
+              <option value="Νοσηλευτικής">Νοσηλευτικής</option>
+              <option value="Δασολογίας">Δασολογίας</option>
+              <option value="Φυσικής">Φυσικής</option>
+              <option value="Μαθηματικών">Μαθηματικών</option>
+              <option value="Βιολογίας">Βιολογίας</option>
             </optgroup>
           </select>
           <select class="form-control" aria-label="Default select example" id="base_operator" name="base_operator" onchange="fill_base()">
@@ -279,7 +287,7 @@
           </select>
         </div>
         <input type="submit" value="Submit" class="btn btn-primary btn-sm">
-        <select class="form-control" aria-label="Default select example" id="more_depts" name="more_depts">
+        <select class="form-control" aria-label="Default select example" id="more_depts" name="more_depts" onchange="fill_dept()">
           
           {% for item in labels %}
           <option>{{ item }}"</option>"
@@ -287,14 +295,6 @@
       
         </select>
         <input type="submit" value="Διαλέξτε Τμήμα" class="btn btn-primary btn-sm">
-      </form>
-      <form method="POST" action="/save">
-        <input type="text" id="dept" name="dept">
-        <input type="text" id="base" name="base">
-        <input type="text" id="pos" name="pos">
-        <input type="text" id="yr" name="yr">
-        <input type="submit" value="Save Selections" class="btn btn-info" onclick="save_subs()">
-        <p id="demo"></p>
       </form>
     </div>
   </div>
@@ -314,6 +314,9 @@
     </div>
     <div class="chart5">
       <canvas id="doughnutArea"></canvas>
+      <h3>Max Year: {{max_y}}</h3>
+      <h3>Department Sum: {{dept_sum}}</h3>
+      <h3>Uni Sum: {{uni_sum}}</h3>
     </div>
       
     </div>
@@ -323,12 +326,18 @@
   <div class="footer">
     <a href=".html" style="float:left"class="button button1">Footer</a>
   </div>
+
+  <script type="text/javascript">
+    function save_subs() {
+      document.getElementById("demo").innerHTML = "Fields Saved!";
+    }
+  </script>
   
   <script>
-    function fill_dept(){
+    function fill_school(){
       // set text box value here
-      get_txt =  document.getElementById('department_operator');
-      set_txt = document.getElementById('dept');
+      get_txt =  document.getElementById('school_operator');
+      set_txt = document.getElementById('school');
       set_txt.value = get_txt.value;
     }
     function fill_base(){
@@ -349,7 +358,14 @@
       set_txt = document.getElementById('yr');
       set_txt.value = get_txt.value;
     }
+    function fill_dept(){
+      // set text box value here
+      get_txt =  document.getElementById('more_depts');
+      set_txt = document.getElementById('dept');
+      set_txt.value = get_txt.value;
+    }
   </script>
+
   <script type="text/javascript">
     const cbx = document.getElementById('bar_chart');
     new Chart(cbx, {
