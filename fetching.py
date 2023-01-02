@@ -1,6 +1,7 @@
 import json
 import requests
 import pandas as pd
+from flask import request
 
 # Utility Functions --------------------------
 
@@ -74,18 +75,46 @@ def bases_department(res: dict) -> list:
 def bases_departments_year(res: dict) -> list:
    bs_ds_y: list = []
    for i in range(len(res['records'])):
-      bs_ds_y.append([res['records'][i]['deptName'], res['records'][i]['baseLast']])
+      bs_ds_y.append([res['records'][i]['deptName'], res['records'][i]['baseLast'], res['records'][i]['code']])
 
    return bs_ds_y
 
 # Extract Positions, of Year, by ExamType
 def positions_year_examType(res: dict) -> list:
    po_y_ex: list = []
+   print(f'THIS IS RES!!!!!! {res}')
    for i in range(len(res['records'])):
       po_y_ex.append([res['records'][i]['year'], res['records'][i]['positions'], res['records'][i]['specialCat']])
       
    return po_y_ex
 
+def preferences_top_3(res: dict) -> list:
+   pr_t_3: list = []
+   f= s= t = 0
+   for i in range(len(res[0]['statistics'])):
+      if ((res[0]['statistics'][i]['year'])==2022):
+         theList = res[0]['statistics'][i]['candidatePreferences']
+         f += int(theList['first'])
+         s += int(theList['second'])
+         t += int(theList['third'])
+   theDict: dict = {'First': f, 'Second': s, 'Third' : t}
+   pr_t_3 = list(theDict.items())
+
+   return pr_t_3
+
+def successful_preferences_top_3(res: dict) -> list:
+   su_pr_t_3: list = []
+   f= s= t = 0
+   for i in range(len(res[0]['statistics'])):
+      if ((res[0]['statistics'][i]['year'])==2022):
+         theList = res[0]['statistics'][i]['successfulPreferences']
+         f += int(theList['first'])
+         s += int(theList['second'])
+         t += int(theList['third'])
+   theDict: dict = {'first': f, 'second': s, 'third' : t}
+   su_pr_t_3 = list(theDict.items())
+
+   return su_pr_t_3
 
 # Turn to DataFrame
 def to_dataFrame(modded_data: list, cols: list) -> pd.core.frame.DataFrame:
@@ -93,7 +122,10 @@ def to_dataFrame(modded_data: list, cols: list) -> pd.core.frame.DataFrame:
 
    return df
 
+
 # GET Functions --------------------------
+
+
 def get_name() -> list:
    data: dict = uni_titles(call_api())
 
@@ -139,7 +171,6 @@ def get_uni_id_by_title(theTitle) -> int:
    #print(data)
    return data
 
-
 #def get_depts_by_uni(theTitle) -> list:
 #   data: list = []
 #   theID: int = get_uni_id_by_title(theTitle)
@@ -150,68 +181,60 @@ def get_uni_id_by_title(theTitle) -> int:
 #   #print(data)
 #   return data
 
-def get_examTypes() -> str:
-   data: str = exam_types(call_api('https://vaseis.iee.ihu.gr/api/index.php/bases/2022/department/1625'))
-   #print(data)
+def get_examTypes(code, year) -> str:
+
+   cook1: str = request.cookies.get('persistent5') 
+   cook2: str = request.cookies.get('persistent4') 
+
+   if code == None and year == None: data: str = exam_types(call_api('https://vaseis.iee.ihu.gr/api/index.php/bases/2022/department/1625'))
+   elif code == '#' and year == '#': data: str = exam_types(call_api(f'https://vaseis.iee.ihu.gr/api/index.php/bases/{cook2}/department/{cook1}'))
+   elif code != '#' and year == '#': data: str = exam_types(call_api(f'https://vaseis.iee.ihu.gr/api/index.php/bases/2022/department/{code}'))
+   elif code == '#' and year != '#': data: str = exam_types(call_api(f'https://vaseis.iee.ihu.gr/api/index.php/bases/{year}/department/1625'))
+   else: data: str = exam_types(call_api(f'https://vaseis.iee.ihu.gr/api/index.php/bases/{year}/department/{code}'))
 
    return data
 
-def get_bases_department() -> list:
-   data: dict = bases_department(call_api('https://vaseis.iee.ihu.gr/api/index.php/bases/department/1622?type=gel-ime-gen&details=full'))
+def get_bases_departments_year(department, year) -> list:
 
-   return data
+   cook1: str = request.cookies.get('persistent1') 
+   cook2: str = request.cookies.get('persistent4') 
 
-def get_bases_departments_year(department) -> list:
-   print(f'this is the dept: {department}')
-   if department == None: link: str = 'https://vaseis.iee.ihu.gr/api/index.php/bases/search/?base=20000&department=πληροφορική&year=2020&details=full&type=gel-ime-gen'
-   else: link = f'https://vaseis.iee.ihu.gr/api/index.php/bases/search/?base=20000&department={department}&year=2020&details=full&type=gel-ime-gen'
+   if department == None and year == None: link: str = 'https://vaseis.iee.ihu.gr/api/index.php/bases/search/?base=20000&department=πληροφορική&year=2022&details=full&type=gel-ime-gen'
+   elif department == '#' and year == '#': link: str = f'https://vaseis.iee.ihu.gr/api/index.php/bases/search/?base=20000&department={cook1}&year={cook2}&details=full&type=gel-ime-gen'
+   elif department != '#' and year == '#': link: str = f'https://vaseis.iee.ihu.gr/api/index.php/bases/search/?base=20000&department={department}&year=2022&details=full&type=gel-ime-gen'
+   elif department == '#' and year != '#': link: str = f'https://vaseis.iee.ihu.gr/api/index.php/bases/search/?base=20000&department=πληροφορική&year={year}&details=full&type=gel-ime-gen'
+   else: link: str = f'https://vaseis.iee.ihu.gr/api/index.php/bases/search/?base=20000&department={department}&year={year}&details=full&type=gel-ime-gen'
    data: dict = bases_departments_year(call_api(link))
 
    return data
 
+def get_bases_department(code) -> list:
 
-def preferences_top_3(res: dict) -> list:
-   pr_t_3: list = []
-   f= s= t = 0
-   for i in range(len(res[0]['statistics'])):
-      if ((res[0]['statistics'][i]['year'])==2022):
-         theList = res[0]['statistics'][i]['candidatePreferences']
-         f += int(theList['first'])
-         s += int(theList['second'])
-         t += int(theList['third'])
-   theDict: dict = {'First': f, 'Second': s, 'Third' : t}
-   pr_t_3 = list(theDict.items())
-   return pr_t_3
+   cook1: str = request.cookies.get('persistent5')
 
-def successful_preferences_top_3(res: dict) -> list:
-   su_pr_t_3: list = []
-   f= s= t = 0
-   for i in range(len(res[0]['statistics'])):
-      if ((res[0]['statistics'][i]['year'])==2022):
-         theList = res[0]['statistics'][i]['successfulPreferences']
-         f += int(theList['first'])
-         s += int(theList['second'])
-         t += int(theList['third'])
-   theDict: dict = {'first': f, 'second': s, 'third' : t}
-   su_pr_t_3 = list(theDict.items())
-   return su_pr_t_3
+   if code == None: data: dict = bases_department(call_api(f'https://vaseis.iee.ihu.gr/api/index.php/bases/department/1625?type=gel-ime-gen&details=full'))
+   elif code == '#': data: dict = bases_department(call_api(f'https://vaseis.iee.ihu.gr/api/index.php/bases/department/{cook1}?type=gel-ime-gen&details=full'))
+   else: data: dict = bases_department(call_api(f'https://vaseis.iee.ihu.gr/api/index.php/bases/department/{code}?type=gel-ime-gen&details=full'))
+
+   return data
 
 def get_preferences_top_3() -> list:
    
    link = 'https://vaseis.iee.ihu.gr/api/index.php/v1.0/statistics/department/1625'
    data: list = preferences_top_3(call_api(link))
-   #print(data)
+
    return data
 
 def get_successful_preferences_top_3() -> list:
    
    link = 'https://vaseis.iee.ihu.gr/api/index.php/v1.0/statistics/department/1625'
    data: list = successful_preferences_top_3(call_api(link))
-   #print(data)
+
    return data
 
-def get_positions_year_examType(tType) -> list:
-   link = 'https://vaseis.iee.ihu.gr/api/index.php/bases/department/98?type=' + tType
-   data: list = positions_year_examType(call_api(link))
-   #print(data)
+def get_positions_year_examType(tType, code) -> list:
+
+   if code == None and code == '#': data: list = positions_year_examType(call_api(f'https://vaseis.iee.ihu.gr/api/index.php/bases/department/1625?type=' + tType))
+   else: data: list = positions_year_examType(call_api(f'https://vaseis.iee.ihu.gr/api/index.php/bases/department/{code}?type={tType}'))
+
    return data
