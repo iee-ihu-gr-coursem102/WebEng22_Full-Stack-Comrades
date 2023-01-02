@@ -6,14 +6,14 @@ CREATE TABLE "User" (
 	PRIMARY KEY("id")
 );
 
-CREATE TABLE "Preference" (
+CREATE TABLE "Dashboard" (
 	"id"	INTEGER NOT NULL,
-	"city"	TEXT,
-	"university"	TEXT,
+	"school"	TEXT,
+	"base"	TEXT,
+	"positions"	TEXT,
+	"year"	TEXT,
 	"department"	TEXT,
-	"year"	INTEGER,
-	"base"	BLOB,
-	"user_id"	TEXT,
+	"user_id"	INTEGER NOT NULL,
 	PRIMARY KEY("id"),
 	FOREIGN KEY("user_id") REFERENCES "User"("id")
 );

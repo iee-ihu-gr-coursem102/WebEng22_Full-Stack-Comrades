@@ -10,6 +10,12 @@ auth = Blueprint('auth', __name__)
 
 @main.route('/', methods = ['GET', 'POST'])
 def index():
+    global persistent1
+    global persistent2
+    global persistent3
+    global persistent4
+    global persistent5
+
     def1 = 'Πληροφορικής'
     def2 = '4000'
     def3 = '40'
@@ -45,7 +51,7 @@ def index():
     else: persistent5 = sl_more[:-1]; sl_more = sl_more[:-1]
 
     print(f'slop1 and cookie1 are -> {sl_op1}, {cookie1}')
-    print(f'Submission operators  are: {persistent1, persistent2, persistent3, persistent4}')
+    print(f'Submission operators  are: {persistent1, persistent2, persistent3, persistent4, persistent5}')
     #if current_user is not None: print(f'user now is: {current_user.username}, with id: {current_user.id}')
 
     cols_bs_ds_y: list = ['departments','baseLast','code']
@@ -101,17 +107,17 @@ def index():
     cols_po_y_ex: list = ['year', 'positions', 'specialCat']
     years: list = ['2019', '2020', '2021', '2022']
     po_y_ex1: pd.core.frame.DataFrame  = ftc.to_dataFrame(ftc.get_positions_year_examType("gel-ime-gen", real_code), cols_po_y_ex)
-    po_y_ex2: pd.core.frame.DataFrame  = ftc.to_dataFrame(ftc.get_positions_year_examType("epal-ime-gen", real_code), cols_po_y_ex)
+    #po_y_ex2: pd.core.frame.DataFrame  = ftc.to_dataFrame(ftc.get_positions_year_examType("epal-ime-gen", real_code), cols_po_y_ex)
     po_y_ex3: pd.core.frame.DataFrame  = ftc.to_dataFrame(ftc.get_positions_year_examType("gel-ime-ten", real_code), cols_po_y_ex)
-    po_y_ex4: pd.core.frame.DataFrame  = ftc.to_dataFrame(ftc.get_positions_year_examType("epal-ime-ten", real_code), cols_po_y_ex)
+    #po_y_ex4: pd.core.frame.DataFrame  = ftc.to_dataFrame(ftc.get_positions_year_examType("epal-ime-ten", real_code), cols_po_y_ex)
     
     po_y_ex_title: str = po_y_ex1['specialCat']
     po_y_ex_labels: int = po_y_ex1['year']
     
     po_y_ex_values1: int = po_y_ex1['positions']
-    po_y_ex_values2: int = po_y_ex2['positions']
+    #po_y_ex_values2: int = po_y_ex2['positions']
     po_y_ex_values3: int = po_y_ex3['positions']
-    po_y_ex_values4: int = po_y_ex4['positions']
+    #po_y_ex_values4: int = po_y_ex4['positions']
 
     line_labels: int = df_bs_d['year']
     line_values: int = df_bs_d['baseLast']
@@ -139,9 +145,9 @@ def index():
                             po_labels = po_y_ex_labels,
                             po_title = po_y_ex_title,
                             po_values1 = po_y_ex_values1,
-                            po_values2 = po_y_ex_values2,
+                            #po_values2 = po_y_ex_values2,
                             po_values3 = po_y_ex_values3,
-                            po_values4 = po_y_ex_values4,
+                            #po_values4 = po_y_ex_values4,
                             #labels5 = du_labels,
                             #values5 = du_values
                             persistent1 = persistent1,
@@ -162,18 +168,25 @@ def index():
 
 @main.route('/save', methods = ['GET', 'POST'])
 def save_selections() -> None:
-    print('ohGod...')
-    op1 = request.form.get('pos')
-    op2 = request.form.get('dept')
-    op3 = request.form.get('yr')
-    op4 = request.form.get('base')
-    print(f'n1, n2, n3, n4 -> {op1, op2, op3, op4}')
+    op1 = request.form.get('school')
+    if op1 == '': op1 = persistent1
+    op2 = request.form.get('base')
+    if op2 == '': op2 = persistent2
+    op3 = request.form.get('pos')
+    if op3 == '': op3 = persistent3
+    op4 = request.form.get('yr')
+    if op4 == '': op4 = persistent4
+    op5 = request.form.get('dept')
+    if op5 == '': op5 = persistent5
+
+    print(f'n1, n2, n3, n4, n5 -> {op1, op2, op3, op4, op5}')
     db_controller.insert_preference(current_user.username,
                                     current_user.id,
                                     op1,
                                     op2,
                                     op3,
-                                    op4
+                                    op4,
+                                    op5
                                     )
 
     return ('', 204)
@@ -181,13 +194,10 @@ def save_selections() -> None:
 @main.route('/profile')
 @login_required
 def profile():
-    ps, de, ye, ba = db_controller.get_preferences(current_user.id)
+    stm = db_controller.get_preferences(current_user.id)
     return render_template('profile.html',
                            username = current_user.username,
-                           ps = ps,
-                           de = de,
-                           ye = ye,
-                           ba = ba)
+                           stm = stm)
 
 @main.route('/startpage', methods = ['GET'])
 def start():
