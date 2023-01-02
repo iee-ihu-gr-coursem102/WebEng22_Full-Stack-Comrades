@@ -183,11 +183,11 @@
 
     <div class="form-group">
       <form method="POST" action="/save">
-        <input type="text" id="school" name="school">
-        <input type="text" id="base" name="base">
-        <input type="text" id="pos" name="pos">
-        <input type="text" id="yr" name="yr">
-        <input type="text" id="dept" name="dept" onchange="checkForm()">
+        <input type="hidden" id="school" name="school">
+        <input type="hidden" id="base" name="base">
+        <input type="hidden" id="pos" name="pos">
+        <input type="hidden" id="yr" name="yr">
+        <input type="hidden" id="dept" name="dept" onchange="checkForm()">
         <input type="submit" id="saveDash" value="Save Selections" class="btn btn-info" onclick="save_subs()">
         <p id="demo"></p>
       </form>
@@ -203,7 +203,7 @@
             <a class="dropdown-item" href="#">Λογιστική</a>
           </div>
           -->
-          <select class="form-control" aria-label="Default select example" id="school_operator" name="school_operator" onchange="fill_school()">
+          <select class="form-control" aria-label="Default select example" id="school_operator" name="school_operator" onchange="fill_school(); disable();">
             <optgroup>
               <option value="#">{{ persistent1 }}</option>
             </optgroup>
@@ -326,6 +326,14 @@
   <div class="footer">
     <a href=".html" style="float:left"class="button button1">Footer</a>
   </div>
+
+  <script>
+    function disable() {
+      document.getElementById("more_depts").disabled = true;
+      document.getElementById("saveDash").disabled = true;
+      saveDash
+    }
+  </script>
 
   <script type="text/javascript">
     function save_subs() {
