@@ -10,7 +10,8 @@ class User(UserMixin, database.Model):
 class Preferences(database.Model):
     id = database.Column(database.Integer, primary_key=True)
     user_id = database.Column(database.Integer, database.ForeignKey(User.id)) 
-    city = database.Column(database.String(20))
-    university = database.Column(database.String(45))
+    base = database.Column(database.String(45))
     department = database.Column(database.String(45))
-    year = database.Column(database.Integer())
+    year = database.Column(database.String(4))
+    positions = database.Column(database.String(45))
+    school = database.Column(database.String(45))

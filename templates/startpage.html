@@ -44,7 +44,7 @@
 
     /* button transition effect */
     .button:hover {
-    background-color:#00FF6C; 
+    background-color:#dee4de; 
     color: #2696A3;}
         
     /* Uniview button */
@@ -109,6 +109,9 @@
 
     /* style for the  class "dashboard" */   
     .dashboard{
+    display: flex;           /* button cenered horizontically*/
+	align-items: center;     /*and*/
+	justify-content: center; /*vertically*/
     background: #443180;
     position: absolute;
     left: 40%;
@@ -116,7 +119,7 @@
     top: 0px;
     right: 0px;
     height: 40%;
-    text-align:center;    /*Dashboard button center*/
+    /*text-align:center;   Dashboard button centered horizontically*/
     }
 
 
@@ -137,6 +140,8 @@
     background-color:#DFDFDF;
     opacity: 0.5;
     border:1px solid rgb(88, 23, 23);
+    width: 70% ;
+    height: 90;
     }
            
 
@@ -163,9 +168,9 @@
     text-decoration: none;
     }
 
-    /*a:hover {
+    a:hover {
     text-decoration: underline;
-    }*/
+    }
 
     a:active {
     text-decoration: underline;
@@ -183,7 +188,9 @@
     padding: 2px;
     }
 
-
+    /*vertical-cenetered{
+        
+    }*/
 	
 </style>
 
@@ -193,11 +200,11 @@
     
     <div class="header">
         
-        <a href="startpage" class="button button1 navbar-item">Uniview</a>
+        <a href="startpage.html" class="button button1">Uniview</a>
 
-        <a href="login" style="float:right"class="button button3 navbar-item">Log in</a>
+        <a href="login.html" style="float:right"class="button button3">Log in</a>
 
-        <a href="signup" style="float:right"; class="button button3 navbar-item">Sign up</a>
+        <a href="signup.html" style="float:right"; class="button button3">Sign up</a>
 
     </div>
 
@@ -210,30 +217,32 @@
         
         <div class="dashboard">
             <br><br>
-            <a href="/"  class="button button2">Dashboard</a>
+            <a href="dashboard_non_auth.html"  class="button button2">Dashboard</a>
 
         </div>
 
         <div class="cities">
                 <br> <br>
-                <p>...pick a city to generate its chart...</p>
+                <p>choose university</p>
                 
-                <table style="width: 70%";>
+                <table>
                 <tr>
-                  <td><a href="citychart.html" >Πάτρα</a></td>
+                  <td><a href="universitypage.html" >Πάτρα</a></td>
                   <td>Θεσσαλονίκη</td>
-                  <td>Αθήνα</td>
                 </tr>
                 <tr>
                   <td>Ιωάννινα</td>
                   <td>Αλεξανδρούπολη</td>
-                  <td>Χανιά</td>
                 </tr>
                 <tr>
                     <td>Ιωάννινα</td>
                     <td>Αλεξανδρούπολη</td>
-                    <td>Χανιά</td>
                   </tr>
+                  <tr>
+                    <td>Ιωάννινα</td>
+                    <td>Αλεξανδρούπολη</td>
+                  </tr>
+                  
               </table>
         </div>
     </div>

@@ -30,7 +30,7 @@
     .header {
     background:#657FAB;
     position: absolute;
-    height:10%;
+    height:7%;
     top: 0px;
     width: 100%;
     left: 0px;     
@@ -45,7 +45,7 @@
     position: absolute;
     width: 100%;   
     bottom: 0;
-    height: 10%;
+    height: 5%;
     left: 0px;
     right: 0px;
     text-align: center;
@@ -111,7 +111,7 @@
            
     /* style for the  class "charts" */   
     .charts{
-    background: #7cd0d6;
+    background: white;
     position: absolute;
     height:80%;
     top: 10%;
@@ -121,7 +121,7 @@
     }
 
     .chart1 {
-    background: rgb(167, 169, 252);
+    /*background: rgb(167, 169, 252);*/
     position: absolute;
     top: 0px;
     width: 40%;
@@ -130,7 +130,7 @@
     }
 
     .chart2 {
-    background: rgb(62, 233, 176);
+    /*background: rgb(62, 233, 176);*/
     position: absolute;
     top: 50%;
     width: 40%;
@@ -139,7 +139,7 @@
     }
 
     .chart3 {
-    background: rgb(29, 33, 243);
+    /*background: rgb(29, 33, 243);*/
     position: absolute;
     top: 0px;
     width: 40%;
@@ -148,7 +148,7 @@
     }
 
     .chart4 {
-    background: rgb(26, 230, 179);
+    /*background: rgb(26, 230, 179);*/
     position: absolute;
     top: 50%;
     width: 40%;
@@ -157,7 +157,7 @@
     }
 
     .chart5 {
-    background: rgb(232, 241, 145);
+    /*background: rgb(232, 241, 145);*/
     position: absolute;
     top: 0px;
     width: 20%;
@@ -165,25 +165,35 @@
     right: 40%;
     left: 40%;
     }
-
-           
+    /*#################################*/
+    #more_depts{
+    width: 100px;
+    text-overflow: ellipsis;
+    }
   </style>
 
 </head>
 
 <body>
-    
+
   <div class="header">
 
     <a href="startpage" class="button button1" style="float:left">Uniview</a>
-    <a href="#" class="button button4">Professor</a>
-    <a href="#" class="button button4">Student</a>
-    <a href="login" style="float:right"class="button button3">Log in</a>
-    <a href="signup" style="float:right"; class="button button3">Sign up</a>
+    <a href="{{ url_for('main.profile') }}" style="float:right"class="button button3">Profile</a>
 
     <div class="form-group">
+      <form method="POST" action="/save">
+        <input type="text" id="school" name="school">
+        <input type="text" id="base" name="base">
+        <input type="text" id="pos" name="pos">
+        <input type="text" id="yr" name="yr">
+        <input type="text" id="dept" name="dept" onchange="checkForm()">
+        <input type="submit" id="saveDash" value="Save Selections" class="btn btn-info" onclick="save_subs()">
+        <p id="demo"></p>
+      </form>
       <form method="post">
         <div class="btn-group">
+          <!--
           <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Σχολές
           </button>
@@ -192,32 +202,99 @@
             <a class="dropdown-item" href="#">Ιατρική</a>
             <a class="dropdown-item" href="#">Λογιστική</a>
           </div>
-          <select class="form-control" aria-label="Default select example" id="department_operator" name="department_operator" onchange="fill_dept()">
-            <option value="#">Σχολές</option>
-            <option value="πληροφορική">Πληροφορική</option>
-            <option value="ιατρική">Ιατρική</option>
-            <option value="λογιστική">Λογιστική</option>
+          -->
+          <select class="form-control" aria-label="Default select example" id="school_operator" name="school_operator" onchange="fill_school()">
+            <optgroup>
+              <option value="#">{{ persistent1 }}</option>
+            </optgroup>
+              <optgroup label="_________">
+              <option value="Πληροφορικής">Πληροφορικής</option>
+              <option value="Ιατρικής">Ιατρικής</option>
+              <option value="Λογιστικής">Λογιστικής</option>
+              <option value="Θεολογίας">Θεολογίας</option>
+              <option value="Φιλοσοφίας">Φιλοσοφίας</option>
+              <option value="Οικονομικών">Οικονομικών</option>
+              <option value="Μηχανολόγων Μηχανικών">Μηχανολόγων Μηχανικών</option>
+              <option value="Ηλεκτρολόγων Μηχανικών">Ηλεκτρολόγων Μηχανικών</option>
+              <option value="Ηλεκτρονικών">Ηλεκτρονικών</option>
+              <option value="Χημικών Μηχανικών">Χημικών Μηχανικών</option>
+              <option value="Χημείας">Χημείας</option>
+              <option value="Αρχιτεκτόνων">Αρχιτεκτόνων</option>
+              <option value="Μουσικών">Μουσικών</option>
+              <option value="Γεωπονίας">Γεωπονίας</option>
+              <option value="Νομικής">Νομικής</option>
+              <option value="Διατροφής">Διατροφής</option>
+              <option value="Κοινωνικής Εργασίας">Κοινωνικής Εργασίας</option>
+              <option value="Νοσηλευτικής">Νοσηλευτικής</option>
+              <option value="Δασολογίας">Δασολογίας</option>
+              <option value="Φυσικής">Φυσικής</option>
+              <option value="Μαθηματικών">Μαθηματικών</option>
+              <option value="Βιολογίας">Βιολογίας</option>
+            </optgroup>
           </select>
           <select class="form-control" aria-label="Default select example" id="base_operator" name="base_operator" onchange="fill_base()">
-            <option value="#">Βάσεις</option>
+            <optgroup>
+              <option value="#">{{ persistent2 }}</option>
+            </optgroup>
+              <optgroup label="_________">
+            <option value="4000">4000</option>
+            <option value="6000">6000</option>
+            <option value="8000">8000</option>
+            <option value="10000">10000</option>
             <option value="12000">12000</option>
             <option value="14000">14000</option>
             <option value="16000">16000</option>
+            <option value="18000">18000</option>
+            <option value="20000">20000</option>
+          </optgroup>
           </select>
           <select class="form-control" aria-label="Default select example" id="position_operator" name="position_operator" onchange="fill_pos()">
-            <option value="#">Θέσεις</option>
+            <optgroup>
+              <option value="#">{{ persistent3 }}</option>
+            </optgroup>
+              <optgroup label="_________">
+            <option value="40">40</option>
+            <option value="60">60</option>
+            <option value="80">80</option>
             <option value="100">100</option>
-            <option value="150">150</option>
+            <option value="120">120</option>
+            <option value="140">140</option>
+            <option value="160">160</option>
+            <option value="180">180</option>
             <option value="200">200</option>
+            <option value="220">220</option>
+            <option value="240">240</option>
+            <option value="260">260</option>
+            <option value="280">280</option>
+          </optgroup>
           </select>
           <select class="form-control" aria-label="Default select example" id="year_operator" name="year_operator" onchange="fill_yr()">
-            <option value="#">Έτος</option>
+            <optgroup>
+              <option value="#">{{ persistent4 }}</option>
+            </optgroup>
+              <optgroup label="_________">
+            <option value="2022">2022</option>
             <option value="2021">2021</option>
             <option value="2020">2020</option>
             <option value="2019">2019</option>
+            <option value="2018">2018</option>
+            <option value="2017">2017</option>
+            <option value="2016">2016</option>
+            <option value="2015">2015</option>
+            <option value="2014">2014</option>
+            <option value="2013">2013</option>
+          </optgroup>
           </select>
         </div>
         <input type="submit" value="Submit" class="btn btn-primary btn-sm">
+        <select class="form-control" aria-label="Default select example" id="more_depts" name="more_depts" onchange="fill_dept()">
+          
+          {% for item in labels %}
+          <option>{{ item }}"</option>"
+          {% endfor %}
+      
+        </select>
+        <input type="submit" value="Διαλέξτε Τμήμα" class="btn btn-primary btn-sm">
       </form>
     </div>
   </div>
@@ -237,6 +314,9 @@
     </div>
     <div class="chart5">
       <canvas id="doughnutArea"></canvas>
+      <h3>Max Year: {{max_y}}</h3>
+      <h3>Department Sum: {{dept_sum}}</h3>
+      <h3>Uni Sum: {{uni_sum}}</h3>
     </div>
       
     </div>
@@ -246,7 +326,46 @@
   <div class="footer">
     <a href=".html" style="float:left"class="button button1">Footer</a>
   </div>
-        
+
+  <script type="text/javascript">
+    function save_subs() {
+      document.getElementById("demo").innerHTML = "Fields Saved!";
+    }
+  </script>
+  
+  <script>
+    function fill_school(){
+      // set text box value here
+      get_txt =  document.getElementById('school_operator');
+      set_txt = document.getElementById('school');
+      set_txt.value = get_txt.value;
+    }
+    function fill_base(){
+      // set text box value here
+      get_txt =  document.getElementById('base_operator');
+      set_txt = document.getElementById('base');
+      set_txt.value = get_txt.value;
+    }
+    function fill_pos(){
+      // set text box value here
+      get_txt =  document.getElementById('position_operator');
+      set_txt = document.getElementById('pos');
+      set_txt.value = get_txt.value;
+    }
+    function fill_yr(){
+      // set text box value here
+      get_txt =  document.getElementById('year_operator');
+      set_txt = document.getElementById('yr');
+      set_txt.value = get_txt.value;
+    }
+    function fill_dept(){
+      // set text box value here
+      get_txt =  document.getElementById('more_depts');
+      set_txt = document.getElementById('dept');
+      set_txt.value = get_txt.value;
+    }
+  </script>
+
   <script type="text/javascript">
     const cbx = document.getElementById('bar_chart');
     new Chart(cbx, {
@@ -284,7 +403,7 @@
       }
     });
   </script>
-  
+
   <script type="text/javascript">
     const clx = document.getElementById('line_chart');
       new Chart(clx, {
@@ -312,7 +431,7 @@
         }
       });
   </script>
-  
+
   <script type="text/javascript">
     const cl2x = document.getElementById('radar_chart');
       new Chart(cl2x, {
@@ -353,7 +472,7 @@
         }
       });
   </script>
-  
+
   <script type="text/javascript">
     const cpx = document.getElementById('doughnutArea');
       new Chart(cpx, {
@@ -389,7 +508,7 @@
         }
       });
   </script>
-  
+
   <script type="text/javascript">
     const cl3x = document.getElementById('line_chart3');
       new Chart(cl3x, {
