@@ -218,17 +218,23 @@ def get_bases_department(code) -> list:
 
    return data
 
-def get_preferences_top_3() -> list:
+def get_preferences_top_3(code) -> list:
+
+   cook1: str = request.cookies.get('persistent5')
    
-   link = 'https://vaseis.iee.ihu.gr/api/index.php/v1.0/statistics/department/1625'
-   data: list = preferences_top_3(call_api(link))
+   if code == None: data: dict = preferences_top_3(call_api('https://vaseis.iee.ihu.gr/api/index.php/v1.0/statistics/department/1625'))
+   elif code == '#': data: dict = preferences_top_3(call_api(f'https://vaseis.iee.ihu.gr/api/index.php/v1.0/statistics/department/{cook1}'))
+   else: data: dict = preferences_top_3(call_api(f'https://vaseis.iee.ihu.gr/api/index.php/v1.0/statistics/department/{code}'))
 
    return data
 
-def get_successful_preferences_top_3() -> list:
+def get_successful_preferences_top_3(code) -> list:
+
+   cook1: str = request.cookies.get('persistent5')
    
-   link = 'https://vaseis.iee.ihu.gr/api/index.php/v1.0/statistics/department/1625'
-   data: list = successful_preferences_top_3(call_api(link))
+   if code == None: data: dict = successful_preferences_top_3(call_api('https://vaseis.iee.ihu.gr/api/index.php/v1.0/statistics/department/1625'))
+   elif code == '#': data: dict = successful_preferences_top_3(call_api(f'https://vaseis.iee.ihu.gr/api/index.php/v1.0/statistics/department/{cook1}'))
+   else: data: dict = successful_preferences_top_3(call_api(f'https://vaseis.iee.ihu.gr/api/index.php/v1.0/statistics/department/{code}'))
 
    return data
 
