@@ -68,16 +68,23 @@
     /* button transition effect */
     button:hover {
     background-color:#dee4de; 
-    color: #2696A3;}
-        
+    color: #2696A3;
+    text-decoration: none;
+    }
 
+    a:hover {
+    text-decoration: none;
+    color: #04070b
+    }
+        
     /* Uniview button */
     .button1{
-    background-color: #CACACA;
+    background-color: #9a9335;
     color: white;
     font-family: "Noto Sans", sans-serif;
     font-size: 16px;
     font-weight: bold;
+    top: 17%;
     }
 
     /* Save Dashboard button*/
@@ -105,7 +112,7 @@
     background-color: #9510AC;
     color: white;
     font-family: "Noto Sans", sans-serif;
-    font-size: 16px;
+    font-size: 15px;
     }
             
            
@@ -307,7 +314,7 @@
             {% for item in labels %}
             <option>{{ item }}"</option>"
             {% endfor %}
-            </optgroup>
+        
             </select>
           <input style="height: 20%;" type="submit" value="Διαλέξτε Τμήμα" class="btn btn-primary btn-sm" id="dept_button">
         </form>
