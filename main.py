@@ -18,8 +18,8 @@ def index():
     global persistent5
 
     def1 = 'Πληροφορικής'
-    def2 = '4000'
-    def3 = '40'
+    def2 = '10000'
+    def3 = '100'
     def4 = '2022'
     def5 = 'ΠΛΗΡΟΦΟΡΙΚΗΣ ΚΑΙ ΤΗΛΕΠΙΚΟΙΝΩΝΙΩΝ (ΤΡΙΠΟΛΗ)'
 
@@ -65,8 +65,8 @@ def index():
     cols_bs_ds_y: list = ['departments','baseLast','code']
     cols_bs_d: list = ['year','department','baseLast']
     
-    if secret == 'true': df_bs_ds_y: pd.core.frame.DataFrame = ftc.to_dataFrame(ftc.get_bases_departments_year(dashReq[1], dashReq[4]), cols_bs_ds_y)
-    else: df_bs_ds_y: pd.core.frame.DataFrame = ftc.to_dataFrame(ftc.get_bases_departments_year(persistent1, persistent4), cols_bs_ds_y)
+    if secret == 'true': df_bs_ds_y: pd.core.frame.DataFrame = ftc.to_dataFrame(ftc.get_bases_departments_year(dashReq[1], dashReq[4], dashReq[2]), cols_bs_ds_y)
+    else: df_bs_ds_y: pd.core.frame.DataFrame = ftc.to_dataFrame(ftc.get_bases_departments_year(persistent1, persistent4, persistent2), cols_bs_ds_y)
     new_list = df_bs_ds_y['departments'][0];
     print(df_bs_ds_y)
 

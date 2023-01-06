@@ -194,16 +194,18 @@ def get_examTypes(code, year) -> str:
 
    return data
 
-def get_bases_departments_year(department, year) -> list:
+def get_bases_departments_year(school, year, base) -> list:
 
    cook1: str = request.cookies.get('persistent1') 
-   cook2: str = request.cookies.get('persistent4') 
+   cook2: str = request.cookies.get('persistent4')
+   cook3: str = request.cookies.get('persistent2')
 
-   if department == None and year == None: link: str = 'https://vaseis.iee.ihu.gr/api/index.php/bases/search/?base=20000&department=πληροφορική&year=2022&details=full&type=gel-ime-gen'
-   elif department == '#' and year == '#': link: str = f'https://vaseis.iee.ihu.gr/api/index.php/bases/search/?base=20000&department={cook1}&year={cook2}&details=full&type=gel-ime-gen'
-   elif department != '#' and year == '#': link: str = f'https://vaseis.iee.ihu.gr/api/index.php/bases/search/?base=20000&department={department}&year=2022&details=full&type=gel-ime-gen'
-   elif department == '#' and year != '#': link: str = f'https://vaseis.iee.ihu.gr/api/index.php/bases/search/?base=20000&department=πληροφορική&year={year}&details=full&type=gel-ime-gen'
-   else: link: str = f'https://vaseis.iee.ihu.gr/api/index.php/bases/search/?base=20000&department={department}&year={year}&details=full&type=gel-ime-gen'
+   if school == None and year == None: link: str = 'https://vaseis.iee.ihu.gr/api/index.php/bases/search/?base=20000&department=πληροφορική&year=2022&details=full&type=gel-ime-gen'
+   elif school == '#' and year == '#' and base == '#': link: str = f'https://vaseis.iee.ihu.gr/api/index.php/bases/search/?base={cook3}&department={cook1}&year={cook2}&details=full&type=gel-ime-gen'
+   elif school != '#' and year == '#' and base == '#': link: str = f'https://vaseis.iee.ihu.gr/api/index.php/bases/search/?base=20000&department={school}&year=2022&details=full&type=gel-ime-gen'
+   elif school == '#' and year != '#' and base == '#': link: str = f'https://vaseis.iee.ihu.gr/api/index.php/bases/search/?base=20000&department=πληροφορική&year={year}&details=full&type=gel-ime-gen'
+   elif school == '#' and year == '#' and base != '#': link: str = f'https://vaseis.iee.ihu.gr/api/index.php/bases/search/?base={base}&department=πληροφορική&year=2022&details=full&type=gel-ime-gen'
+   else: link: str = f'https://vaseis.iee.ihu.gr/api/index.php/bases/search/?base={base}&department={school}&year={year}&details=full&type=gel-ime-gen'
    data: dict = bases_departments_year(call_api(link))
 
    return data
