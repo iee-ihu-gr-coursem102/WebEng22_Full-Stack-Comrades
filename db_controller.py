@@ -43,12 +43,26 @@ def get_preferences(uid):
     tableaus = []
 
     for i in range(len(res)):
-        if res[i][5][-1] == '"': correct = res[i][5][:-1]; tableaus.append([res[i][1], res[i][2], res[i][3], res[i][4], correct])
-        else: tableaus.append([res[i][1], res[i][2], res[i][3], res[i][4], res[i][5]])
-        print(f'THIS IS RES[0] -> {res[0][1], res[0][2], res[0][3], res[0][4], res[0][5]}')
-    print(f'THIS ARE TABLEAUS -> {tableaus}')
+        if res[i][5][-1] == '"': correct = res[i][5][:-1]; tableaus.append([res[i][0], res[i][1], res[i][2], res[i][3], res[i][4], correct])
+        else: tableaus.append([res[i][0], res[i][1], res[i][2], res[i][3], res[i][4], res[i][5]])
     
     
+    db.commit()
+    db.close()
+
+    return tableaus
+
+def del_preferences(tableaus):
+    db = get_db()
+    cursor = db.cursor()
+    stm: str
+    stm = "DELETE FROM Dashboard WHERE id = (?);"
+
+    for i in range(len(tableaus)):
+        cursor.execute(stm, [tableaus[i]])
+    
+    
+
     db.commit()
     db.close()
 

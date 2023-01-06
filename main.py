@@ -36,7 +36,6 @@ def index():
         print(f'saved dash is {dashReq}')
     print(f'secret is {secret}')
     
-
     cookie1 = request.cookies.get('persistent1')
 
     if sl_op1 == None: persistent1 = def1
@@ -66,7 +65,7 @@ def index():
     cols_bs_ds_y: list = ['departments','baseLast','code']
     cols_bs_d: list = ['year','department','baseLast']
     
-    if secret == 'true': df_bs_ds_y: pd.core.frame.DataFrame = ftc.to_dataFrame(ftc.get_bases_departments_year(dashReq[0], dashReq[3]), cols_bs_ds_y)
+    if secret == 'true': df_bs_ds_y: pd.core.frame.DataFrame = ftc.to_dataFrame(ftc.get_bases_departments_year(dashReq[1], dashReq[4]), cols_bs_ds_y)
     else: df_bs_ds_y: pd.core.frame.DataFrame = ftc.to_dataFrame(ftc.get_bases_departments_year(persistent1, persistent4), cols_bs_ds_y)
     new_list = df_bs_ds_y['departments'][0];
     print(df_bs_ds_y)
@@ -80,7 +79,7 @@ def index():
     elif new_list != sl_more and sl_more == persistent5 and new_list != persistent5: persistent5 = new_list; print('sec')
     
     print(f'this is the FINAL persistent5-> {persistent5}')
-    if secret == 'true': real_code = int(df_bs_ds_y.loc[df_bs_ds_y['departments'] == dashReq[4], 'code'])
+    if secret == 'true': real_code = int(df_bs_ds_y.loc[df_bs_ds_y['departments'] == dashReq[5], 'code'])
     else: real_code = int(df_bs_ds_y.loc[df_bs_ds_y['departments'] == persistent5, 'code'])
     print(real_code)
     df_bs_d: pd.core.frame.DataFrame  = ftc.to_dataFrame(ftc.get_bases_department(real_code), cols_bs_d)
@@ -111,7 +110,7 @@ def index():
     su_pr_values: int = su_pr_t3['prefs']
 
     cols_ex_ty: list = ['examType', 'positions']
-    if secret == 'true': ex_ty: pd.core.frame.DataFrame = ftc.to_dataFrame(ftc.get_examTypes(real_code, dashReq[3]), cols_ex_ty)
+    if secret == 'true': ex_ty: pd.core.frame.DataFrame = ftc.to_dataFrame(ftc.get_examTypes(real_code, dashReq[4]), cols_ex_ty)
     else: ex_ty: pd.core.frame.DataFrame = ftc.to_dataFrame(ftc.get_examTypes(real_code, persistent4), cols_ex_ty)
     polar_labels: str = ex_ty['examType']
     polar_values: int = ex_ty['positions']
@@ -141,11 +140,11 @@ def index():
     tableaus = db_controller.get_preferences(current_user.id)
 
     if secret == 'true':
-        persistent1 = dashReq[0]
-        persistent2 = dashReq[1]
-        persistent3 = dashReq[2]
-        persistent4 = dashReq[3]
-        persistent5 = dashReq[4]
+        persistent1 = dashReq[1]
+        persistent2 = dashReq[2]
+        persistent3 = dashReq[3]
+        persistent4 = dashReq[4]
+        persistent5 = dashReq[5]
 
     resp =  make_response(render_template('dashboard_non_auth.html',
                             labels = bar_labels,
@@ -210,6 +209,15 @@ def save_selections() -> None:
                                     op4,
                                     op5
                                     )
+
+    return ('', 204)
+
+@main.route('/delTabls', methods = ['GET', 'POST'])
+def del_tableaus() -> None:
+    tableaus = request.form.to_dict()
+    tableaus = list(tableaus.keys())
+    print(f'tableaus are: {tableaus}')
+    db_controller.del_preferences(tableaus)
 
     return ('', 204)
 

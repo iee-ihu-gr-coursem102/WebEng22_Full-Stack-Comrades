@@ -1,10 +1,38 @@
 {% extends "base-auth.html" %}
 
 {% block content %}
-<h1 class="title">
-  Welcome, {{ username }}!
-</h1>
-<h2>Your saved Dashboards</h2>
-<p>{{ stm }}</p>
+  <h1 class="title1">
+    Welcome, {{ username }}!<br><br>
+  </h1>
+  <h2 class="title2">Your saved dashboards below:</h2><br>
+    {% for item in stm %}
+      <p id="{{ item[0] }}" onclick="style.textDecoration = 'line-through'; style.color = 'chocolate'; style.fontStyle = 'italic'; onclick=collect(this.id); dis()"> {{ item[1] }}, {{ item[2] }}, {{ item[3] }}, {{ item[4] }}, {{ item[5] }}</p>
+    {% endfor %}
+
+  <form id="delTablsForm" method="POST" action="/delTabls">
+    <input id="btn" type="submit" class="btn btn-danger btn-sm" value="Delete Selected" onclick="allgood()">
+    <br><br><br><h2 id="demo" class="title3"></h2>
+  </form>
+
+  <script>
+  function collect(uid) {
+    console.log('allIN', uid)
+    var form = document.getElementById('delTablsForm');
+    
+    var input = document.createElement("input");
+    input.id = 'input-' + uid;
+    input.type = 'hidden';
+    input.name = uid;
+    input.textContent = uid;
+    form.appendChild(input);
+  };
+  
+  </script>
+
+<script type="text/javascript">
+  function allgood() {
+    document.getElementById("demo").innerHTML = "Tableaus Deleted! Reload to Update";
+  }
+</script>
 
 {% endblock %}
