@@ -30,7 +30,7 @@
     .header {
     background:#657FAB;
     position: absolute;
-    height:7%;
+    height:5%;
     top: 0px;
     width: 100%;
     left: 0px;     
@@ -68,16 +68,23 @@
     /* button transition effect */
     button:hover {
     background-color:#dee4de; 
-    color: #2696A3;}
-        
+    color: #2696A3;
+    text-decoration: none;
+    }
 
+    a:hover {
+    text-decoration: none;
+    color: #04070b
+    }
+        
     /* Uniview button */
     .button1{
-    background-color: #CACACA;
+    background-color: #9a9335;
     color: white;
     font-family: "Noto Sans", sans-serif;
     font-size: 16px;
     font-weight: bold;
+    top: 17%;
     }
 
     /* Save Dashboard button*/
@@ -105,7 +112,7 @@
     background-color: #9510AC;
     color: white;
     font-family: "Noto Sans", sans-serif;
-    font-size: 16px;
+    font-size: 15px;
     }
             
            
@@ -170,6 +177,18 @@
     width: 100px;
     text-overflow: ellipsis;
     }
+
+    .btn-group {
+      position:absolute;
+      top: 15%;
+      right: 15%;
+      left: 15%;
+    }
+
+    .footer-group {
+      position:absolute;
+      top: 3%;
+    }
   </style>
 
 </head>
@@ -182,17 +201,9 @@
     <a href="{{ url_for('main.profile') }}" style="float:right"class="button button3">Profile</a>
 
     <div class="form-group">
-      <form method="POST" action="/save">
-        <input type="text" id="school" name="school">
-        <input type="text" id="base" name="base">
-        <input type="text" id="pos" name="pos">
-        <input type="text" id="yr" name="yr">
-        <input type="text" id="dept" name="dept" onchange="checkForm()">
-        <input type="submit" id="saveDash" value="Save Selections" class="btn btn-info" onclick="save_subs()">
-        <p id="demo"></p>
-      </form>
       <form method="post">
         <div class="btn-group">
+          <input id="secret_operator" name="secret_operator" hidden>
           <!--
           <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Σχολές
@@ -203,7 +214,16 @@
             <a class="dropdown-item" href="#">Λογιστική</a>
           </div>
           -->
-          <select class="form-control" aria-label="Default select example" id="school_operator" name="school_operator" onchange="fill_school()">
+          <select class="form-control" aria-label="Default select example" id="saved_dashed" name="saved_dashed">
+            <optgroup>
+              <option value="#" selected disabled hidden>Τα Ταμπλό μου</option>
+            </optgroup>
+            {% for item in saved %}
+              <option>{{ item }}</option>"
+            {% endfor %}
+          </select>
+          <input style="height: 20%;" type="submit" value="Προβολή Ταμπλό" class="btn btn-primary btn-sm" onclick="signalDash()">
+          <select class="form-control" aria-label="Default select example" id="school_operator" name="school_operator" onchange="fill_school(); disable();">
             <optgroup>
               <option value="#">{{ persistent1 }}</option>
             </optgroup>
@@ -237,9 +257,9 @@
               <option value="#">{{ persistent2 }}</option>
             </optgroup>
               <optgroup label="_________">
-            <option value="4000">4000</option>
+            <!--<option value="4000">4000</option>
             <option value="6000">6000</option>
-            <option value="8000">8000</option>
+            <option value="8000">8000</option>-->
             <option value="10000">10000</option>
             <option value="12000">12000</option>
             <option value="14000">14000</option>
@@ -268,11 +288,11 @@
             <option value="280">280</option>
           </optgroup>
           </select>
-          <select class="form-control" aria-label="Default select example" id="year_operator" name="year_operator" onchange="fill_yr()">
+          <select class="form-control" aria-label="Default select example" id="year_operator" name="year_operator" onchange="fill_yr(); disable()">
             <optgroup>
               <option value="#">{{ persistent4 }}</option>
             </optgroup>
-              <optgroup label="_________">
+            <optgroup label="_________">
             <option value="2022">2022</option>
             <option value="2021">2021</option>
             <option value="2020">2020</option>
@@ -285,17 +305,29 @@
             <option value="2013">2013</option>
           </optgroup>
           </select>
-        </div>
-        <input type="submit" value="Submit" class="btn btn-primary btn-sm">
-        <select class="form-control" aria-label="Default select example" id="more_depts" name="more_depts" onchange="fill_dept()">
-          
-          {% for item in labels %}
-          <option>{{ item }}"</option>"
-          {% endfor %}
-      
-        </select>
-        <input type="submit" value="Διαλέξτε Τμήμα" class="btn btn-primary btn-sm">
-      </form>
+          <input style="height: 20%;" type="submit" value="Υποβολή Όλων" class="btn btn-primary btn-sm">
+          <select class="form-control" aria-label="Default select example" id="more_depts" name="more_depts" onchange="fill_dept()">
+            <optgroup>
+              <option value="#">{{ persistent5 }}</option>
+            </optgroup>
+            <optgroup label="_________">
+            {% for item in labels %}
+            <option>{{ item }}"</option>"
+            {% endfor %}
+        
+            </select>
+          <input style="height: 20%;" type="submit" value="Διαλέξτε Τμήμα" class="btn btn-primary btn-sm" id="dept_button">
+        </form>
+        <form method="POST" action="/save">
+          <input type="hidden" id="school" name="school">
+          <input type="hidden" id="base" name="base">
+          <input type="hidden" id="pos" name="pos">
+          <input type="hidden" id="yr" name="yr">
+          <input type="hidden" id="dept" name="dept" onchange="checkForm()">
+          <input type="submit" id="saveDash" value="Save Selections" class="btn btn-info" onclick="save_subs()">
+          <p id="demo"></p>
+        </form>
+      </div>
     </div>
   </div>
         
@@ -318,14 +350,31 @@
       <h3>Department Sum: {{dept_sum}}</h3>
       <h3>Uni Sum: {{uni_sum}}</h3>
     </div>
-      
     </div>
   </div>
      
 
   <div class="footer">
-    <a href=".html" style="float:left"class="button button1">Footer</a>
+    <div class="footer-group">
+      <a href=".html" style="float:left" class="button button1">Footer</a>
+    </div>
   </div>
+
+  <script>
+    function signalDash(){
+      document.getElementById("secret_operator").value = "true";
+      txt = document.getElementById("secret_operator").value = "true";
+      console.log(txt)
+    }
+  </script>
+  <script>
+    function disable() {
+      document.getElementById("more_depts").disabled = true;
+      document.getElementById("saveDash").disabled = true;
+      document.getElementById("dept_button").disabled = true;
+      saveDash
+    }
+  </script>
 
   <script type="text/javascript">
     function save_subs() {

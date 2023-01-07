@@ -33,15 +33,37 @@ def insert_preference(cr_usnm, uid, op1, op2, op3, op4, op5) -> None:
     db.commit()
     db.close()
 
-def get_preferences(uid) -> None:
+def get_preferences(uid):
     db = get_db()
     cursor = db.cursor()
     stm: str
     stm = "SELECT * FROM Dashboard WHERE user_id = (?);"
     cursor.execute(stm, [uid])
     res = cursor.fetchall()
+    tableaus = []
+
+    for i in range(len(res)):
+        if res[i][5][-1] == '"': correct = res[i][5][:-1]; tableaus.append([res[i][0], res[i][1], res[i][2], res[i][3], res[i][4], correct])
+        else: tableaus.append([res[i][0], res[i][1], res[i][2], res[i][3], res[i][4], res[i][5]])
+    
     
     db.commit()
     db.close()
 
-    return res
+    return tableaus
+
+def del_preferences(tableaus):
+    db = get_db()
+    cursor = db.cursor()
+    stm: str
+    stm = "DELETE FROM Dashboard WHERE id = (?);"
+
+    for i in range(len(tableaus)):
+        cursor.execute(stm, [tableaus[i]])
+    
+    
+
+    db.commit()
+    db.close()
+
+    return tableaus
