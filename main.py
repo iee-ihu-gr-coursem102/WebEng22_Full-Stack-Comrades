@@ -58,7 +58,7 @@ def index():
     cols_bs_d: list = ['year','department','baseLast']
     
     df_bs_ds_y: pd.core.frame.DataFrame = ftc.to_dataFrame(ftc.get_bases_departments_year(persistent1, persistent4), cols_bs_ds_y)
-    new_list = df_bs_ds_y['departments'][0];
+    new_list = df_bs_ds_y['departments'][0]
     print(df_bs_ds_y)
 
     print(f'this is first PERSISTENT5-> {persistent5}\n')
@@ -107,17 +107,19 @@ def index():
     cols_po_y_ex: list = ['year', 'positions', 'specialCat']
     years: list = ['2019', '2020', '2021', '2022']
     po_y_ex1: pd.core.frame.DataFrame  = ftc.to_dataFrame(ftc.get_positions_year_examType("gel-ime-gen", real_code), cols_po_y_ex)
-    #po_y_ex2: pd.core.frame.DataFrame  = ftc.to_dataFrame(ftc.get_positions_year_examType("epal-ime-gen", real_code), cols_po_y_ex)
+    po_y_ex2: pd.core.frame.DataFrame  = ftc.to_dataFrame(ftc.get_positions_year_examType("epal-ime-gen", real_code), cols_po_y_ex)
     po_y_ex3: pd.core.frame.DataFrame  = ftc.to_dataFrame(ftc.get_positions_year_examType("gel-ime-ten", real_code), cols_po_y_ex)
-    #po_y_ex4: pd.core.frame.DataFrame  = ftc.to_dataFrame(ftc.get_positions_year_examType("epal-ime-ten", real_code), cols_po_y_ex)
+    po_y_ex4: pd.core.frame.DataFrame  = ftc.to_dataFrame(ftc.get_positions_year_examType("epal-ime-ten", real_code), cols_po_y_ex)
     
     po_y_ex_title: str = po_y_ex1['specialCat']
     po_y_ex_labels: int = po_y_ex1['year']
     
     po_y_ex_values1: int = po_y_ex1['positions']
-    #po_y_ex_values2: int = po_y_ex2['positions']
+    if po_y_ex2 is not None:
+        po_y_ex_values2: int = po_y_ex2['positions']
     po_y_ex_values3: int = po_y_ex3['positions']
-    #po_y_ex_values4: int = po_y_ex4['positions']
+    if po_y_ex4 is not None:
+        po_y_ex_values4: int = po_y_ex4['positions']
 
     line_labels: int = df_bs_d['year']
     line_values: int = df_bs_d['baseLast']
@@ -145,9 +147,9 @@ def index():
                             po_labels = po_y_ex_labels,
                             po_title = po_y_ex_title,
                             po_values1 = po_y_ex_values1,
-                            #po_values2 = po_y_ex_values2,
+                            po_values2 = po_y_ex_values2,
                             po_values3 = po_y_ex_values3,
-                            #po_values4 = po_y_ex_values4,
+                            po_values4 = po_y_ex_values4,
                             #labels5 = du_labels,
                             #values5 = du_values
                             persistent1 = persistent1,

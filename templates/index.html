@@ -81,19 +81,6 @@
 <canvas id="doughnutArea"></canvas>
 <canvas id="line_chart3"></canvas>
 
-<div class="uni-slct">
-  <form method="post">
-      <select class="form-control" aria-label="Default select example" id="uni-sl" name="uni-sl">
-        <option value="#">Ιδρύματα</option>
-        {% for opt in uni_tit %}
-          <option> {{ opt }}</option>
-        {% endfor %}
-      </select>
-      <input type="submit" value="Submit" class="btn btn-primary btn-sm" onclick="showDept(this)">
-    <p id="show_dpt">"{{uni_dps}}"</p>
-  </form> 
-</div>
-
 
 <h5>{{department_name}}</h5>
 <h1>Max Year: {{max_y}}</h1>
@@ -107,11 +94,6 @@
   }
 </script>
 
-<script type="text/javascript">
-  function showDept(selectObject) {
-    document.getElementById("show_dpt").innerHTML = "{{uni_dps}}";
-  }
-</script>
 
 <script>
   function fill_dept(){

@@ -34,11 +34,11 @@ def department_sum(res: dict) -> int:
    return dp_s
 
 # Extract List of Departments
-#def department_list(res: list) -> list:
+# def department_list(res: list) -> list:
 #   dept_l: list = []
-#   for i in res:
-#      dept_l.append(i['name'])
-#
+#   for i in range(len(res)):
+#      dept_l.append(res[0][i]['name'])
+
 #   return dept_l 
 
 # Extract Sum of Universities
@@ -171,7 +171,7 @@ def get_uni_id_by_title(theTitle) -> int:
    #print(data)
    return data
 
-#def get_depts_by_uni(theTitle) -> list:
+# def get_depts_by_uni(theTitle) -> list:
 #   data: list = []
 #   theID: int = get_uni_id_by_title(theTitle)
 #   myURL: str = 'https://vaseis.iee.ihu.gr/api/index.php/departments/university/'+ str(theID)
