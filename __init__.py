@@ -1,8 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
-import os 
-
+from pathlib import Path
 
 database = SQLAlchemy()
 
@@ -11,9 +10,10 @@ def create_app():
    
    app.config['SECRET_KEY'] = 'secret-key-goes-here'
    #app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///C:\\Users\\Stella\\Documents\\GitHub\\WebEng22_Full-Stack-Comrades\\db.sqlite'
-   dir_path = os.path.dirname(os.path.realpath('db.sqlite'))
+   #app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///./db.sqlite'
+   dir_path = Path().absolute()
    print(f'DIR -> {dir_path}')
-   app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{dir_path}/WebEng22_Full-Stack-Comrades/db.sqlite'
+   app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{dir_path}/db.sqlite'
 
    #from . import db
    database.init_app(app)
@@ -28,8 +28,8 @@ def create_app():
    def load_user(id):
       return User.query.get(int(id))
 
-   #with app.app_context():
-   #   database.create_all()
+   with app.app_context():
+      database.create_all()
 
    # blueprint for auth routes in our app
    from .auth import auth as auth_blueprint

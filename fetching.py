@@ -199,6 +199,8 @@ def get_bases_departments_year(school, year, base) -> list:
    cook1: str = request.cookies.get('persistent1') 
    cook2: str = request.cookies.get('persistent4')
    cook3: str = request.cookies.get('persistent2')
+   print(f'HMMMM: {cook1, cook2, cook3}')
+   print(f'HMMMM: {school, year, base}')
 
    if school == None and year == None: link: str = 'https://vaseis.iee.ihu.gr/api/index.php/bases/search/?base=20000&department=πληροφορική&year=2022&details=full&type=gel-ime-gen'
    elif school == '#' and year == '#' and base == '#': link: str = f'https://vaseis.iee.ihu.gr/api/index.php/bases/search/?base={cook3}&department={cook1}&year={cook2}&details=full&type=gel-ime-gen'

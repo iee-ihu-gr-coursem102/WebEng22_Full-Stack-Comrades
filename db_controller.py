@@ -17,7 +17,7 @@ def insert_user(mail, username, password) -> bool:
         db.close()
     return True
 
-def insert_preference(cr_usnm, uid, op1, op2, op3, op4, op5) -> None:
+def insert_preference(cr_usnm, uid, op1, op2, op4, op5) -> None:
     db = get_db()
     cursor = db.cursor()
     statement: str
@@ -27,8 +27,8 @@ def insert_preference(cr_usnm, uid, op1, op2, op3, op4, op5) -> None:
     
     if exist is not None:
         statement: str
-        statement = "INSERT INTO Dashboard(school,base,positions,year,department,user_id) VALUES(?,?,?,?,?,?);"
-        cursor.execute(statement, [op1,op2,op3,op4,op5,uid])
+        statement = "INSERT INTO Dashboard(school,base,year,department,user_id) VALUES(?,?,?,?,?);"
+        cursor.execute(statement, [op1,op2,op4,op5,uid])
 
     db.commit()
     db.close()
@@ -43,8 +43,8 @@ def get_preferences(uid):
     tableaus = []
 
     for i in range(len(res)):
-        if res[i][5][-1] == '"': correct = res[i][5][:-1]; tableaus.append([res[i][0], res[i][1], res[i][2], res[i][3], res[i][4], correct])
-        else: tableaus.append([res[i][0], res[i][1], res[i][2], res[i][3], res[i][4], res[i][5]])
+        if res[i][4][-1] == '"': correct = res[i][5][:-1]; tableaus.append([res[i][0], res[i][1], res[i][2], res[i][3], correct])
+        else: tableaus.append([res[i][0], res[i][1], res[i][2], res[i][3], res[i][4]])
     
     
     db.commit()
