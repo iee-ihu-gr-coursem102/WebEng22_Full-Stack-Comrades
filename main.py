@@ -8,7 +8,7 @@ from . import fetching as ftc
 main = Blueprint('main', __name__)
 auth = Blueprint('auth', __name__)
 
-@main.route('/', methods = ['GET', 'POST'])
+@main.route('/dashboard', methods = ['GET', 'POST'])
 def index():
 
     global persistent1
@@ -229,6 +229,6 @@ def profile():
                            username = current_user.username,
                            stm = stm)
 
-@main.route('/startpage', methods = ['GET'])
+@main.route('/', methods = ['GET'])
 def start():
     return render_template('startpage.html')
