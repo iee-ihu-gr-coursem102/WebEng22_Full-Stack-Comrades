@@ -7,6 +7,7 @@ from . import fetching as ftc
 
 main = Blueprint('main', __name__)
 auth = Blueprint('auth', __name__)
+uni = Blueprint('uni', __name__)
 
 @main.route('/', methods = ['GET', 'POST'])
 def index():
@@ -67,7 +68,7 @@ def index():
     
     if secret == 'true': df_bs_ds_y: pd.core.frame.DataFrame = ftc.to_dataFrame(ftc.get_bases_departments_year(dashReq[1], dashReq[4], dashReq[2]), cols_bs_ds_y)
     else: df_bs_ds_y: pd.core.frame.DataFrame = ftc.to_dataFrame(ftc.get_bases_departments_year(persistent1, persistent4, persistent2), cols_bs_ds_y)
-    new_list = df_bs_ds_y['departments'][0];
+    new_list = df_bs_ds_y['departments'][0]
     print(df_bs_ds_y)
 
     print(f'this is first PERSISTENT5-> {persistent5}\n')
@@ -88,17 +89,18 @@ def index():
     dp_s: int = ftc.get_dptSum()
     un_s: int = ftc.get_uniSum()
 
-    #cols_dp_uni: list = ['uni', 'depts']
-    #dp_uni: pd.core.frame.DataFrame  = ftc.to_dataFrame(ftc.get_depts_by_uni(), cols_dp_uni)
-    #du_labels: str = dp_uni['uni']
-    #du_values: int = dp_uni['depts']
 
     cols_uni: list = ['id', 'title']
     un_ti: pd.core.frame.DataFrame = ftc.to_dataFrame(ftc.get_uniList(), cols_uni)
     un_ids: int = un_ti['id']
     un_titles: str = un_ti['title']
 
-    #un_dps: list = ftc.get_depts_by_uni(request.form.get('uni-sl'))
+    un_dps: list = ftc.get_depts_by_uni(request.form.get('uni-sl'))
+
+    # cols_dp_uni: list = ['uni', 'depts']
+    # dp_uni: pd.core.frame.DataFrame  = ftc.to_dataFrame(ftc.get_depts_by_uni_old(), cols_dp_uni)
+    # du_labels: str = dp_uni['uni']
+    # du_values: int = dp_uni['depts']
 
     cols_pr_t3: list = ['position', 'prefs']
     pr_t3: pd.core.frame.DataFrame  = ftc.to_dataFrame(ftc.get_preferences_top_3(real_code), cols_pr_t3)
@@ -118,17 +120,19 @@ def index():
     cols_po_y_ex: list = ['year', 'positions', 'specialCat']
     years: list = ['2019', '2020', '2021', '2022']
     po_y_ex1: pd.core.frame.DataFrame  = ftc.to_dataFrame(ftc.get_positions_year_examType("gel-ime-gen", real_code), cols_po_y_ex)
-    #po_y_ex2: pd.core.frame.DataFrame  = ftc.to_dataFrame(ftc.get_positions_year_examType("epal-ime-gen", real_code), cols_po_y_ex)
+    po_y_ex2: pd.core.frame.DataFrame  = ftc.to_dataFrame(ftc.get_positions_year_examType("epal-ime-gen", real_code), cols_po_y_ex)
     po_y_ex3: pd.core.frame.DataFrame  = ftc.to_dataFrame(ftc.get_positions_year_examType("gel-ime-ten", real_code), cols_po_y_ex)
-    #po_y_ex4: pd.core.frame.DataFrame  = ftc.to_dataFrame(ftc.get_positions_year_examType("epal-ime-ten", real_code), cols_po_y_ex)
+    po_y_ex4: pd.core.frame.DataFrame  = ftc.to_dataFrame(ftc.get_positions_year_examType("epal-ime-ten", real_code), cols_po_y_ex)
     
     po_y_ex_title: str = po_y_ex1['specialCat']
     po_y_ex_labels: int = po_y_ex1['year']
     
     po_y_ex_values1: int = po_y_ex1['positions']
-    #po_y_ex_values2: int = po_y_ex2['positions']
+    if po_y_ex2 is not None:
+        po_y_ex_values2: int = po_y_ex2['positions']
     po_y_ex_values3: int = po_y_ex3['positions']
-    #po_y_ex_values4: int = po_y_ex4['positions']
+    if po_y_ex4 is not None:
+        po_y_ex_values4: int = po_y_ex4['positions']
 
     line_labels: int = df_bs_d['year']
     line_values: int = df_bs_d['baseLast']
@@ -160,22 +164,22 @@ def index():
                             su_pref_top3 = su_pr_values,
                             pol_val = polar_values,
                             pol_lab = polar_labels,
-                            uni_tit = un_titles,
-                            #uni_dps = un_dps,
                             po_labels = po_y_ex_labels,
                             po_title = po_y_ex_title,
                             po_values1 = po_y_ex_values1,
-                            #po_values2 = po_y_ex_values2,
+                            po_values2 = po_y_ex_values2,
                             po_values3 = po_y_ex_values3,
-                            #po_values4 = po_y_ex_values4,
-                            #labels5 = du_labels,
-                            #values5 = du_values
+                            po_values4 = po_y_ex_values4,
                             persistent1 = persistent1,
                             persistent2 = persistent2,
                             persistent3 = persistent3,
                             persistent4 = persistent4,
                             persistent5 = persistent5,
-                            saved = tableaus
+                            saved = tableaus,
+                            uni_tit = un_titles,
+                            uni_dps = un_dps,
+                            # values5 = du_values,
+                            # labels5 = du_labels
                             )
             )       
     
@@ -232,3 +236,8 @@ def profile():
 @main.route('/startpage', methods = ['GET'])
 def start():
     return render_template('startpage.html')
+
+@main.route('/universities', methods = ['GET', 'POST'])
+def unis():
+    return render_template('universitypage.html')
+

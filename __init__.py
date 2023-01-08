@@ -10,10 +10,11 @@ def create_app():
    app = Flask(__name__)
    
    app.config['SECRET_KEY'] = 'secret-key-goes-here'
-   #app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///C:\\Users\\Stella\\Documents\\GitHub\\WebEng22_Full-Stack-Comrades\\db.sqlite'
    dir_path = os.path.dirname(os.path.realpath('db.sqlite'))
    print(f'DIR -> {dir_path}')
-   app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{dir_path}/WebEng22_Full-Stack-Comrades/db.sqlite'
+   #app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{dir_path}/WebEng22_Full-Stack-Comrades/db.sqlite'
+   app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///C:\\Users\\Stella\\Documents\\GitHub\\WebEng22_Full-Stack-Comrades\\db.sqlite'
+
 
    #from . import db
    database.init_app(app)
@@ -38,5 +39,8 @@ def create_app():
    # blueprint for non-auth parts of app
    from .main import main as main_blueprint
    app.register_blueprint(main_blueprint)
+
+   from .uni import uni as uni_blueprint
+   app.register_blueprint(uni_blueprint)
 
    return app

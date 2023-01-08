@@ -199,30 +199,38 @@
 
     <div class="content"> 
         
-        <div class="university_info"></div>
+        <div class="university_info">"{{uni_dps}}"</div>
         
         <!--<div class="city_chart"></div>-->
 
         <div class="universities">
             <br> <br>
             <br> <br>
-            <p>pick a university</p>
-                
+            <p>pick a university
+            <div class="uni-slct">
+                <form method="post">
+                    <select class="form-control" aria-label="Default select example" id="uni-sl" name="uni-sl">
+                      <option value="#">Ιδρύματα</option>
+                      {% for opt in uni_tit %}
+                        <option> {{ opt }}</option>
+                      {% endfor %}
+                    </select>
+                    <input type="submit" value="Submit" class="btn btn-primary btn-sm" onclick="showDept(this)">
+                </form> 
+              </div>
+            </p>
             <table style="width: 70%";>
             <tr>
-                <td><a href="universitychart.html" >ΔΙΠΑΕ</a></td>
-                <td></td>
-                <td></td>
+                <td><a href="universitychart.html" >ΕΚΠΑ (42)</a></td>
+                <td><a href="universitychart.html" >ΑΠΘ (41)</a></td>
             </tr>
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td><a href="universitychart.html" >ΠΑΝ. ΠΑΤΡΩΝ (38)</a></td>
+                <td><a href="universitychart.html" >ΠΑΝ. ΘΕΣΣΑΛΙΑΣ (35)</a></td>
             </tr>
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td><a href="universitychart.html" >ΤΕΙ ΑΘΗΝΑΣ (32)</a></td>
+                <td><a href="universitychart.html" >ΔΙ.ΠΑ.Ε. (31)</a></td>
             </tr>
             </table>
         </div>-->
@@ -231,7 +239,13 @@
     <div class="footer">
         <a href="startpage.html" style="float:left"class="button button1">Footer</a>
     </div>
-        
+    
+    <script type="text/javascript">
+        function showDept(selectObject) {
+          document.getElementById("show_dpt").innerHTML = "{{uni_dps}}";
+        }
+      </script>
+    
 </body>
 
 </html> 
