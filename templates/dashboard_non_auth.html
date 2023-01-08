@@ -50,7 +50,26 @@
     text-align: center;  
     }*/
 
-      
+    select.form-control:not([size]):not([multiple]) {
+      height: calc(2.25rem + 2px);
+      /* padding: 10px; */
+    }
+
+    #school_operator {
+      margin-inline-start: 1%;
+    }
+
+    #more_depts {
+      margin-inline-start: 1%;
+    }
+
+    .btn-info {
+      color: #000;
+      background-color: #0dff00;
+      border-color: #0000008f;
+      margin-left: 5%;
+    }
+
         /* style for the  class "footer" */
     .footer {
     background: #BBBBBB;  
@@ -289,26 +308,6 @@
                       <option value="20000">20000</option>
                     </optgroup>
                     </select>
-                    <select class="form-control" aria-label="Default select example" id="position_operator" name="position_operator" onchange="fill_pos()">
-                      <optgroup>
-                        <option value="#">{{ persistent3 }}</option>
-                      </optgroup>
-                        <optgroup label="_________">
-                      <option value="40">40</option>
-                      <option value="60">60</option>
-                      <option value="80">80</option>
-                      <option value="100">100</option>
-                      <option value="120">120</option>
-                      <option value="140">140</option>
-                      <option value="160">160</option>
-                      <option value="180">180</option>
-                      <option value="200">200</option>
-                      <option value="220">220</option>
-                      <option value="240">240</option>
-                      <option value="260">260</option>
-                      <option value="280">280</option>
-                    </optgroup>
-                    </select>
                     <select class="form-control" aria-label="Default select example" id="year_operator" name="year_operator" onchange="fill_yr(); disable()">
                       <optgroup>
                         <option value="#">{{ persistent4 }}</option>
@@ -337,17 +336,16 @@
                       {% endfor %}
                       </select>
                     <input type="submit" value="Διαλέξτε Τμήμα" class="btn btn-primary btn-sm" id="dept_button">
-                  </form>
-                  <form method="POST" action="/save">
-                    <input type="hidden" id="school" name="school">
-                    <input type="hidden" id="base" name="base">
-                    <input type="hidden" id="pos" name="pos">
-                    <input type="hidden" id="yr" name="yr">
-                    <input type="hidden" id="dept" name="dept" onchange="checkForm()">
-                    <input type="submit" id="saveDash" value="Save Selections" class="btn btn-info" onclick="save_subs()">
-                    <!--<p id="demo"></p>-->
-                  </form>
+                </form>
+                <form method="POST" action="/save">
+                  <input type="hidden" id="school" name="school">
+                  <input type="hidden" id="base" name="base">
+                  <input type="hidden" id="yr" name="yr">
+                  <input type="hidden" id="dept" name="dept" onchange="checkForm()">
+                  <input type="submit" id="saveDash" value="Save Selections" class="btn btn-info" onclick="save_subs()">
+                </form>
                 </div>
+                <p id="demo"></p>
               </div>
             </li>
             <div class="navbar-collapse collapse">
@@ -424,12 +422,6 @@
       // set text box value here
       get_txt =  document.getElementById('base_operator');
       set_txt = document.getElementById('base');
-      set_txt.value = get_txt.value;
-    }
-    function fill_pos(){
-      // set text box value here
-      get_txt =  document.getElementById('position_operator');
-      set_txt = document.getElementById('pos');
       set_txt.value = get_txt.value;
     }
     function fill_yr(){

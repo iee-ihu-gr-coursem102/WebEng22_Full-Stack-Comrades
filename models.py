@@ -13,5 +13,4 @@ class Dashboard(database.Model):
     base = database.Column(database.String(45))
     department = database.Column(database.String(45))
     year = database.Column(database.String(4))
-    positions = database.Column(database.String(45))
     school = database.Column(database.String(45))

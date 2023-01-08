@@ -10,7 +10,6 @@ CREATE TABLE "Dashboard" (
 	"id"	INTEGER NOT NULL,
 	"school"	TEXT,
 	"base"	TEXT,
-	"positions"	TEXT,
 	"year"	TEXT,
 	"department"	TEXT,
 	"user_id"	INTEGER NOT NULL,

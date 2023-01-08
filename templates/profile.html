@@ -6,7 +6,7 @@
   </h1>
   <h2 class="title2">Your saved dashboards below:</h2><br>
     {% for item in stm %}
-      <p id="{{ item[0] }}" onclick="style.textDecoration = 'line-through'; style.color = 'chocolate'; style.fontStyle = 'italic'; onclick=collect(this.id); dis()"> {{ item[1] }}, {{ item[2] }}, {{ item[3] }}, {{ item[4] }}, {{ item[5] }}</p>
+      <p id="{{ item[0] }}" onclick="style.textDecoration = 'line-through'; style.color = 'chocolate'; style.fontStyle = 'italic'; onclick=collect(this.id); dis()"> {{ item[1] }}, {{ item[2] }}, {{ item[3] }}, {{ item[4] }}</p>
     {% endfor %}
 
   <form id="delTablsForm" method="POST" action="/delTabls">
