@@ -82,19 +82,6 @@ def index():
     dp_s: int = ftc.get_dptSum()
     un_s: int = ftc.get_uniSum()
 
-
-    # cols_uni: list = ['id', 'title']
-    # un_ti: pd.core.frame.DataFrame = ftc.to_dataFrame(ftc.get_uniList(), cols_uni)
-    # un_ids: int = un_ti['id']
-    # un_titles: str = un_ti['title']
-
-    # un_dps: list = ftc.get_depts_by_uni(request.form.get('uni-sl'))
-
-    # cols_dp_uni: list = ['uni', 'depts']
-    # dp_uni: pd.core.frame.DataFrame  = ftc.to_dataFrame(ftc.get_depts_by_uni_old(), cols_dp_uni)
-    # du_labels: str = dp_uni['uni']
-    # du_values: int = dp_uni['depts']
-
     cols_pr_t3: list = ['position', 'prefs']
     pr_t3: pd.core.frame.DataFrame  = ftc.to_dataFrame(ftc.get_preferences_top_3(real_code), cols_pr_t3)
     pr_labels: str = pr_t3['position']
@@ -166,11 +153,7 @@ def index():
                             persistent2 = persistent2,
                             persistent4 = persistent4,
                             persistent5 = persistent5,
-                            saved = tableaus,
-                            # uni_tit = un_titles,
-                            # uni_dps = un_dps,
-                            # values5 = du_values,
-                            # labels5 = du_labels
+                            saved = tableaus
                             )
             )       
     
@@ -220,11 +203,11 @@ def profile():
                            username = current_user.username,
                            stm = stm)
 
-@main.route('/', methods = ['GET'])
-def start():
-    return render_template('startpage.html')
+# @main.route('/', methods = ['GET'])
+# def start():
+#     return render_template('startpage.html')
 
-@main.route('/universities', methods = ['GET', 'POST'])
+@main.route('/', methods = ['GET', 'POST'])
 def unis():
     
     # cols_dp_uni: list = ['uni', 'depts']
@@ -240,7 +223,7 @@ def unis():
     dp_n: str = ftc.get_uni_full_title(request.form.get('uni-sl'))
     un_dps: list = ftc.get_depts_by_uni(request.form.get('uni-sl'))
 
-    resp =  make_response(render_template('universitypage.html',
+    resp =  make_response(render_template('startpage.html',
 
                             uni_tit = un_titles,
                             uni_dps = un_dps,

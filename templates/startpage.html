@@ -188,6 +188,24 @@
     padding: 2px;
     }
 
+    .university_info{
+    background: #ffffff;
+    position: absolute;
+    top: 0px;
+    width: 40%;
+    bottom: 0px;
+    left: 0px;}
+
+    .universities{
+    background: #443180;
+    position: absolute;
+    left: 40%;
+    right: 0px;
+    width: 60%;
+    top: 0%;
+    height: 100%;
+    }
+
     /*vertical-cenetered{
         
     }*/
@@ -199,21 +217,28 @@
 <body>
     
     <div class="header">
-        
-        <a href="/" class="button button1">Uniview</a>
 
         <a href="/login" style="float:right"class="button button3">Log in</a>
 
         <a href="/signup" style="float:right"; class="button button3">Sign up</a>
+
+        <a href="/dashboard"  class="button button2" style="float:right";>Dashboard</a>
 
     </div>
 
 
     <div class="content"> 
         
-        <div class="welcome">
-            <!--<div class="message"> </div>-->
+
+      <!-- <div class="welcome"> -->
+        <div class="university_info" id="show_dpt" style="overflow:auto">
+          <h3>&emsp;{{dept_nm}}</h3>
+          {% for dic in uni_dps %}
+            <ul> {{dic}}</ul>
+          {% endfor %}
+          
         </div>
+      <!-- </div> -->
         
         {% if current_user.is_authenticated %}
         <div class="dashboard">
@@ -227,57 +252,57 @@
           <br><br>
           <a href="/signup"  class="button button2">Signup</a>
 
-      </div>
+        </div>
         {% endif %}
-        <div class="cities">
-                <br> <br>
-                <p>choose university</p>
-                
-                <table>
-                <tr>
-                  <td><a href="universitypage.html" >Πάτρα</a></td>
-                  <td>Θεσσαλονίκη</td>
-                </tr>
-                <tr>
-                  <td>Ιωάννινα</td>
-                  <td>Αλεξανδρούπολη</td>
-                </tr>
-                <tr>
-                    <td>Ιωάννινα</td>
-                    <td>Αλεξανδρούπολη</td>
+
+        <div class="universities">
+        <br> <br>
+        <br> <br>
+        <p>pick a university
+        <div class="uni-slct">
+            <form method="post" style="text-align: center;">
+                <select class="form-control" aria-label="Default select example" id="uni-sl" name="uni-sl" style="width: 60%;">
+                  <option value="#" selected disabled hidden>Ιδρύματα</option>
+                  {% for opt in uni_tit %}
+                    <option> {{ opt }}</option>
+                  {% endfor %}
+                </select>
+                <input type="submit" value="Υποβολή" class="btn btn-primary btn-sm" onclick="showDept(this)">
+                <table style="width: 70%";>
+                  <tr>
+                      <td><input type="submit" value="ΕΚΠΑ (42)" class="btn btn-primary btn-sm" onclick="giveDept('ΕΚΠΑ')"></td>
+                      <td><input type="submit" value="ΑΠΘ (41)" class="btn btn-primary btn-sm" onclick="giveDept('ΑΠΘ')"></td>
                   </tr>
                   <tr>
-                    <td>Ιωάννινα</td>
-                    <td>Αλεξανδρούπολη</td>
+                      <td><input type="submit" value="ΠΑΝ. ΠΑΤΡΩΝ (38)" class="btn btn-primary btn-sm" onclick="giveDept('ΠΑΝ. ΠΑΤΡΩΝ')"></td>
+                      <td><input type="submit" value="ΠΑΝ. ΘΕΣΣΑΛΙΑΣ (35)" class="btn btn-primary btn-sm" onclick="giveDept('ΠΑΝ. ΘΕΣΣΑΛΙΑΣ')"></td>
                   </tr>
-                  
-              </table>
-        </div>
+                  <tr>
+                      <td><input type="submit" value="ΤΕΙ ΑΘΗΝΑΣ (32)" class="btn btn-primary btn-sm" onclick="giveDept('ΤΕΙ ΑΘΗΝΑΣ')"></td>
+                      <td><input type="submit" value="ΔΙ.ΠΑ.Ε. (31)" class="btn btn-primary btn-sm" onclick="giveDept('ΔΙ.ΠΑ.Ε.')"></td>
+                  </tr>
+                  </table>
+            </form> 
+          </div>
+        </p>
+      </div>
     </div>
 
     <div class="footer">
         <a href="/" style="float:left"class="button button1">Footer</a>
     </div>
         
-
-    <div class="uni-slct">
-        <form method="post">
-            <select class="form-control" aria-label="Default select example" id="uni-sl" name="uni-sl">
-              <option value="#">Ιδρύματα</option>
-              {% for opt in uni_tit %}
-                <option> {{ opt }}</option>
-              {% endfor %}
-            </select>
-            <input type="submit" value="Submit" class="btn btn-primary btn-sm" onclick="showDept(this)">
-          <p id="show_dpt">"{{uni_dps}}"</p>
-        </form> 
-      </div>
-
     <script type="text/javascript">
-    function showDept(selectObject) {
+      function showDept(selectObject) {
         document.getElementById("show_dpt").innerHTML = "{{uni_dps}}";
-    }
+      }
     </script>
+  
+  <script type="text/javascript">
+    function giveDept(theDpt){
+      document.getElementById("uni-sl").value = theDpt;
+    }
+  </script>
       
 </body>
 
