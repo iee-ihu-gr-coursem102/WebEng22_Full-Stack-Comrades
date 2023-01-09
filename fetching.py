@@ -34,12 +34,13 @@ def department_sum(res: dict) -> int:
    return dp_s
 
 # Extract List of Departments
-#def department_list(res: list) -> list:
-#   dept_l: list = []
-#   for i in res:
-#      dept_l.append(i['name'])
-#
-#   return dept_l 
+def department_list(res: list) -> list:
+   dept_l: list = []
+   for d in res:
+      dept_l.append(d['name'])
+      #print(d['name'])
+
+   return dept_l 
 
 # Extract Sum of Universities
 def university_sum(res: dict) -> int:
@@ -54,6 +55,12 @@ def university_list(res: dict) -> list:
       uni_s.append([res['records'][i]['id'], res['records'][i]['title']])
 
    return uni_s
+
+# Extract University Full Title
+def university_full_title(res: dict) -> str:
+   uni_ft: str = str(res['full-title'])
+   
+   return uni_ft
 
 
 # Extract Exam types
@@ -171,15 +178,38 @@ def get_uni_id_by_title(theTitle) -> int:
    #print(data)
    return data
 
-#def get_depts_by_uni(theTitle) -> list:
-#   data: list = []
-#   theID: int = get_uni_id_by_title(theTitle)
-#   myURL: str = 'https://vaseis.iee.ihu.gr/api/index.php/departments/university/'+ str(theID)
-#   theDepts: list = department_list(call_api(myURL))
-#   for i in range(len(theDepts)):
-#      data.append(theDepts[i])
-#   #print(data)
-#   return data
+def get_depts_by_uni(theTitle) -> list:
+  data: list = []
+  if theTitle is not None:
+   theID: int = get_uni_id_by_title(theTitle)
+   myURL: str = 'https://vaseis.iee.ihu.gr/api/index.php/departments/university/'+ str(theID)
+   #print(myURL)
+   theDepts: list = department_list(call_api(myURL))
+   #print(theDepts)
+   for i in range(len(theDepts)):
+      data.append(theDepts[i])
+   #print(data)
+  return data
+
+def get_uni_full_title(theTitle) -> str:
+   data: str = ""
+   print(theTitle)
+   if theTitle is not None:
+      theID: int = get_uni_id_by_title(theTitle)
+      link: str =  'https://vaseis.iee.ihu.gr/api/index.php/universities/'+ str(theID)
+      data = university_full_title(call_api(link))
+
+   return data
+   
+
+# def get_depts_by_uni_old() -> list:
+#    data: list = []
+#    for i in range(len(uniIDs)):
+#       myURL: str = 'https://vaseis.iee.ihu.gr/api/index.php/departments/university/'+ str(uniIDs[i][0])
+#       theSum: int = department_sum(call_api(myURL))
+#       data.append([uniIDs[i][1], theSum])
+#    #print(data)
+#    return data
 
 def get_examTypes(code, year) -> str:
 
