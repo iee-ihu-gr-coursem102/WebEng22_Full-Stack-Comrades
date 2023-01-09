@@ -22,23 +22,11 @@
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.js"></script>  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.js"></script>
 
   <style>
-
-  html, body{
-    margin:0px;
-    padding:0px;
-  }
         
-    /*
+    /* style for the  class "header" */
     .header {
     background:#657FAB;
     position: absolute;
@@ -47,29 +35,10 @@
     width: 100%;
     left: 0px;     
     min-height: 50px;
-    text-align: center;  
-    }*/
-
-    select.form-control:not([size]):not([multiple]) {
-      height: calc(2.25rem + 2px);
-      /* padding: 10px; */
+    text-align: center;  /* button center*/
     }
 
-    #school_operator {
-      margin-inline-start: 1%;
-    }
-
-    #more_depts {
-      margin-inline-start: 1%;
-    }
-
-    .btn-info {
-      color: #000;
-      background-color: #0dff00;
-      border-color: #0000008f;
-      margin-left: 5%;
-    }
-
+      
         /* style for the  class "footer" */
     .footer {
     background: #BBBBBB;  
@@ -83,9 +52,6 @@
     min-height: 50px;
     }
 
-    .navbar-light .navbar-nav .nav-link {
-      color: rgb(255 255 255);
-    }
 
     /* style for the class buttons" */
     .button {     
@@ -229,136 +195,141 @@
 
 <body>
 
-    <nav class="navbar navbar-expand-md navbar-light" style="background-color: #657FAB;">
-      <div class="container-fluid">
-        <div class="navbar-collapse collapse">
-          <ul class="navbar-nav me-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="/">UniView</a>
-            </li>
-          </ul>
-        </div>
-  
-          <ul class="navbar-nav ms-auto flex-nowrap">
-            
-            <li class="nav-item">
-              <div class="form-group">
-                <form method="post">
-                  <div class="btn-group">
-                    <input id="secret_operator" name="secret_operator" hidden>
-                    <!--
-                    <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Σχολές
-                    </button>
-                    <div class="dropdown-menu" id="department_operator" name="department_operator">
-                      <a class="dropdown-item" href="#">Πληροφορική</a>
-                      <a class="dropdown-item" href="#">Ιατρική</a>
-                      <a class="dropdown-item" href="#">Λογιστική</a>
-                    </div>
-                    -->
-                    <select class="form-control" aria-label="Default select example" id="saved_dashed" name="saved_dashed">
-                        <option value="#" selected disabled>Τα Ταμπλό μου</option>
-                        {% for item in saved %}
-                        <option>{{ item }}</option>"
-                        {% endfor %}
-                    </select>
-                    <input type="submit" value="Προβολή Ταμπλό" class="btn btn-primary btn-sm" onclick="signalDash()">
-                    <select class="form-control" aria-label="Default select example" id="school_operator" name="school_operator" onchange="fill_school(); disable();">
-                      <optgroup>
-                        <option value="#">{{ persistent1 }}</option>
-                      </optgroup>
-                        <optgroup label="_________">
-                        <option value="Πληροφορικής">Πληροφορικής</option>
-                        <option value="Ιατρικής">Ιατρικής</option>
-                        <option value="Λογιστικής">Λογιστικής</option>
-                        <option value="Θεολογίας">Θεολογίας</option>
-                        <option value="Φιλοσοφίας">Φιλοσοφίας</option>
-                        <option value="Οικονομικών">Οικονομικών</option>
-                        <option value="Μηχανολόγων Μηχανικών">Μηχανολόγων Μηχανικών</option>
-                        <option value="Ηλεκτρολόγων Μηχανικών">Ηλεκτρολόγων Μηχανικών</option>
-                        <option value="Ηλεκτρονικών">Ηλεκτρονικών</option>
-                        <option value="Χημικών Μηχανικών">Χημικών Μηχανικών</option>
-                        <option value="Χημείας">Χημείας</option>
-                        <option value="Αρχιτεκτόνων">Αρχιτεκτόνων</option>
-                        <option value="Μουσικών">Μουσικών</option>
-                        <option value="Γεωπονίας">Γεωπονίας</option>
-                        <option value="Νομικής">Νομικής</option>
-                        <option value="Διατροφής">Διατροφής</option>
-                        <option value="Κοινωνικής Εργασίας">Κοινωνικής Εργασίας</option>
-                        <option value="Νοσηλευτικής">Νοσηλευτικής</option>
-                        <option value="Δασολογίας">Δασολογίας</option>
-                        <option value="Φυσικής">Φυσικής</option>
-                        <option value="Μαθηματικών">Μαθηματικών</option>
-                        <option value="Βιολογίας">Βιολογίας</option>
-                      </optgroup>
-                    </select>
-                    <select class="form-control" aria-label="Default select example" id="base_operator" name="base_operator" onchange="fill_base()">
-                      <optgroup>
-                        <option value="#">{{ persistent2 }}</option>
-                      </optgroup>
-                        <optgroup label="_________">
-                      <!--<option value="4000">4000</option>
-                      <option value="6000">6000</option>
-                      <option value="8000">8000</option>-->
-                      <option value="10000">10000</option>
-                      <option value="12000">12000</option>
-                      <option value="14000">14000</option>
-                      <option value="16000">16000</option>
-                      <option value="18000">18000</option>
-                      <option value="20000">20000</option>
-                    </optgroup>
-                    </select>
-                    <select class="form-control" aria-label="Default select example" id="year_operator" name="year_operator" onchange="fill_yr(); disable()">
-                      <optgroup>
-                        <option value="#">{{ persistent4 }}</option>
-                      </optgroup>
-                      <optgroup label="_________">
-                      <option value="2022">2022</option>
-                      <option value="2021">2021</option>
-                      <option value="2020">2020</option>
-                      <option value="2019">2019</option>
-                      <option value="2018">2018</option>
-                      <option value="2017">2017</option>
-                      <option value="2016">2016</option>
-                      <option value="2015">2015</option>
-                      <option value="2014">2014</option>
-                      <option value="2013">2013</option>
-                    </optgroup>
-                    </select>
-                    <input type="submit" value="Υποβολή Όλων" class="btn btn-primary btn-sm">
-                    <select class="form-control" aria-label="Default select example" id="more_depts" name="more_depts" onchange="fill_dept()">
-                      <optgroup>
-                        <option value="#">{{ persistent5 }}</option>
-                      </optgroup>
-                      <optgroup label="_________">
-                      {% for item in labels %}
-                      <option>{{ item }}"</option>"
-                      {% endfor %}
-                      </select>
-                    <input type="submit" value="Διαλέξτε Τμήμα" class="btn btn-primary btn-sm" id="dept_button">
-                </form>
-                <form method="POST" action="/save">
-                  <input type="hidden" id="school" name="school">
-                  <input type="hidden" id="base" name="base">
-                  <input type="hidden" id="yr" name="yr">
-                  <input type="hidden" id="dept" name="dept" onchange="checkForm()">
-                  <input type="submit" id="saveDash" value="Save Selections" class="btn btn-info" onclick="save_subs()">
-                </form>
-                </div>
-                <p id="demo"></p>
-              </div>
-            </li>
-            <div class="navbar-collapse collapse">
-              <ul class="navbar-nav me-auto">
-                <li class="nav-item">
-                  <a class="nav-link" href="/profile">Profile</a>
-                </li>
-              </ul>
-            </div>
-          </ul>
-        </div>
+  <div class="header">
+
+    <a href="startpage" class="button button1" style="float:left">Uniview</a>
+    <a href="{{ url_for('main.profile') }}" style="float:right"class="button button3">Profile</a>
+
+    <div class="form-group">
+      <form method="post">
+        <div class="btn-group">
+          <input id="secret_operator" name="secret_operator" hidden>
+          <!--
+          <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Σχολές
+          </button>
+          <div class="dropdown-menu" id="department_operator" name="department_operator">
+            <a class="dropdown-item" href="#">Πληροφορική</a>
+            <a class="dropdown-item" href="#">Ιατρική</a>
+            <a class="dropdown-item" href="#">Λογιστική</a>
+          </div>
+          -->
+          <select class="form-control" aria-label="Default select example" id="saved_dashed" name="saved_dashed">
+            <optgroup>
+              <option value="#" selected disabled hidden>Τα Ταμπλό μου</option>
+            </optgroup>
+            {% for item in saved %}
+              <option>{{ item }}</option>"
+            {% endfor %}
+          </select>
+          <input style="height: 20%;" type="submit" value="Προβολή Ταμπλό" class="btn btn-primary btn-sm" onclick="signalDash()">
+          <select class="form-control" aria-label="Default select example" id="school_operator" name="school_operator" onchange="fill_school(); disable();">
+            <optgroup>
+              <option value="#">{{ persistent1 }}</option>
+            </optgroup>
+              <optgroup label="_________">
+              <option value="Πληροφορικής">Πληροφορικής</option>
+              <option value="Ιατρικής">Ιατρικής</option>
+              <option value="Λογιστικής">Λογιστικής</option>
+              <option value="Θεολογίας">Θεολογίας</option>
+              <option value="Φιλοσοφίας">Φιλοσοφίας</option>
+              <option value="Οικονομικών">Οικονομικών</option>
+              <option value="Μηχανολόγων Μηχανικών">Μηχανολόγων Μηχανικών</option>
+              <option value="Ηλεκτρολόγων Μηχανικών">Ηλεκτρολόγων Μηχανικών</option>
+              <option value="Ηλεκτρονικών">Ηλεκτρονικών</option>
+              <option value="Χημικών Μηχανικών">Χημικών Μηχανικών</option>
+              <option value="Χημείας">Χημείας</option>
+              <option value="Αρχιτεκτόνων">Αρχιτεκτόνων</option>
+              <option value="Μουσικών">Μουσικών</option>
+              <option value="Γεωπονίας">Γεωπονίας</option>
+              <option value="Νομικής">Νομικής</option>
+              <option value="Διατροφής">Διατροφής</option>
+              <option value="Κοινωνικής Εργασίας">Κοινωνικής Εργασίας</option>
+              <option value="Νοσηλευτικής">Νοσηλευτικής</option>
+              <option value="Δασολογίας">Δασολογίας</option>
+              <option value="Φυσικής">Φυσικής</option>
+              <option value="Μαθηματικών">Μαθηματικών</option>
+              <option value="Βιολογίας">Βιολογίας</option>
+            </optgroup>
+          </select>
+          <select class="form-control" aria-label="Default select example" id="base_operator" name="base_operator" onchange="fill_base()">
+            <optgroup>
+              <option value="#">{{ persistent2 }}</option>
+            </optgroup>
+              <optgroup label="_________">
+            <!--<option value="4000">4000</option>
+            <option value="6000">6000</option>
+            <option value="8000">8000</option>-->
+            <option value="10000">10000</option>
+            <option value="12000">12000</option>
+            <option value="14000">14000</option>
+            <option value="16000">16000</option>
+            <option value="18000">18000</option>
+            <option value="20000">20000</option>
+          </optgroup>
+          </select>
+          <select class="form-control" aria-label="Default select example" id="position_operator" name="position_operator" onchange="fill_pos()">
+            <optgroup>
+              <option value="#">{{ persistent3 }}</option>
+            </optgroup>
+              <optgroup label="_________">
+            <option value="40">40</option>
+            <option value="60">60</option>
+            <option value="80">80</option>
+            <option value="100">100</option>
+            <option value="120">120</option>
+            <option value="140">140</option>
+            <option value="160">160</option>
+            <option value="180">180</option>
+            <option value="200">200</option>
+            <option value="220">220</option>
+            <option value="240">240</option>
+            <option value="260">260</option>
+            <option value="280">280</option>
+          </optgroup>
+          </select>
+          <select class="form-control" aria-label="Default select example" id="year_operator" name="year_operator" onchange="fill_yr(); disable()">
+            <optgroup>
+              <option value="#">{{ persistent4 }}</option>
+            </optgroup>
+            <optgroup label="_________">
+            <option value="2022">2022</option>
+            <option value="2021">2021</option>
+            <option value="2020">2020</option>
+            <option value="2019">2019</option>
+            <option value="2018">2018</option>
+            <option value="2017">2017</option>
+            <option value="2016">2016</option>
+            <option value="2015">2015</option>
+            <option value="2014">2014</option>
+            <option value="2013">2013</option>
+          </optgroup>
+          </select>
+          <input style="height: 20%;" type="submit" value="Υποβολή Όλων" class="btn btn-primary btn-sm">
+          <select class="form-control" aria-label="Default select example" id="more_depts" name="more_depts" onchange="fill_dept()">
+            <optgroup>
+              <option value="#">{{ persistent5 }}</option>
+            </optgroup>
+            <optgroup label="_________">
+            {% for item in labels %}
+            <option>{{ item }}"</option>"
+            {% endfor %}
+        
+            </select>
+          <input style="height: 20%;" type="submit" value="Διαλέξτε Τμήμα" class="btn btn-primary btn-sm" id="dept_button">
+        </form>
+        <form method="POST" action="/save">
+          <input type="hidden" id="school" name="school">
+          <input type="hidden" id="base" name="base">
+          <input type="hidden" id="pos" name="pos">
+          <input type="hidden" id="yr" name="yr">
+          <input type="hidden" id="dept" name="dept" onchange="checkForm()">
+          <input type="submit" id="saveDash" value="Save Selections" class="btn btn-info" onclick="save_subs()">
+          <p id="demo"></p>
+        </form>
       </div>
-    </nav>
+    </div>
+  </div>
         
   <div class="charts">
     <div class="chart1"> 
@@ -422,6 +393,12 @@
       // set text box value here
       get_txt =  document.getElementById('base_operator');
       set_txt = document.getElementById('base');
+      set_txt.value = get_txt.value;
+    }
+    function fill_pos(){
+      // set text box value here
+      get_txt =  document.getElementById('position_operator');
+      set_txt = document.getElementById('pos');
       set_txt.value = get_txt.value;
     }
     function fill_yr(){

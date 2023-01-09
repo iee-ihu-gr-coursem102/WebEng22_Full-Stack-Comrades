@@ -9,24 +9,21 @@ main = Blueprint('main', __name__)
 auth = Blueprint('auth', __name__)
 uni = Blueprint('uni', __name__)
 
-@main.route('/', methods = ['GET', 'POST'])
+@main.route('/dashboard', methods = ['GET', 'POST'])
 def index():
 
     global persistent1
     global persistent2
-    global persistent3
     global persistent4
     global persistent5
 
     def1 = 'Πληροφορικής'
     def2 = '10000'
-    def3 = '100'
     def4 = '2022'
     def5 = 'ΠΛΗΡΟΦΟΡΙΚΗΣ ΚΑΙ ΤΗΛΕΠΙΚΟΙΝΩΝΙΩΝ (ΤΡΙΠΟΛΗ)'
 
     sl_op1 = request.form.get('school_operator')
     sl_op2 = request.form.get('base_operator')
-    sl_op3 = request.form.get('position_operator')
     sl_op4 = request.form.get('year_operator')
     sl_more = request.form.get('more_depts')
 
@@ -47,10 +44,6 @@ def index():
     elif sl_op2 == '#': persistent2 = request.cookies.get('persistent2')
     else: persistent2 = sl_op2
 
-    if sl_op3 == None: persistent3 = def3
-    elif sl_op3 == '#': persistent3 = request.cookies.get('persistent3') 
-    else: persistent3 = sl_op3
-
     if sl_op4 == None: persistent4 = def4
     elif sl_op4 == '#': persistent4 = request.cookies.get('persistent4') 
     else: persistent4 = sl_op4
@@ -60,13 +53,13 @@ def index():
     else: persistent5 = sl_more[:-1]; sl_more = sl_more[:-1]
 
     print(f'slop1 and cookie1 are -> {sl_op1}, {cookie1}')
-    print(f'Submission operators  are: {persistent1, persistent2, persistent3, persistent4, persistent5}')
+    print(f'Submission operators  are: {persistent1, persistent2, persistent4, persistent5}')
     #if current_user is not None: print(f'user now is: {current_user.username}, with id: {current_user.id}')
 
     cols_bs_ds_y: list = ['departments','baseLast','code']
     cols_bs_d: list = ['year','department','baseLast']
     
-    if secret == 'true': df_bs_ds_y: pd.core.frame.DataFrame = ftc.to_dataFrame(ftc.get_bases_departments_year(dashReq[1], dashReq[4], dashReq[2]), cols_bs_ds_y)
+    if secret == 'true': df_bs_ds_y: pd.core.frame.DataFrame = ftc.to_dataFrame(ftc.get_bases_departments_year(dashReq[1], dashReq[3], dashReq[2]), cols_bs_ds_y)
     else: df_bs_ds_y: pd.core.frame.DataFrame = ftc.to_dataFrame(ftc.get_bases_departments_year(persistent1, persistent4, persistent2), cols_bs_ds_y)
     new_list = df_bs_ds_y['departments'][0]
     print(df_bs_ds_y)
@@ -80,7 +73,7 @@ def index():
     elif new_list != sl_more and sl_more == persistent5 and new_list != persistent5: persistent5 = new_list; print('sec')
     
     print(f'this is the FINAL persistent5-> {persistent5}')
-    if secret == 'true': real_code = int(df_bs_ds_y.loc[df_bs_ds_y['departments'] == dashReq[5], 'code'])
+    if secret == 'true': real_code = int(df_bs_ds_y.loc[df_bs_ds_y['departments'] == dashReq[4], 'code'])
     else: real_code = int(df_bs_ds_y.loc[df_bs_ds_y['departments'] == persistent5, 'code'])
     print(real_code)
     df_bs_d: pd.core.frame.DataFrame  = ftc.to_dataFrame(ftc.get_bases_department(real_code), cols_bs_d)
@@ -112,7 +105,7 @@ def index():
     su_pr_values: int = su_pr_t3['prefs']
 
     cols_ex_ty: list = ['examType', 'positions']
-    if secret == 'true': ex_ty: pd.core.frame.DataFrame = ftc.to_dataFrame(ftc.get_examTypes(real_code, dashReq[4]), cols_ex_ty)
+    if secret == 'true': ex_ty: pd.core.frame.DataFrame = ftc.to_dataFrame(ftc.get_examTypes(real_code, dashReq[3]), cols_ex_ty)
     else: ex_ty: pd.core.frame.DataFrame = ftc.to_dataFrame(ftc.get_examTypes(real_code, persistent4), cols_ex_ty)
     polar_labels: str = ex_ty['examType']
     polar_values: int = ex_ty['positions']
@@ -146,9 +139,8 @@ def index():
     if secret == 'true':
         persistent1 = dashReq[1]
         persistent2 = dashReq[2]
-        persistent3 = dashReq[3]
-        persistent4 = dashReq[4]
-        persistent5 = dashReq[5]
+        persistent4 = dashReq[3]
+        persistent5 = dashReq[4]
 
     resp =  make_response(render_template('dashboard_non_auth.html',
                             labels = bar_labels,
@@ -172,7 +164,6 @@ def index():
                             po_values4 = po_y_ex_values4,
                             persistent1 = persistent1,
                             persistent2 = persistent2,
-                            persistent3 = persistent3,
                             persistent4 = persistent4,
                             persistent5 = persistent5,
                             saved = tableaus,
@@ -185,7 +176,6 @@ def index():
     
     resp.set_cookie('persistent1', persistent1)
     resp.set_cookie('persistent2', persistent2)
-    resp.set_cookie('persistent3', persistent3)
     resp.set_cookie('persistent4', persistent4)
     resp.set_cookie('persistent5', persistent5)
 
@@ -197,19 +187,16 @@ def save_selections() -> None:
     if op1 == '': op1 = persistent1
     op2 = request.form.get('base')
     if op2 == '': op2 = persistent2
-    op3 = request.form.get('pos')
-    if op3 == '': op3 = persistent3
     op4 = request.form.get('yr')
     if op4 == '': op4 = persistent4
     op5 = request.form.get('dept')
     if op5 == '': op5 = persistent5
 
-    print(f'n1, n2, n3, n4, n5 -> {op1, op2, op3, op4, op5}')
+    print(f'n1, n2, n3, n4, n5 -> {op1, op2, op4, op5}')
     db_controller.insert_preference(current_user.username,
                                     current_user.id,
                                     op1,
                                     op2,
-                                    op3,
                                     op4,
                                     op5
                                     )
@@ -233,7 +220,7 @@ def profile():
                            username = current_user.username,
                            stm = stm)
 
-@main.route('/startpage', methods = ['GET'])
+@main.route('/', methods = ['GET'])
 def start():
     return render_template('startpage.html')
 

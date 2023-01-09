@@ -200,11 +200,11 @@
     
     <div class="header">
         
-        <a href="startpage.html" class="button button1">Uniview</a>
+        <a href="/" class="button button1">Uniview</a>
 
-        <a href="login.html" style="float:right"class="button button3">Log in</a>
+        <a href="/login" style="float:right"class="button button3">Log in</a>
 
-        <a href="signup.html" style="float:right"; class="button button3">Sign up</a>
+        <a href="/signup" style="float:right"; class="button button3">Sign up</a>
 
     </div>
 
@@ -215,12 +215,20 @@
             <!--<div class="message"> </div>-->
         </div>
         
+        {% if current_user.is_authenticated %}
         <div class="dashboard">
             <br><br>
-            <a href="dashboard_non_auth.html"  class="button button2">Dashboard</a>
+            <a href="/dashboard"  class="button button2">Dashboard</a>
 
         </div>
+        {% endif %}
+        {% if not current_user.is_authenticated %}
+        <div class="dashboard">
+          <br><br>
+          <a href="/signup"  class="button button2">Signup</a>
 
+      </div>
+        {% endif %}
         <div class="cities">
                 <br> <br>
                 <p>choose university</p>
@@ -248,7 +256,7 @@
     </div>
 
     <div class="footer">
-        <a href="startpage.html" style="float:left"class="button button1">Footer</a>
+        <a href="/" style="float:left"class="button button1">Footer</a>
     </div>
         
 
