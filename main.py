@@ -1,7 +1,7 @@
 from flask import render_template, request
 from flask import Blueprint, make_response
 import pandas as pd
-from flask_login import login_required, current_user
+from flask_login import login_required, current_user, logout_user
 from . import db_controller
 from . import fetching as ftc
 
@@ -194,6 +194,13 @@ def del_tableaus() -> None:
     db_controller.del_preferences(tableaus)
 
     return ('', 204)
+
+@main.route('/delUser', methods = ['GET', 'POST'])
+def del_profile() :
+    db_controller.del_user(current_user.id)
+    logout_user()
+
+    return render_template('signup.html')
 
 @main.route('/profile')
 @login_required

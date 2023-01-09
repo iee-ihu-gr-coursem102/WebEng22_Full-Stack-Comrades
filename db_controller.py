@@ -13,6 +13,7 @@ def insert_user(mail, username, password) -> bool:
         statement: str
         statement = "INSERT INTO User(mail, username, password) VALUES(?, ?, ?);"
         cursor.execute(statement, [mail, username, password])
+
         db.commit()
         db.close()
     return True
@@ -46,7 +47,6 @@ def get_preferences(uid):
         if res[i][4][-1] == '"': correct = res[i][5][:-1]; tableaus.append([res[i][0], res[i][1], res[i][2], res[i][3], correct])
         else: tableaus.append([res[i][0], res[i][1], res[i][2], res[i][3], res[i][4]])
     
-    
     db.commit()
     db.close()
 
@@ -61,9 +61,19 @@ def del_preferences(tableaus):
     for i in range(len(tableaus)):
         cursor.execute(stm, [tableaus[i]])
     
-    
-
     db.commit()
     db.close()
 
     return tableaus
+
+def del_user(uid):
+    print(f'USER -> {uid}')
+    db = get_db()
+    cursor = db.cursor()
+    stm: str
+    stm = "DELETE FROM User WHERE id = (?);"
+
+    cursor.execute(stm, [uid])
+    
+    db.commit()
+    db.close()
