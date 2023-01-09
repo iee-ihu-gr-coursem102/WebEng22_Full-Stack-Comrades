@@ -241,4 +241,3 @@ def unis():
     )
     return resp
     #return render_template('universitypage.html')
-
