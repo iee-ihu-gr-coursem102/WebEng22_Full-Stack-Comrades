@@ -1,8 +1,6 @@
 from flask import render_template, request
 from flask import Blueprint, make_response
 import pandas as pd
-from flask_login import login_required, current_user
-from . import db_controller
 from . import fetching as ftc
 
 uni = Blueprint('uni', __name__)

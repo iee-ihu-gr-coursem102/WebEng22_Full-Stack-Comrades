@@ -90,12 +90,12 @@ def index():
     un_s: int = ftc.get_uniSum()
 
 
-    cols_uni: list = ['id', 'title']
-    un_ti: pd.core.frame.DataFrame = ftc.to_dataFrame(ftc.get_uniList(), cols_uni)
-    un_ids: int = un_ti['id']
-    un_titles: str = un_ti['title']
+    # cols_uni: list = ['id', 'title']
+    # un_ti: pd.core.frame.DataFrame = ftc.to_dataFrame(ftc.get_uniList(), cols_uni)
+    # un_ids: int = un_ti['id']
+    # un_titles: str = un_ti['title']
 
-    un_dps: list = ftc.get_depts_by_uni(request.form.get('uni-sl'))
+    # un_dps: list = ftc.get_depts_by_uni(request.form.get('uni-sl'))
 
     # cols_dp_uni: list = ['uni', 'depts']
     # dp_uni: pd.core.frame.DataFrame  = ftc.to_dataFrame(ftc.get_depts_by_uni_old(), cols_dp_uni)
@@ -176,8 +176,8 @@ def index():
                             persistent4 = persistent4,
                             persistent5 = persistent5,
                             saved = tableaus,
-                            uni_tit = un_titles,
-                            uni_dps = un_dps,
+                            # uni_tit = un_titles,
+                            # uni_dps = un_dps,
                             # values5 = du_values,
                             # labels5 = du_labels
                             )
@@ -239,5 +239,29 @@ def start():
 
 @main.route('/universities', methods = ['GET', 'POST'])
 def unis():
-    return render_template('universitypage.html')
+    
+    # cols_dp_uni: list = ['uni', 'depts']
+    # dp_uni: pd.core.frame.DataFrame  = ftc.to_dataFrame(ftc.get_depts_by_uni(), cols_dp_uni)
+    # du_labels: str = dp_uni['uni']
+    # du_values: int = dp_uni['depts']
+
+    cols_uni: list = ['id', 'title']
+    un_ti: pd.core.frame.DataFrame = ftc.to_dataFrame(ftc.get_uniList(), cols_uni)
+    un_ids: int = un_ti['id']
+    un_titles: str = un_ti['title']
+
+    dp_n: str = ftc.get_uni_full_title(request.form.get('uni-sl'))
+    un_dps: list = ftc.get_depts_by_uni(request.form.get('uni-sl'))
+
+    resp =  make_response(render_template('universitypage.html',
+
+                            uni_tit = un_titles,
+                            uni_dps = un_dps,
+                            dept_nm = dp_n
+                            # labels5 = du_labels,
+                            # values5 = du_values
+                        )
+    )
+    return resp
+    #return render_template('universitypage.html')
 
