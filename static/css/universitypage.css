@@ -1,0 +1,281 @@
+
+  /* style for the universitypage*/
+
+
+ul {                /*style for navigation bar header*/
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-family: "Noto Sans", sans-serif;
+    font-size: 16px;
+    background-color: #764C78;
+  
+  }
+
+  .ul2{   /* style for the  class ul2-nav bar  footer */
+   
+    background-color: #2696A3;
+  }
+  
+  li {
+    float: right;
+    border-left:1px solid #bbb;
+    
+  }
+  
+  li:first-child {
+    border-right: none;
+  }
+  
+  
+  li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  
+  }
+  
+  li a:hover:not(.active) {
+    background-color: #5F9EA0;
+    color: #ffffff;
+  }
+  
+  .active {
+    background-color: #CACACA;
+    
+  }
+  
+  
+  
+  
+    
+      /* style for the  class "header" */
+      .header {
+      position: absolute;
+      height:5%;
+      top: 0px;
+      width: 100%;
+      left: 0px;     
+      /*min-height: 50px;*/
+      /*align-items: center;*/
+      
+      }
+  
+       /* style for the  class "footer" */
+       .footer {
+      background: #2696A3;  
+      position: absolute;
+      width: 100%;   
+      bottom: 0;
+      height: 7%;
+      left: 0px;
+      right: 0px;
+      text-align: center;
+     
+      
+      
+      }
+  
+       /* style for the class buttons" */
+       .button {     
+      transition-duration: 0.4s;              
+      border-radius: 4px;
+      text-align: center;
+      display: inline-block;  /*the top and bottom margins/paddings are respected*/
+      cursor: pointer;
+  
+      
+      }
+  
+  /* button transition effect */
+      .button:hover {
+      background-color:#dee4de; 
+      color: #2696A3;}
+          
+      /* Uniview button 
+      .button1{
+      background-color: #CACACA;
+      color: white;
+      font-family: "Noto Sans", sans-serif;
+      font-size: 16px;
+      font-weight: bold;
+      top: 50%;
+      }*/
+  
+      /* Dashboard button*/
+      .button2 {
+      background-color:#414BB2;
+      color: white;
+      font-size: 22px;
+      font-family: Arial, Helvetica, sans-serif;
+      margin-right: 15px;
+      }   
+  
+  
+      /* Sign up - Log in button 
+      .button3 {
+      background-color: #ffffff;  
+      font-family: Arial, Helvetica, sans-serif; 
+      border:1px solid #88b0c0;
+      color: #414BB2; 
+      font-size: 18px;
+      margin-right: 15px;
+      padding: 10px;
+      }    */  
+              
+           
+  
+      .content{ 
+      position: absolute;
+      background: #050505;
+      width: 100%;
+      height:86%;
+      top: 7%;
+      bottom:7%;
+      left: 0px;
+      } 
+          
+  
+  
+      /* style for the  div "university_info" */   
+      .university_info{
+      background: #ffffff;
+      position: absolute;
+      top: 0px;
+      width: 40%;
+      bottom: 0px;
+      left: 0px;}
+  
+          
+  
+  
+      /* style for the  class "city_chart"  
+      .city_chart{
+      background: #443180;
+      position: absolute;
+      left: 40%;
+      width: 60%;
+      top: 0px;
+      right: 0px;
+      height: 40%;
+      text-align:center;    
+      }*/  
+  
+  
+      /* style for the  div "universities" */
+      .universities{
+      background: #443180;
+      position: absolute;
+      left: 40%;
+      right: 0px;
+      width: 60%;
+      top: 0%;
+      height: 100%;
+      }
+  
+      /* style for the table 
+      table {
+      margin: auto;
+      background-color:#DFDFDF;
+      opacity: 0.5;
+      border:1px solid rgb(88, 23, 23);
+      }*/
+             
+      /*th, td {
+      
+      border:1px solid rgb(88, 23, 23);
+      border-radius: 4px;
+      padding: 13px;
+      font-family: "Nixie One", sans-serif;
+      font-size: 18px;
+      text-align: center;
+      /*opacity: 1;
+      }*/
+  
+      /* style for hyperlink in table  */
+      /*a:link {
+      text-decoration: none;
+      }
+  
+      a:visited {
+      text-decoration: none;
+      }
+  
+      a:hover {
+      text-decoration: underline;
+      }
+  
+      a:active {
+      text-decoration: underline;
+      }*/
+  
+      p { margin: auto;
+      font-family: "Noto Sans", sans-serif;
+      font-style: italic;
+      border-radius: 4px;
+      background-color: #666666; 
+      color: #ffffff; 
+      width: 70%;
+      text-align: center;
+      padding: 2px;
+      }
+  
+  /* .footer-centered{
+      position:absolute;
+        top: 15%;
+        right: 15%;
+        left: 15%;
+  }*/
+
+  .container{
+    display: flex;           /* select dropdown centered horizontically*/
+    align-items: center;     /*and*/
+    justify-content: center; /*vertically*/
+
+  }
+
+  .horizontical_align_btn{
+    display: flex;           /* select dropdown centered horizontically*/
+    align-items: center;     /*and*/
+    justify-content: center; /*vertically*/
+
+  }
+
+  /* style for the dropdown select box "διάλεξε σχολή"*/
+  .form {
+    /*max-width: 330px;*/
+    width: 100%;
+    padding: 15px;
+    padding-top: 15px;
+    /*margin: 0 auto;
+    margin: auto;*/
+    font-family: "Noto Sans", sans-serif;
+    text-align: center;
+    align-items: center;
+    /*background-color: #5F9EA0;*/
+    
+    
+}
+.form .form-heading {
+    margin-bottom: 20px;
+    text-align: center;
+}
+.form .form-control {
+    position: relative;
+    font-size: 16px;
+    height: auto;
+    padding: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.form .form-control:focus {
+    z-index: 2;
+}
+.form input[type="text"] {
+    margin-bottom: -1px;
+    border-radius: 0;
+}
