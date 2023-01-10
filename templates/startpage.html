@@ -33,7 +33,7 @@
     </div>
 
     <div class="universities">
-      <p> Διάλεξε σχολή  </p>
+      <p> Διάλεξε σχολή </p>
       <!--<div class="container">
         <div class="row">
          <div class="col-xs-4 col-xs-offset-4">
@@ -56,24 +56,30 @@
       
         <div class="uni-slct">
             <form method="post" style="text-align: center;">
+
+                <div class="container">
                 <select class="form-control" aria-label="Default select example" id="uni-sl" name="uni-sl" style="width: 60%;">
                   <option value="#" selected disabled hidden>Ιδρύματα</option>
                   {% for opt in uni_tit %}
                     <option> {{ opt }}</option>
                   {% endfor %}
                 </select>
+
+
                 <input type="submit" value="Υποβολή" class="btn btn-primary btn-sm" onclick="showDept(this)">
+              </div>
+
                 <table style="width: 70%";>
                   <tr>
-                      <td><input type="submit" value="ΕΚΠΑ (42)" class="btn btn-primary btn-sm" onclick="giveDept('ΕΚΠΑ')"></td>
+                      <td><input type="submit" value="ΕΚΠΑ (42)" class="btn btn-light" onclick="giveDept('ΕΚΠΑ')"></td>
                       <td><input type="submit" value="ΑΠΘ (41)" class="btn btn-primary btn-sm" onclick="giveDept('ΑΠΘ')"></td>
                   </tr>
                   <tr>
-                      <td><input type="submit" value="ΠΑΝ. ΠΑΤΡΩΝ (38)" class="btn btn-primary btn-sm" onclick="giveDept('ΠΑΝ. ΠΑΤΡΩΝ')"></td>
+                      <td><input type="submit" value="ΠΑΝ. ΠΑΤΡΩΝ (38)" class="btn btn-link" style="color:rgb(0, 0, 0); font-weight: bold;" onclick="giveDept('ΠΑΝ. ΠΑΤΡΩΝ')"></td>
                       <td><input type="submit" value="ΠΑΝ. ΘΕΣΣΑΛΙΑΣ (35)" class="btn btn-primary btn-sm" onclick="giveDept('ΠΑΝ. ΘΕΣΣΑΛΙΑΣ')"></td>
                   </tr>
                   <tr>
-                      <td><input type="submit" value="ΤΕΙ ΑΘΗΝΑΣ (32)" class="btn btn-primary btn-sm" onclick="giveDept('ΤΕΙ ΑΘΗΝΑΣ')"></td>
+                      <td><input type="submit" value="ΤΕΙ ΑΘΗΝΑΣ (32)" class="btn btn-outline-secondary" onclick="giveDept('ΤΕΙ ΑΘΗΝΑΣ')"></td>
                       <td><input type="submit" value="ΔΙ.ΠΑ.Ε. (31)" class="btn btn-primary btn-sm" onclick="giveDept('ΔΙ.ΠΑ.Ε.')"></td>
                   </tr>
                   </table>

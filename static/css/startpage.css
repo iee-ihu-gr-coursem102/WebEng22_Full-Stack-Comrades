@@ -191,7 +191,8 @@ li a:hover:not(.active) {         /*style for li είσοδος-εγγραφή*/
     }
   
          
-      /* style for the table 
+      /* style for the table */
+      table{
       margin: auto;
       background-color:#DFDFDF;
       opacity: 0.5;
@@ -203,24 +204,25 @@ li a:hover:not(.active) {         /*style for li είσοδος-εγγραφή*/
   
   
       th, td {
-      /*color: #6CF6FF;
+      color: #6CF6FF;
       border:1px solid rgb(88, 23, 23);
       border-radius: 4px;
       padding: 13px;
       font-family: "Nixie One", sans-serif;
       font-size: 18px;
       text-align: center;
-      /*opacity: 1;
+      /*opacity: 1;*/
       }
   
   
       /* style for hyperlink in table  
+
       a:link {
       text-decoration: none;
-      }
+      }*/
   
   
-      a:visited {
+      /*a:visited {
       text-decoration: none;
       }
   
@@ -259,8 +261,8 @@ li a:hover:not(.active) {         /*style for li είσοδος-εγγραφή*/
       align-items: center;
       /*background-color: #5F9EA0;*/
       
-      
   }
+  
   .form .form-heading {
       margin-bottom: 20px;
       text-align: center;
@@ -282,17 +284,18 @@ li a:hover:not(.active) {         /*style for li είσοδος-εγγραφή*/
       border-radius: 0;
   }
 
+/*select dropdown centered horizontically and vertically*/
+   .container{
+    display: flex;            
+    align-items: center;     
+    justify-content: center; 
+   }
+ 
 
-  .container{
-    display: flex;           /* select dropdown centered horizontically*/
-    align-items: center;     /*and*/
-    justify-content: center; /*vertically*/
-
-  }
-
+    /*  centered horizontically  
   .horizontical_align_btn{
-    display: flex;           /* select dropdown centered horizontically*/
-    align-items: center;     /*and*/
-    justify-content: center; /*vertically*/
+    display: flex;           
+    align-items: center;     
+    justify-content: center; 
 
-  }
+  }*/
