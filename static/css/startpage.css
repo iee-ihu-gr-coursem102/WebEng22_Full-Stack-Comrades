@@ -202,17 +202,17 @@ li a:hover:not(.active) {         /*style for li είσοδος-εγγραφή*/
       }
              
   
-  
+      /*δεν  παιρνει μορφοποίηση γτ????*/
       th, td {
-      color: #6CF6FF;
       border:1px solid rgb(88, 23, 23);
       border-radius: 4px;
       padding: 13px;
       font-family: "Nixie One", sans-serif;
-      font-size: 18px;
+      font-size: 16px;
       text-align: center;
       /*opacity: 1;*/
       }
+      
   
   
       /* style for hyperlink in table  

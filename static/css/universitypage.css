@@ -49,8 +49,6 @@ ul {                /*style for navigation bar header*/
   }
   
   
-  
-  
     
       /* style for the  class "header" */
       .header {
@@ -61,9 +59,10 @@ ul {                /*style for navigation bar header*/
       left: 0px;     
       /*min-height: 50px;*/
       /*align-items: center;*/
-      
       }
-  
+
+      
+
        /* style for the  class "footer" */
        .footer {
       background: #2696A3;  
@@ -74,20 +73,20 @@ ul {                /*style for navigation bar header*/
       left: 0px;
       right: 0px;
       text-align: center;
-     
-      
-      
+      /*min-height: 50px;*/
       }
-  
-       /* style for the class buttons" */
-       .button {     
+
+
+
+    /* style for the class buttons" */
+    .button {     
       transition-duration: 0.4s;              
       border-radius: 4px;
+      /*padding: 8px;*/
       text-align: center;
       display: inline-block;  /*the top and bottom margins/paddings are respected*/
+      /*margin: 5px;*/
       cursor: pointer;
-  
-      
       }
   
   /* button transition effect */
@@ -95,15 +94,19 @@ ul {                /*style for navigation bar header*/
       background-color:#dee4de; 
       color: #2696A3;}
           
-      /* Uniview button 
-      .button1{
-      background-color: #CACACA;
-      color: white;
-      font-family: "Noto Sans", sans-serif;
-      font-size: 16px;
-      font-weight: bold;
-      top: 50%;
-      }*/
+
+
+  * Uniview button */
+  .button1{
+  background-color: #CACACA;
+  color: white;
+  font-family: "Noto Sans", sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  top: 50%;
+  }
+
+
   
       /* Dashboard button*/
       .button2 {
