@@ -46,6 +46,7 @@
       padding-bottom: 25px;
       padding-left: 75px;
       padding-right: 75px;
+      text-decoration: none;
     }   
 
     .button2:hover {
@@ -91,9 +92,9 @@
 
     /* style for the  class "dashboard" */   
     .dashboard{
-    display: flex;           /* button cenered horizontically*/
-	  align-items: center;     /*and*/
-	  justify-content: center; /*vertically*/
+    display: flex;           /* button centered horizontically-vertically*/
+	  align-items: center;     
+	  justify-content: center; 
     background: #540e4c96;
     position: absolute;
     left: 40%;
@@ -141,23 +142,7 @@
     }
 
 
-    /* style for hyperlink in table  */
-    /*a:link {
-    text-decoration: none;
-    }
-
-
-    a:visited {
-    text-decoration: none;
-    }
-
-    a:hover {
-    text-decoration: underline;
-    }
-
-    a:active {
-    text-decoration: underline;
-    }*/
+  
 
     p { 
     margin: auto;
@@ -207,15 +192,17 @@
       top: 50%;
     }
 
-    /*btn in the table*/
+    /*table buttons*/
     .btn-link{
       color:white;
       font-family: Arial, Helvetica, sans-serif;
+      text-decoration: none;
     }
 
     .btn:hover{
       
       color:white;
+      text-decoration: underline;
       /*color:#000000;*/
 
     }
@@ -307,7 +294,7 @@
                         <option> {{ opt }}</option>
                       {% endfor %}
                     </select>
-                    <input type="submit" value="Υποβολή" class="btn btn-primary btn-sm" style="background-color:#98ccff;"  onclick="showDept(this)">
+                    <input type="submit" value="Υποβολή" class="btn btn-primary btn-sm" style="background-color:#6585ba;"  onclick="showDept(this)">
                     <table>
                       <tr>
                           <td><input type="submit" value="ΕΚΠΑ" class="btn btn-link"  onclick="giveDept('ΕΚΠΑ')"></td>
