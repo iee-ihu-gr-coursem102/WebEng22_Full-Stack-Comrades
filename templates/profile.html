@@ -2,16 +2,20 @@
 
 {% block content %}
   <h1 class="title1">
-    Welcome, {{ username }}!<br><br>
+    Καλωσόρισες, {{ username }}!<br><br>
   </h1>
-  <h2 class="title2">Your saved dashboards below:</h2><br>
+  <h2 class="title2">Τα αποθηκευμένα σου ταμπλό:</h2><br>
     {% for item in stm %}
-      <p id="{{ item[0] }}" onclick="style.textDecoration = 'line-through'; style.color = 'chocolate'; style.fontStyle = 'italic'; onclick=collect(this.id); dis()"> {{ item[1] }}, {{ item[2] }}, {{ item[3] }}, {{ item[4] }}</p>
+      <p id="{{ item[0] }}" onclick="style.textDecoration = 'line-through'; style.color = '#00ffdc'; style.fontStyle = 'italic'; onclick=collect(this.id); dis()"> {{ item[1] }}, {{ item[2] }}, {{ item[3] }}, {{ item[4] }}</p>
     {% endfor %}
 
   <form id="delTablsForm" method="POST" action="/delTabls">
-    <input id="btn" type="submit" class="btn btn-danger btn-sm" value="Delete Selected" onclick="allgood()">
+    <br><br>
+    <input id="btn" type="submit" class="btn btn-danger btn-sm btn_dark" value="Διαγραφή επιλεγμένων" onclick="allgood()">
     <br><br><br><h2 id="demo" class="title3"></h2>
+  </form>
+  <form id="delUserForm" method="POST" action="/delUser">
+    <input id="btn" type="submit" class="btn btn-danger btn-sm btn_light " value="Διαγραφή χρήστη">
   </form>
 
   <script>
@@ -31,7 +35,7 @@
 
 <script type="text/javascript">
   function allgood() {
-    document.getElementById("demo").innerHTML = "Tableaus Deleted! Reload to Update";
+    document.getElementById("demo").innerHTML = "Διαγράφηκαν Ταμπλό! Ανανέωσε τη σελίδα.";
   }
 </script>
 

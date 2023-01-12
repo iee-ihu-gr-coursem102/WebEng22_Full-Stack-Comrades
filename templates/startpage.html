@@ -1,34 +1,21 @@
 <!DOCTYPE html>
 <head>
 <meta charset="utf-8">
-<title> Start page</title>
+<title> Αρχική σελίδα</title>
   <!--<link rel="stylesheet" href="stylesheets/startpage.css">-->
-  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+  integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <style>
 
-    /* style for the  class "header" */
-    .header {
-    background: #764C78;
-    position: absolute;
-    height:10%;
-    top: 0px;
-    width: 100%;
-    left: 0px;     
-    min-height: 50px;
+    html, body{
+      margin:0px;
+      padding:0px;
+      margin-left: 0px;
+      margin-top: 0px;
+      margin-right: 0px;
+      margin-bottom: 0px;
     }
-
-    /* style for the  class "footer" */
-    .footer {
-    background: #2696A3;  
-    position: absolute;
-    width: 100%;   
-    bottom: 0;
-    height: 10%;
-    left: 0px;
-    right: 0px;
-    text-align: center;
-    min-height: 50px;
-    }
+  
 
     /* style for the class buttons" */
     .button {     
@@ -47,28 +34,25 @@
     background-color:#dee4de; 
     color: #2696A3;}
         
-    /* Uniview button */
-    .button1{
-    background-color: #CACACA;
-    color: white;
-    font-family: "Noto Sans", sans-serif;
-    font-size: 16px;
-    font-weight: bold;
-    top: 50%;
-    }
+    
 
     /* Dashboard button*/
     .button2 {
-    background-color:#414BB2;
-    color: white;
-    font-size: 22px;
-    font-family: Arial, Helvetica, sans-serif;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    padding-left: 25px;
-    padding-right: 25px;
+      background-color: #3d4e6b;
+      color: white;
+      font-size: 22px;
+      font-family: Arial, Helvetica, sans-serif;
+      padding-top: 24px;
+      padding-bottom: 25px;
+      padding-left: 75px;
+      padding-right: 75px;
     }   
 
+    .button2:hover {
+      background-color: #199ef2;
+      color: #ffffff;
+      text-decoration: none;
+    }
 
     /* Sign up - Log in button*/   
     .button3 {
@@ -84,48 +68,46 @@
          
 
     .content{ 
-    position: absolute;
-    background: #050505;
-    width: 100%;
-    height:80%;
-    top: 10%;
-    bottom:10%;
-    left: 0px;
+      position: absolute;
+      background: #050505;
+      width: 100%;
+      height: 90%;
+      left: 0px;
     } 
         
 
 
-    /* style for the  class "welcome" */   
-    .welcome{
-    background: #ffffff;
+    /* style for the  class "dep_readable" */   
+    .dep_readable{
     position: absolute;
     top: 0px;
     width: 40%;
     bottom: 0px;
-    left: 0px;}
+    left: 0px;
+    background-image: url("https://www.perrakispapers.gr/media/1586/ice-white.jpeg?mode=pad&width=1200&upscale=false");
+   }
 
-        
-
+  
 
     /* style for the  class "dashboard" */   
     .dashboard{
     display: flex;           /* button cenered horizontically*/
-	align-items: center;     /*and*/
-	justify-content: center; /*vertically*/
-    background: #443180;
+	  align-items: center;     /*and*/
+	  justify-content: center; /*vertically*/
+    background: #540e4c96;
     position: absolute;
     left: 40%;
     width: 60%;
-    top: 0px;
+    /*top: 0px;*/
     right: 0px;
     height: 40%;
     /*text-align:center;   Dashboard button centered horizontically*/
     }
 
 
-    /* style for the  class "cities" */
-    .cities{
-    background: #443180;
+    /* style for the  class "universities" */
+    .universities{
+    background: #34686b;
     position: absolute;
     left: 40%;
     right: 0px;
@@ -133,33 +115,34 @@
     top: 40%;
     height: 60%;}
 
-       
+ 
+
     /* style for the table */
     table {
-    margin: auto;
-    background-color:#DFDFDF;
-    opacity: 0.5;
-    border:1px solid rgb(88, 23, 23);
-    width: 70% ;
-    height: 90;
+      margin: auto;
+      /* background-color: #5f4b8b63; */
+      opacity: 6.5;
+      border-style: hidden;
+      width: 70%;
+      height: 90;
+      margin-top: 4.5%;
     }
            
 
 
-    th, td {
-    /*color: #6CF6FF;*/
-    border:1px solid rgb(88, 23, 23);
-    border-radius: 4px;
-    padding: 13px;
-    font-family: "Nixie One", sans-serif;
-    font-size: 18px;
-    text-align: center;
-    /*opacity: 1;*/
+    tr, td {
+      border: 1px solid
+      rgb(88 23 23 / 25%);
+      border-radius: 4px;
+      padding: 13px;
+      font-size: 18px;
+      text-align: center;
+      /* opacity: 1; */
     }
 
 
     /* style for hyperlink in table  */
-    a:link {
+    /*a:link {
     text-decoration: none;
     }
 
@@ -174,23 +157,69 @@
 
     a:active {
     text-decoration: underline;
-    }
+    }*/
 
     p { 
     margin: auto;
     font-family: "Noto Sans", sans-serif;
     font-style: italic;
     border-radius: 4px;
-    background-color: #666666; 
+    background-color: #3d4e6b; 
     color: #ffffff; 
     width: 70%;
     text-align: center;
     padding: 2px;
     }
 
-    /*vertical-cenetered{
-        
-    }*/
+    .copyright {     /*footer*/
+      background: #3d4e6b;  
+      position: absolute;
+      width: 100%;   
+      bottom: 0;
+      height: 5%;
+      left: 0px;
+      right: 0px;
+      text-align: center;
+      min-height: 50px;
+    }
+
+    .text-white {
+      padding-top: 1.1%;
+      --bs-text-opacity: 1;
+      color: rgba(var(--bs-white-rgb),var(--bs-text-opacity))!important;
+    }   
+
+    /*header nav_bar*/
+    .navbar-light .navbar-nav .nav-link {    
+      color: rgb(255 255 255);
+    } 
+
+
+    /*welcome message*/
+    .wel {                
+      position: absolute;
+      top: 25%;
+      color: #98ccff;
+    }
+
+    .dashb {
+      position: absolute;
+      top: 50%;
+    }
+
+    /*btn in the table*/
+    .btn-link{
+      color:white;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .btn:hover{
+      
+      color:white;
+      /*color:#000000;*/
+
+    }
+    
 	
 </style>
 
@@ -198,86 +227,133 @@
 
 <body>
     
-    <div class="header">
-        
-        <a href="/" class="button button1">Uniview</a>
+    <nav class="navbar navbar-expand-md navbar-light" style="background-color: #3d4e6b;">
+    <div class="container-fluid">
+      <div class="navbar-collapse collapse">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+          </li>
+        </ul>
+      </div>
 
-        <a href="/login" style="float:right"class="button button3">Log in</a>
-
-        <a href="/signup" style="float:right"; class="button button3">Sign up</a>
-
+        <ul class="navbar-nav ms-auto flex-nowrap">
+          
+          
+          <div class="navbar-collapse collapse">
+            <ul class="navbar-nav me-auto">
+              <li class="nav-item">
+                {% if current_user.is_authenticated %}
+                  <a class='nav-link' href="/profile" style="float:right"class="button button3">Προφίλ</a> 
+                {% endif %}
+                {% if not current_user.is_authenticated %}
+                  <a class='nav-link' href="/login" style="float:right"; class="button button3">Σύνδεση</a>
+                  <a class='nav-link' href="/signup" style="float:right"; class="button button3">Εγγραφή</a>
+                {% endif %}
+              </li>
+            </ul>
+          </div>
+        </ul>
+      </div>
     </div>
+  </nav>
 
 
     <div class="content"> 
         
-        <div class="welcome">
-            <!--<div class="message"> </div>-->
+        <div class="dep_readable" id="show_dpt" style="overflow:auto">
+          <br>
+            <h3>&emsp;{{dept_nm}}</h3>
+            {% for dic in uni_dps %}
+              <ul> {{dic}}</ul>
+            {% endfor %}
+          
         </div>
         
         {% if current_user.is_authenticated %}
         <div class="dashboard">
-            <br><br>
-            <a href="/dashboard"  class="button button2">Dashboard</a>
-
+          <div class="wel">
+            <h3>
+              Καλωσόρισες, {{ current_user.username }}!
+            </h3>
+          </div>
+          <div class="dashb">
+            <a href="/dashboard"  class="button button2">Ταμπλό</a>
+          </div>
         </div>
         {% endif %}
         {% if not current_user.is_authenticated %}
         <div class="dashboard">
-          <br><br>
-          <a href="/signup"  class="button button2">Signup</a>
-
-      </div>
-        {% endif %}
-        <div class="cities">
-                <br> <br>
-                <p>choose university</p>
-                
-                <table>
-                <tr>
-                  <td><a href="universitypage.html" >Πάτρα</a></td>
-                  <td>Θεσσαλονίκη</td>
-                </tr>
-                <tr>
-                  <td>Ιωάννινα</td>
-                  <td>Αλεξανδρούπολη</td>
-                </tr>
-                <tr>
-                    <td>Ιωάννινα</td>
-                    <td>Αλεξανδρούπολη</td>
-                  </tr>
-                  <tr>
-                    <td>Ιωάννινα</td>
-                    <td>Αλεξανδρούπολη</td>
-                  </tr>
-                  
-              </table>
+          <div class="wel">
+            <h3>
+              Καλωσορίσατε!
+            </h3>
+          </div>
+          <div class="dashb">
+            <a href="/trial"  class="button button2">Ταμπλό</a>
+          </div>
         </div>
-    </div>
+        {% endif %}
 
-    <div class="footer">
-        <a href="/" style="float:left"class="button button1">Footer</a>
-    </div>
+        <div class="universities">
+            <br> <br>
+            <!--<br> <br>-->
+            <p>Διάλεξε Πανεπιστήμιο</p>
+            <div class="uni-slct">
+
+                <form method="post" style="text-align: center;">
+                  <select class="form-control" aria-label="Default select example" id="uni-sl" name="uni-sl"  style="width:70%; margin: auto;">
+                      <option value="#" selected disabled hidden>Ιδρύματα</option>
+                      {% for opt in uni_tit %}
+                        <option> {{ opt }}</option>
+                      {% endfor %}
+                    </select>
+                    <input type="submit" value="Υποβολή" class="btn btn-primary btn-sm" style="background-color:#98ccff;"  onclick="showDept(this)">
+                    <table>
+                      <tr>
+                          <td><input type="submit" value="ΕΚΠΑ" class="btn btn-link"  onclick="giveDept('ΕΚΠΑ')"></td>
+                          <td><input type="submit" value="ΑΠΘ" class="btn btn-link"  onclick="giveDept('ΑΠΘ')"></td>
+                      </tr>
+                      <tr>
+                          <td><input type="submit" value="ΠΑΝ. ΠΑΤΡΩΝ" class="btn btn-link" onclick="giveDept('ΠΑΝ. ΠΑΤΡΩΝ')"></td>
+                          <td><input type="submit" value="ΠΑΝ. ΘΕΣΣΑΛΙΑΣ" class="btn btn-link" onclick="giveDept('ΠΑΝ. ΘΕΣΣΑΛΙΑΣ')"></td>
+                      </tr>
+                      <tr>
+                          <td><input type="submit" value="ΤΕΙ ΑΘΗΝΑΣ" class="btn btn-link"  onclick="giveDept('ΤΕΙ ΑΘΗΝΑΣ')"></td>
+                          <td><input type="submit" value="ΔΙ.ΠΑ.Ε." class="btn btn-link"  onclick="giveDept('ΔΙ.ΠΑ.Ε.')"></td>
+                      </tr>
+                      </table>
+                </form> 
+              </div>
         
-
-    <div class="uni-slct">
-        <form method="post">
-            <select class="form-control" aria-label="Default select example" id="uni-sl" name="uni-sl">
-              <option value="#">Ιδρύματα</option>
-              {% for opt in uni_tit %}
-                <option> {{ opt }}</option>
-              {% endfor %}
-            </select>
-            <input type="submit" value="Submit" class="btn btn-primary btn-sm" onclick="showDept(this)">
-          <p id="show_dpt">"{{uni_dps}}"</p>
-        </form> 
+        </div>
       </div>
+
+    
+    
+    <section class="copyright">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12 ">
+						<div class="text-center text-white">
+							&copy; 2023 UniView. All Rights Reserved.
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
 
     <script type="text/javascript">
-    function showDept(selectObject) {
+      function showDept(selectObject) {
         document.getElementById("show_dpt").innerHTML = "{{uni_dps}}";
-    }
+      }
     </script>
+  
+  <script type="text/javascript">
+    function giveDept(theDpt){
+      //div.vakue == keno
+      document.getElementById("uni-sl").value = theDpt;
+    }
+  </script>
       
 </body>
 
