@@ -1,0 +1,57 @@
+.title1 {
+    color: #ffffff;
+    font-weight: lighter;
+    font-size: xxx-large;
+}
+.title2 {
+    font-size: x-large;
+    color: #ffffff;
+}
+.title3 {
+    font-size: large;
+    color: cornsilk;
+}
+p {
+    color: #ffffff;
+    font-weight: 400;
+}
+
+p:hover {
+    color: #00ffdc;
+    cursor: pointer;
+    font-weight: bolder;
+}
+
+.btn_light{
+    background-color: #ff0018;
+}
+
+.btn_dark{
+    background-color: #79010c;
+}
+
+.copyright {
+  background: #3d4e6b;  
+  position: absolute;
+  width: 100%;   
+  bottom: 0;
+  height: 5%;
+  left: 0px;
+  right: 0px;
+  text-align: center;
+  min-height: 50px;
+}
+
+.text-white {
+  padding-top: 1.1%;
+  --bs-text-opacity: 1;
+  color: rgba(var(--bs-white-rgb),var(--bs-text-opacity))!important;
+} 
+
+.horizontical_align {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%,0); /*2 ώρες απ τη ζωή μου*/
+    border: 2px solid white;
+    vertical-align: middle;
+}
