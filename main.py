@@ -164,6 +164,91 @@ def index():
 
     return resp
 
+@main.route('/trial', methods = ['GET', 'POST'])
+def trial_index():
+
+    def1 = 'Πληροφορικής'
+    def2 = '20000'
+    def4 = '2022'
+    def5 = 'ΜΗΧΑΝΙΚΩΝ ΠΛΗΡΟΦΟΡΙΚΗΣ ΚΑΙ ΗΛΕΚΤΡΟΝΙΚΩΝ ΣΥΣΤΗΜΑΤΩΝ (ΘΕΣΣΑΛΟΝΙΚΗ)'
+
+    cols_bs_ds_y: list = ['departments','baseLast','code']
+    cols_bs_d: list = ['year','department','baseLast']
+    
+    df_bs_ds_y: pd.core.frame.DataFrame = ftc.to_dataFrame(ftc.get_bases_departments_year(def1, def4, def2), cols_bs_ds_y)
+    
+    real_code = int(df_bs_ds_y.loc[df_bs_ds_y['departments'] == def5, 'code'])
+    print(real_code)
+    df_bs_d: pd.core.frame.DataFrame  = ftc.to_dataFrame(ftc.get_bases_department(real_code), cols_bs_d)
+
+    m_y: int = ftc.get_maxYear()
+    dp_s: int = ftc.get_dptSum()
+    un_s: int = ftc.get_uniSum()
+
+    cols_pr_t3: list = ['position', 'prefs']
+    pr_t3: pd.core.frame.DataFrame  = ftc.to_dataFrame(ftc.get_preferences_top_3(real_code), cols_pr_t3)
+    pr_labels: str = pr_t3['position']
+    pr_values: int = pr_t3['prefs']
+
+    cols_suc_pr_t3: list = ['position', 'prefs']
+    su_pr_t3: pd.core.frame.DataFrame  = ftc.to_dataFrame(ftc.get_successful_preferences_top_3(real_code), cols_suc_pr_t3)
+    su_pr_values: int = su_pr_t3['prefs']
+
+    cols_ex_ty: list = ['examType', 'positions']
+    ex_ty: pd.core.frame.DataFrame = ftc.to_dataFrame(ftc.get_examTypes(real_code, def4), cols_ex_ty)
+    polar_labels: str = ex_ty['examType']
+    polar_values: int = ex_ty['positions']
+
+    cols_po_y_ex: list = ['year', 'positions', 'specialCat']
+    years: list = ['2019', '2020', '2021', '2022']
+    po_y_ex1: pd.core.frame.DataFrame  = ftc.to_dataFrame(ftc.get_positions_year_examType("gel-ime-gen", real_code), cols_po_y_ex)
+    po_y_ex2: pd.core.frame.DataFrame  = ftc.to_dataFrame(ftc.get_positions_year_examType("epal-ime-gen", real_code), cols_po_y_ex)
+    po_y_ex3: pd.core.frame.DataFrame  = ftc.to_dataFrame(ftc.get_positions_year_examType("gel-ime-ten", real_code), cols_po_y_ex)
+    po_y_ex4: pd.core.frame.DataFrame  = ftc.to_dataFrame(ftc.get_positions_year_examType("epal-ime-ten", real_code), cols_po_y_ex)
+    
+    po_y_ex_title: str = po_y_ex1['specialCat']
+    po_y_ex_labels: int = po_y_ex1['year']
+    
+    po_y_ex_values1: int = po_y_ex1['positions']
+    if po_y_ex2 is not None:
+        po_y_ex_values2: int = po_y_ex2['positions']
+    po_y_ex_values3: int = po_y_ex3['positions']
+    if po_y_ex4 is not None:
+        po_y_ex_values4: int = po_y_ex4['positions']
+
+    line_labels: int = df_bs_d['year']
+    line_values: int = df_bs_d['baseLast']
+    line_title: str = df_bs_d['department'][0]
+
+    bar_labels: str = df_bs_ds_y['departments']
+    bar_values: int = df_bs_ds_y['baseLast']
+
+    resp =  make_response(render_template('trial.html',
+                            labels = bar_labels,
+                            values = bar_values,
+                            department_name = line_title,
+                            labels2 = line_labels,
+                            values2 = line_values,
+                            max_y = m_y,
+                            dept_sum = dp_s,
+                            uni_sum = un_s,
+                            pref_top3 = pr_values,
+                            labels3 = pr_labels,
+                            su_pref_top3 = su_pr_values,
+                            pol_val = polar_values,
+                            pol_lab = polar_labels,
+                            po_labels = po_y_ex_labels,
+                            po_title = po_y_ex_title,
+                            po_values1 = po_y_ex_values1,
+                            po_values2 = po_y_ex_values2,
+                            po_values3 = po_y_ex_values3,
+                            po_values4 = po_y_ex_values4,
+                            )
+            )       
+
+    return resp
+
+
 @main.route('/save', methods = ['GET', 'POST'])
 def save_selections() -> None:
     op1 = request.form.get('school')
@@ -195,6 +280,13 @@ def del_tableaus() -> None:
 
     return ('', 204)
 
+@main.route('/delUser', methods = ['GET', 'POST'])
+def del_profile() :
+    db_controller.del_user(current_user.id)
+    logout_user()
+
+    return render_template('signup.html')
+
 @main.route('/profile')
 @login_required
 def profile():
@@ -203,11 +295,11 @@ def profile():
                            username = current_user.username,
                            stm = stm)
 
-@main.route('/', methods = ['GET'])
-def start():
-    return render_template('startpage.html')
+# @main.route('/', methods = ['GET'])
+# def start():
+#     return render_template('startpage.html')
 
-@main.route('/universities', methods = ['GET', 'POST'])
+@main.route('/', methods = ['GET', 'POST'])
 def unis():
     
     # cols_dp_uni: list = ['uni', 'depts']
@@ -223,7 +315,7 @@ def unis():
     dp_n: str = ftc.get_uni_full_title(request.form.get('uni-sl'))
     un_dps: list = ftc.get_depts_by_uni(request.form.get('uni-sl'))
 
-    resp =  make_response(render_template('universitypage.html',
+    resp =  make_response(render_template('startpage.html',
 
                             uni_tit = un_titles,
                             uni_dps = un_dps,
