@@ -1,301 +1,201 @@
-
-
-/*style for startpage*/
-
-
-
-/*style for navigation bar header*/
-ul {                           
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    font-family: "Noto Sans", sans-serif;
-    font-size: 16px;
-    background-color: #764C78;
-
-  }
-  
-.ul2{   /* style for the  class ul2-nav bar  footer */
-   
-   background-color: #2696A3;
- }
-  
-li {
-    float: right;
-    border-left:1px solid #bbb;
-    
-  }
-  
-li:first-child {
-    border-right: none;
-  }
-  
-  
-li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-  
-  }
-  
-li a:hover:not(.active) {         /*style for li είσοδος-εγγραφή*/
-    background-color: #5F9EA0;
-    color: #ffffff;
-  }
-  
-.active {                         /*style for li UniView*/
-    background-color: #CACACA;
-    
-  }
-  
-  
-  
-/* style for the  class "header" */
-.header {
-    position: absolute;
-    height:7%;
-    top: 0px;
-    width: 100%;
-    left: 0px;     
-    /*min-height: 50px;*/
-    /*align-items: center;*/
-      
-   }
-  
-  /* style for the  class "footer" */
-  .footer {
-    background: #2696A3;  
-    position: absolute;
-    width: 100%;   
-    bottom: 0;
-    height: 7%;
-    left: 0px;
-    right: 0px;
-    text-align: center;
-     
-    }
-  
-    /* style for the class buttons" */
-    .button {     
-      transition-duration: 0.4s;              
-      border-radius: 4px;
-      text-align: center;
-      display: inline-block;  /*the top and bottom margins/paddings are respected*/
-      cursor: pointer;
-  
-      
-      }
-  
-  
-  /* button transition effect */
-  .button:hover {
-   background-color:#dee4de; 
-   color: #2696A3;}
-          
-    /* footer button 
-    .button1{
-      background-color: #CACACA;
-      color: white;
-      font-family: "Noto Sans", sans-serif;
-      font-size: 14px;
-      font-weight: bold;
-      position:absolute;
-      top: 15%;
-      right: 15%;
-      left: 15%;
-      }*/
-  
-      /* Dashboard button*/
-  .button2 {
-    background-color:#414BB2;
-    color: white;
-    font-size: 22px;
-    font-family: Arial, Helvetica, sans-serif;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    padding-left: 25px;
-    padding-right: 25px;
-  }   
-  
-      
-  
-      /* Sign up - Log in button  
-      .button3 {
-      background-color: #ffffff;  
-      font-family: Arial, Helvetica, sans-serif; 
-      border:1px solid #88b0c0;
-      color: #414BB2; 
-      font-size: 18px;
-      margin-right: 15px;
-      padding: 10px;
-      
-      }    */
-              
-           
-  /* style for the  div "content" */  
-  .content{ 
-    position: absolute;
-    background: #050505;
-    width: 100%;
-    height:86%;
-    top: 7%;
-    bottom:7%;
-    left: 0px;
-  } 
-          
-  
-  
-  /* style for the  div "welcome" */   
-.welcome{
-  background: #ffffff;
-  position: absolute;
-  top: 0px;
-  width: 40%;
-  bottom: 0px;
-  left: 0px;}
-  
-          
-  
-  
-  /* style for the  div "dashboard" */   
-.dashboard{
-   display: flex;           /* button cenered horizontically*/
-   align-items: center;     /*and*/
-   justify-content: center; /*vertically*/
-   background: #443180;
-   position: absolute;
-   left: 40%;
-   width: 60%;
-   top: 0px;
-   right: 0px;
-   height: 40%;
-  /*text-align:center;   Dashboard button centered horizontically*/
+html, body{
+  margin:0px;
+  padding:0px;
+  margin-left: 0px;
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-bottom: 0px;
 }
-  
-  
-  /* style for the div "universities" */
-.universities{
-  background: #443180;
+
+
+/* style for the class buttons" */
+.button {     
+transition-duration: 0.4s;              
+border-radius: 4px;
+padding: 8px;
+text-align: center;
+display: inline-block;  /*the top and bottom margins/paddings are respected*/
+margin: 5px;
+cursor: pointer;
+}
+
+
+/* button transition effect */
+.button:hover {
+background-color:#dee4de; 
+color: #2696A3;}
+    
+
+
+/* Dashboard button*/
+.button2 {
+  background-color: #3d4e6b;
+  color: white;
+  font-size: 22px;
+  font-family: Arial, Helvetica, sans-serif;
+  padding-top: 24px;
+  padding-bottom: 25px;
+  padding-left: 75px;
+  padding-right: 75px;
+  text-decoration: none;
+}   
+
+.button2:hover {
+  background-color: #199ef2;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+/* Sign up - Log in button*/   
+.button3 {
+background-color: #ffffff;  
+font-family: Arial, Helvetica, sans-serif; 
+border:1px solid #88b0c0;
+color: #414BB2; 
+font-size: 18px;
+margin-right: 15px;
+padding: 10px;
+}    
+        
+     
+
+.content{ 
   position: absolute;
-  left: 40%;
+  background: #050505;
+  width: 100%;
+  height: 90%;
+  left: 0px;
+} 
+    
+
+
+/* style for the  class "dep_readable" */   
+.dep_readable{
+position: absolute;
+top: 0px;
+width: 40%;
+bottom: 0px;
+left: 0px;
+background-image: url("https://www.perrakispapers.gr/media/1586/ice-white.jpeg?mode=pad&width=1200&upscale=false");
+}
+
+
+
+/* style for the  class "dashboard" */   
+.dashboard{
+display: flex;           /* button centered horizontically-vertically*/
+align-items: center;     
+justify-content: center; 
+background: #540e4c96;
+position: absolute;
+left: 40%;
+width: 60%;
+/*top: 0px;*/
+right: 0px;
+height: 40%;
+/*text-align:center;   Dashboard button centered horizontically*/
+}
+
+
+/* style for the  class "universities" */
+.universities{
+background: #34686b;
+position: absolute;
+left: 40%;
+right: 0px;
+width: 60%;
+top: 40%;
+height: 60%;}
+
+
+
+/* style for the table */
+table {
+  margin: auto;
+  /* background-color: #5f4b8b63; */
+  opacity: 6.5;
+  border-style: hidden;
+  width: 70%;
+  height: 90;
+  margin-top: 4.5%;
+  
+}
+       
+
+
+tr, td {
+  border: 1px solid
+  rgb(88 23 23 / 25%);
+  border-radius: 4px;
+  padding: 13px;
+  font-size: 18px;
+  text-align: center;
+  /* opacity: 1; */
+  
+}
+
+
+
+
+p { 
+margin: auto;
+font-family: "Noto Sans", sans-serif;
+font-style: italic;
+border-radius: 4px;
+background-color: #3d4e6b; 
+color: #ffffff; 
+width: 70%;
+text-align: center;
+padding: 2px;
+}
+
+.copyright {     /*footer*/
+  background: #3d4e6b;  
+  position: absolute;
+  width: 100%;   
+  bottom: 0;
+  height: 5%;
+  left: 0px;
   right: 0px;
-  width: 60%;
-  top: 40%;
-  height:60%;
-      
-     
-  
-    }
-  
-         
-      /* style for the table */
-      table{
-      margin: auto;
-      background-color:#DFDFDF;
-      opacity: 0.5;
-      border:1px solid rgb(88, 23, 23);
-      width: 70% ;
-      height: 90;
-      }
-             
-  
-      /*δεν  παιρνει μορφοποίηση γτ????*/
-      th, td {
-      border:1px solid rgb(88, 23, 23);
-      border-radius: 4px;
-      padding: 13px;
-      font-family: "Nixie One", sans-serif;
-      font-size: 16px;
-      text-align: center;
-      /*opacity: 1;*/
-      }
-      
-  
-  
-      /* style for hyperlink in table  
+  text-align: center;
+  min-height: 50px;
+}
 
-      a:link {
-      text-decoration: none;
-      }*/
-  
-  
-      /*a:visited {
-      text-decoration: none;
-      }
-  
-      a:hover {
-      text-decoration: underline;
-      }
-  
-      a:active {
-      text-decoration: underline;
-      }*/
-  
-      p { 
-      margin: auto;
-      font-family: "Noto Sans", sans-serif;
-      font-style: italic;
-      border-radius: 4px;
-      background-color: #666666; 
-      color: #ffffff; 
-      width: 50%;
-      text-align: center;
-      padding: 2px;
-     
-      }
-  
+.text-white {
+  padding-top: 1.1%;
+  --bs-text-opacity: 1;
+  color: rgba(var(--bs-white-rgb),var(--bs-text-opacity))!important;
+}   
 
-       /* style for the dropdown select box "διάλεξε σχολή"*/
-      .form {
-      /*max-width: 330px;*/
-      width: 100%;
-      padding: 15px;
-      padding-top: 15px;
-      /*margin: 0 auto;
-      margin: auto;*/
-      font-family: "Noto Sans", sans-serif;
-      text-align: center;
-      align-items: center;
-      /*background-color: #5F9EA0;*/
-      
-  }
+/*header nav_bar*/
+.navbar-light .navbar-nav .nav-link {    
+  color: rgb(255 255 255);
+} 
+
+
+/*welcome message*/
+.wel {                
+  position: absolute;
+  top: 25%;
+  color: #98ccff;
+}
+
+.dashb {
+  position: absolute;
+  top: 50%;
+}
+
+/*table buttons*/
+.btn-link{
+  color:white;
+  font-family: Arial, Helvetica, sans-serif;
+  text-decoration: none;
+}
+
+.btn:hover{
   
-  .form .form-heading {
-      margin-bottom: 20px;
-      text-align: center;
-  }
-  .form .form-control {
-      position: relative;
-      font-size: 16px;
-      height: auto;
-      padding: 10px;
-      -webkit-box-sizing: border-box;
-      -moz-box-sizing: border-box;
-      box-sizing: border-box;
-  }
-  .form .form-control:focus {
-      z-index: 2;
-  }
-  .form input[type="text"] {
-      margin-bottom: -1px;
-      border-radius: 0;
-  }
+  color:white;
+  text-decoration: underline;
+  /*color:#000000;*/
 
-/*select dropdown centered horizontically and vertically*/
-   .container{
-    display: flex;            
-    align-items: center;     
-    justify-content: center; 
-   }
- 
-
-    /*  centered horizontically  
-  .horizontical_align_btn{
-    display: flex;           
-    align-items: center;     
-    justify-content: center; 
-
-  }*/
+}
