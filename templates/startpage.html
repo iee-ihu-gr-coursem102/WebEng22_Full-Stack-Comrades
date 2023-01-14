@@ -216,31 +216,27 @@
 
 <body>
     
-    <nav class="navbar navbar-expand-md navbar-light" style="background-color: #3d4e6b;">
-    <div class="container-fluid">
+    <nav class="navbar navbar-expand-md navbar-light" style="padding-right: 2%; background-color: #3d4e6b;">
       <div class="navbar-collapse collapse">
-        <ul class="navbar-nav me-auto">
+                      
+        {% if current_user.is_authenticated %}
+        <ul class="navbar-nav ms-auto">
           <li class="nav-item">
+            <a class='nav-link' href="/profile" style="float:right"class="button button3 navbar-item">Προφίλ</a> 
           </li>
         </ul>
+        {% endif %}
+        {% if not current_user.is_authenticated %}
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"></li>
+            <a class='nav-link' href="/login" style="float:right"; class="button button3 navbar-item">Σύνδεση</a>
+          </li>
+          <li class="nav-item"> 
+            <a class='nav-link' href="/signup" style="float:right"; class="button button3 navbar-item">Εγγραφή</a>
+          </li>
+      </ul>
+        {% endif %}
       </div>
-        <ul class="navbar-nav ms-auto flex-nowrap">
-          <div class="navbar-collapse collapse">
-            <ul class="navbar-nav me-auto">
-              <li class="nav-item">
-                {% if current_user.is_authenticated %}
-                  <a class='nav-link' href="/profile" style="float:right"class="button button3">Προφίλ</a> 
-                {% endif %}
-                {% if not current_user.is_authenticated %}
-                  <a class='nav-link' href="/login" style="float:right"; class="button button3">Σύνδεση</a>
-                  <a class='nav-link' href="/signup" style="float:right"; class="button button3">Εγγραφή</a>
-                {% endif %}
-              </li>
-            </ul>
-          </div>
-        </ul>
-      </div>
-    </div>
   </nav>
 
 
