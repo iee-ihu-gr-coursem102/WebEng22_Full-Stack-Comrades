@@ -46,7 +46,6 @@ def get_preferences(uid):
         if res[i][4][-1] == '"': correct = res[i][5][:-1]; tableaus.append([res[i][0], res[i][1], res[i][2], res[i][3], correct])
         else: tableaus.append([res[i][0], res[i][1], res[i][2], res[i][3], res[i][4]])
     
-    
     db.commit()
     db.close()
 
@@ -67,3 +66,16 @@ def del_preferences(tableaus):
     db.close()
 
     return tableaus
+
+def del_user(uid):
+    db = get_db()
+    cursor = db.cursor()
+    stm: str
+    stm = "DELETE FROM User WHERE id = (?);"
+    stm2 = "DELETE FROM Dashboard WHERE user_id = (?);"
+
+    cursor.execute(stm, [uid])
+    cursor.execute(stm2, [uid])
+    
+    db.commit()
+    db.close()

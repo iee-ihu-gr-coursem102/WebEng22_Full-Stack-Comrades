@@ -1,7 +1,7 @@
 from flask import render_template, request
 from flask import Blueprint, make_response
 import pandas as pd
-from flask_login import login_required, current_user
+from flask_login import login_required, current_user, logout_user
 from . import db_controller
 from . import fetching as ftc
 
@@ -18,7 +18,7 @@ def index():
     global persistent5
 
     def1 = 'Πληροφορικής'
-    def2 = '10000'
+    def2 = '20000'
     def4 = '2022'
     def5 = 'ΠΛΗΡΟΦΟΡΙΚΗΣ ΚΑΙ ΤΗΛΕΠΙΚΟΙΝΩΝΙΩΝ (ΤΡΙΠΟΛΗ)'
 
@@ -260,7 +260,8 @@ def save_selections() -> None:
     op5 = request.form.get('dept')
     if op5 == '': op5 = persistent5
 
-    print(f'n1, n2, n3, n4, n5 -> {op1, op2, op4, op5}')
+    print(f'o1, o2 o4, o5 -> {persistent1, persistent2, persistent4, persistent5}')
+    print(f'n1, n2,n4, n5 -> {op1, op2, op4, op5}')
     db_controller.insert_preference(current_user.username,
                                     current_user.id,
                                     op1,

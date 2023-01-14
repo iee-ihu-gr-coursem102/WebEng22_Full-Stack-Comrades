@@ -81,6 +81,8 @@ def bases_department(res: dict) -> list:
 # Extract Bases, of Year, of Departments
 def bases_departments_year(res: dict) -> list:
    bs_ds_y: list = []
+   print(f'wow -> {type(res)}')
+
    for i in range(len(res['records'])):
       bs_ds_y.append([res['records'][i]['deptName'], res['records'][i]['baseLast'], res['records'][i]['code']])
 
@@ -90,6 +92,11 @@ def bases_departments_year(res: dict) -> list:
 def positions_year_examType(res: dict) -> list:
    po_y_ex: list = []
    print(f'THIS IS RES!!!!!! {res}')
+
+   for key, value in res.items():
+    print(key, value)
+    if key == 'error': po_y_ex = pd.DataFrame(); return po_y_ex
+
    for i in range(len(res['records'])):
       po_y_ex.append([res['records'][i]['year'], res['records'][i]['positions'], res['records'][i]['specialCat']])
       
