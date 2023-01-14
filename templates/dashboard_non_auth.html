@@ -287,146 +287,145 @@
       color: rgba(var(--bs-white-rgb),var(--bs-text-opacity))!important;
     } 
 
+    .uni_owl{
+      background-image: url("https://i.imgur.com/cL07VqT.png");
+    }
+
   </style>
 
 </head>
 
 <body>
 
-    <nav class="navbar navbar-expand-md navbar-light" style="background-color: #3d4e6b;">
+    <nav class="navbar navbar-expand-md navbar-light fixed-top" style="background-color: #3d4e6b;">
       <div class="container-fluid">
-        <div class="navbar-collapse collapse">
-          <ul class="navbar-nav me-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="/">Αρχική</a>
-            </li>
-          </ul>
-        </div>
-  
-          <ul class="navbar-nav ms-auto flex-nowrap">
-            
-            <li class="nav-item">
-              <div class="form-group">
-                <form method="post">
-                  <div class="btn-group">
-                    <input id="secret_operator" name="secret_operator" hidden>
-                    <!--
-                    <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Σχολές
-                    </button>
-                    <div class="dropdown-menu" id="department_operator" name="department_operator">
-                      <a class="dropdown-item" href="#">Πληροφορική</a>
-                      <a class="dropdown-item" href="#">Ιατρική</a>
-                      <a class="dropdown-item" href="#">Λογιστική</a>
-                    </div>
-                    -->
-                    <select class="form-control" aria-label="Default select example" id="saved_dashed" name="saved_dashed">
-                        <option value="#" selected disabled>Τα Ταμπλό μου</option>
-                        {% for item in saved %}
-                        <option>{{ item }}</option>"
-                        {% endfor %}
-                    </select>
-                    <input type="submit" value="Προβολή Ταμπλό" class="btn btn-primary btn-tab" onclick="signalDash()">
-                    <select class="form-control" aria-label="Default select example" id="school_operator" name="school_operator" onchange="fill_school(); disable();">
-                      <optgroup>
-                        <option value="#">{{ persistent1 }}</option>
-                      </optgroup>
-                        <optgroup label="_________">
-                        <option value="Πληροφορικής">Πληροφορικής</option>
-                        <option value="Ιατρικής">Ιατρικής</option>
-                        <option value="Λογιστικής">Λογιστικής</option>
-                        <option value="Θεολογίας">Θεολογίας</option>
-                        <option value="Φιλοσοφίας">Φιλοσοφίας</option>
-                        <option value="Οικονομικών">Οικονομικών</option>
-                        <option value="Μηχανολόγων Μηχανικών">Μηχανολόγων Μηχανικών</option>
-                        <option value="Ηλεκτρολόγων Μηχανικών">Ηλεκτρολόγων Μηχανικών</option>
-                        <option value="Ηλεκτρονικών">Ηλεκτρονικών</option>
-                        <option value="Χημικών Μηχανικών">Χημικών Μηχανικών</option>
-                        <option value="Χημείας">Χημείας</option>
-                        <option value="Αρχιτεκτόνων">Αρχιτεκτόνων</option>
-                        <option value="Μουσικών">Μουσικών</option>
-                        <option value="Γεωπονίας">Γεωπονίας</option>
-                        <option value="Νομικής">Νομικής</option>
-                        <option value="Διατροφής">Διατροφής</option>
-                        <option value="Κοινωνικής Εργασίας">Κοινωνικής Εργασίας</option>
-                        <option value="Νοσηλευτικής">Νοσηλευτικής</option>
-                        <option value="Δασολογίας">Δασολογίας</option>
-                        <option value="Φυσικής">Φυσικής</option>
-                        <option value="Μαθηματικών">Μαθηματικών</option>
-                        <option value="Βιολογίας">Βιολογίας</option>
-                      </optgroup>
-                    </select>
-                    <select class="form-control" aria-label="Default select example" id="base_operator" name="base_operator" onchange="fill_base()">
-                      <optgroup>
-                        <option value="#">{{ persistent2 }}</option>
-                      </optgroup>
-                        <optgroup label="_________">
-                      <!--<option value="4000">4000</option>
-                      <option value="6000">6000</option>
-                      <option value="8000">8000</option>-->
-                      <option value="20000">20000</option>
-                      <option value="19000">19000</option>
-                      <option value="18000">18000</option>
-                      <option value="17000">17000</option>
-                      <option value="16000">16000</option>
-                      <option value="15000">15000</option>
-                      <option value="14000">14000</option>
-                      <option value="13000">13000</option>
-                      <option value="12000">12000</option>
-                      <option value="11000">11000</option>
-                      <option value="10000">10000</option>
-                      <option value="9000">9000</option>
-                    </optgroup>
-                    </select>
-                    <select class="form-control" aria-label="Default select example" id="year_operator" name="year_operator" onchange="fill_yr(); disable()">
-                      <optgroup>
-                        <option value="#">{{ persistent4 }}</option>
-                      </optgroup>
-                      <optgroup label="_________">
-                      <option value="2022">2022</option>
-                      <option value="2021">2021</option>
-                      <option value="2020">2020</option>
-                      <option value="2019">2019</option>
-                      <option value="2018">2018</option>
-                      <option value="2017">2017</option>
-                      <option value="2016">2016</option>
-                      <option value="2015">2015</option>
-                      <option value="2014">2014</option>
-                      <option value="2013">2013</option>
-                    </optgroup>
-                    </select>
-                    <input type="submit" value="Υποβολή Όλων" class="btn btn-primary btn-sub">
-                    <select class="form-control" aria-label="Default select example" id="more_depts" name="more_depts" onchange="fill_dept()">
-                      <optgroup>
-                        <option value="#">{{ persistent5 }}</option>
-                      </optgroup>
-                      <optgroup label="_________">
-                      {% for item in labels %}
-                      <option>{{ item }}"</option>"
-                      {% endfor %}
-                      </select>
-                    <input type="submit" value="Διαλέξτε Τμήμα" class="btn btn-primary btn-dept" id="dept_button">
-                </form>
-                <form method="POST" action="/save">
-                  <input type="hidden" id="school" name="school">
-                  <input type="hidden" id="base" name="base">
-                  <input type="hidden" id="yr" name="yr">
-                  <input type="hidden" id="dept" name="dept" onchange="checkForm()">
-                  <input type="submit" id="saveDash" value="Αποθήκευση Ταμπλό" class="btn btn-info" onclick="save_subs()">
-                </form>
-                </div>
-              </div>
-            </li>
-            <div class="navbar-collapse collapse">
-              <ul class="navbar-nav me-auto">
+          <div class="navbar-collapse">
+            <ul class="navbar-nav me-auto flex-nowrap">
+              <li class="nav-item">
+                <a class="nav-link" href="/">Αρχική</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="navbar-collapse">
+            <ul class="navbar-nav navbar-collapse ms-auto flex-nowrap">
+              
                 <li class="nav-item">
-                  <a class="nav-link" href="/profile">Προφίλ</a>
-                </li>
-              </ul>
-            </div>
-          </ul>
+                  <div class="form-group">
+                    <form method="post">
+                      <div class="btn-group">
+                        <input id="secret_operator" name="secret_operator" hidden>
+                        <select class="form-control" aria-label="Default select example" id="saved_dashed" name="saved_dashed">
+                            <option value="#" selected disabled>Τα Ταμπλό μου</option>
+                            {% for item in saved %}
+                            <option>{{ item }}</option>"
+                            {% endfor %}
+                        </select>
+                        <input type="submit" value="Προβολή Ταμπλό" class="btn btn-primary btn-tab" onclick="signalDash()">
+                        <select class="form-control" aria-label="Default select example" id="school_operator" name="school_operator" onchange="fill_school(); disable();">
+                          <optgroup>
+                            <option value="#">{{ persistent1 }}</option>
+                          </optgroup>
+                            <optgroup label="_________">
+                            <option value="Πληροφορικής">Πληροφορικής</option>
+                            <option value="Ιατρικής">Ιατρικής</option>
+                            <option value="Λογιστικής">Λογιστικής</option>
+                            <option value="Θεολογίας">Θεολογίας</option>
+                            <option value="Φιλοσοφίας">Φιλοσοφίας</option>
+                            <option value="Οικονομικών">Οικονομικών</option>
+                            <option value="Μηχανολόγων Μηχανικών">Μηχανολόγων Μηχανικών</option>
+                            <option value="Ηλεκτρολόγων Μηχανικών">Ηλεκτρολόγων Μηχανικών</option>
+                            <option value="Ηλεκτρονικών">Ηλεκτρονικών</option>
+                            <option value="Χημικών Μηχανικών">Χημικών Μηχανικών</option>
+                            <option value="Χημείας">Χημείας</option>
+                            <option value="Αρχιτεκτόνων">Αρχιτεκτόνων</option>
+                            <option value="Μουσικών">Μουσικών</option>
+                            <option value="Γεωπονίας">Γεωπονίας</option>
+                            <option value="Νομικής">Νομικής</option>
+                            <option value="Διατροφής">Διατροφής</option>
+                            <option value="Κοινωνικής Εργασίας">Κοινωνικής Εργασίας</option>
+                            <option value="Νοσηλευτικής">Νοσηλευτικής</option>
+                            <option value="Δασολογίας">Δασολογίας</option>
+                            <option value="Φυσικής">Φυσικής</option>
+                            <option value="Μαθηματικών">Μαθηματικών</option>
+                            <option value="Βιολογίας">Βιολογίας</option>
+                          </optgroup>
+                        </select>
+                        <select class="form-control" aria-label="Default select example" id="base_operator" name="base_operator" onchange="fill_base()">
+                          <optgroup>
+                            <option value="#">{{ persistent2 }}</option>
+                          </optgroup>
+                            <optgroup label="_________">
+                              <option value="20000">20000</option>
+                              <option value="19000">19000</option>
+                              <option value="18000">18000</option>
+                              <option value="17000">17000</option>
+                              <option value="16000">16000</option>
+                              <option value="15000">15000</option>
+                              <option value="14000">14000</option>
+                              <option value="13000">13000</option>
+                              <option value="12000">12000</option>
+                              <option value="11000">11000</option>
+                              <option value="10000">10000</option>
+                              <option value="9000">9000</option>
+                        </optgroup>
+                        </select>
+                        <select class="form-control" aria-label="Default select example" id="year_operator" name="year_operator" onchange="fill_yr(); disable()">
+                          <optgroup>
+                            <option value="#">{{ persistent4 }}</option>
+                          </optgroup>
+                          <optgroup label="_________">
+                          <option value="2022">2022</option>
+                          <option value="2021">2021</option>
+                          <option value="2020">2020</option>
+                          <option value="2019">2019</option>
+                          <option value="2018">2018</option>
+                          <option value="2017">2017</option>
+                          <option value="2016">2016</option>
+                          <option value="2015">2015</option>
+                          <option value="2014">2014</option>
+                          <option value="2013">2013</option>
+                        </optgroup>
+                        </select>
+                        <input type="submit" value="Υποβολή Όλων" class="btn btn-primary btn-sub" id="sub_all">
+                        <select class="form-control" aria-label="Default select example" id="more_depts" name="more_depts" onchange="fill_dept()">
+                          <optgroup>
+                            <option value="#">{{ persistent5 }}</option>
+                          </optgroup>
+                          <optgroup label="_________">
+                          {% for item in labels %}
+                          <option>{{ item }}"</option>"
+                          {% endfor %}
+                          </optgroup>
+                        </select>
+                        <input type="submit" value="Διαλέξτε Τμήμα" class="btn btn-primary btn-dept" id="dept_button">
+                        <form method="POST" action="/save">    
+                          <input type="hidden" id="school" name="school">
+                          <input type="hidden" id="base" name="base">
+                          <input type="hidden" id="yr" name="yr">
+                          <input type="hidden" id="dept" name="dept" onchange="checkForm()">
+                          <input type="submit" id="saveDash" value="Αποθήκευση Ταμπλό" class="btn btn-info" onclick="save_subs()">
+                      </form>
+                      <!-- με νίκησε. -->
+                      </div>
+                    </form>
+                    
+                  </div>
+                  
+                </li>        
+            </ul>
+            
         </div>
-      </div>
+
+          <div class="navbar-collapse">
+            <ul class="navbar-nav ms-auto flex-nowrap">
+              <li class="nav-item">
+                <a class="nav-link" href="/profile">Προφίλ</a>
+              </li>
+            </ul>
+          </div>
+          
+        </div>
     </nav>
         
   <div class="charts">
