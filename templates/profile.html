@@ -9,12 +9,12 @@
       <p id="{{ item[0] }}" onclick="style.textDecoration = 'line-through'; style.color = '#00ffdc'; style.fontStyle = 'italic'; onclick=collect(this.id); dis()"> {{ item[1] }}, {{ item[2] }}, {{ item[3] }}, {{ item[4] }}</p>
     {% endfor %}
 
-  <form id="delTablsForm" method="POST" action="/delTabls">
+  <form id="delTablsForm" method="POST" action="/delTabls" onsubmit="return confirm('Επιθυμείτε διαγραφή των επιλεγμένων ταμπλό σας;') && allgood();">
     <br><br>
-    <input id="btn" type="submit" class="btn btn-danger btn-sm btn_dark" value="Διαγραφή επιλεγμένων" onclick="allgood()">
+    <input id="btn" type="submit" class="btn btn-danger btn-sm btn_dark" value="Διαγραφή επιλεγμένων">
     <br><br><br><h2 id="demo" class="title3"></h2>
   </form>
-  <form id="delUserForm" method="POST" action="/delUser">
+  <form id="delUserForm" method="POST" action="/delUser" onsubmit="return confirm('Επιθυμείτε διαγραφή του χρήστη σας;');">
     <input id="btn" type="submit" class="btn btn-danger btn-sm btn_light " value="Διαγραφή χρήστη">
   </form>
 
