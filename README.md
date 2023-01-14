@@ -5,6 +5,9 @@
 #### Functionality Requirements Report is at the link below -> 
 https://docs.google.com/spreadsheets/d/1GqqP_t0dQVbJOB64EJoC6flGX8PWPmG5JRZP1xR_mP8/edit?usp=sharing
 
+#### Our team's meetings records ->
+https://docs.google.com/document/d/1Xs819m7O-6SbDMmAs3oQ2KZ5Uj-coZhf/edit?usp=sharing&ouid=110705169211316604949&rtpof=true&sd=true
+
 ###### Project Environment Setup
 
 - Create a virtual Python environment:\
