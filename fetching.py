@@ -8,9 +8,17 @@ from flask import request
 # Make the API Call
 def call_api(uri: str) -> None:
    url: str = uri
-   response: requests.models.Response  = requests.get(url)
-   res: dict = json.loads(response.content.decode('utf-8'))
-   
+   try:
+      req = requests.get(url)
+      response: requests.models.Response  = requests.get(url)
+      if req.status_code == 404:
+         print("the error is 404")
+         res = None
+      else:
+         print("there is no error")
+         res: dict = json.loads(response.content.decode('utf-8'))
+   except Exception as e:
+      print(e)
    return res
 
 # Extract Uni Names
@@ -83,18 +91,27 @@ def bases_departments_year(res: dict) -> list:
    bs_ds_y: list = []
    print(f'wow -> {type(res)}')
 
-   for i in range(len(res['records'])):
-      bs_ds_y.append([res['records'][i]['deptName'], res['records'][i]['baseLast'], res['records'][i]['code']])
+   if res is not None:
+      print("the res is NOT none")
+      #print(res)
+      #res.status_code()
+      #print(res.raise_for_status())
+      for i in range(len(res['records'])):
+         bs_ds_y.append([res['records'][i]['deptName'], res['records'][i]['baseLast'], res['records'][i]['code']])
+
+   else:
+      print("the res is none")
+      bs_ds_y = None
 
    return bs_ds_y
 
 # Extract Positions, of Year, by ExamType
 def positions_year_examType(res: dict) -> list:
    po_y_ex: list = []
-   print(f'THIS IS RES!!!!!! {res}')
+   #print(f'THIS IS RES!!!!!! {res}')
 
    for key, value in res.items():
-    print(key, value)
+    #print(key, value)
     if key == 'error': po_y_ex = pd.DataFrame(); return po_y_ex
 
    for i in range(len(res['records'])):
@@ -111,7 +128,7 @@ def preferences_top_3(res: dict) -> list:
          f += int(theList['first'])
          s += int(theList['second'])
          t += int(theList['third'])
-   theDict: dict = {'First': f, 'Second': s, 'Third' : t}
+   theDict: dict = {'Πρώτη': f, 'Δεύτερη': s, 'Τρίτη' : t}
    pr_t_3 = list(theDict.items())
 
    return pr_t_3
@@ -239,14 +256,23 @@ def get_bases_departments_year(school, year, base) -> list:
    print(f'HMMMM: {cook1, cook2, cook3}')
    print(f'HMMMM: {school, year, base}')
 
+   
    if school == None and year == None: link: str = 'https://vaseis.iee.ihu.gr/api/index.php/bases/search/?base=20000&department=πληροφορική&year=2022&details=full&type=gel-ime-gen'
    elif school == '#' and year == '#' and base == '#': link: str = f'https://vaseis.iee.ihu.gr/api/index.php/bases/search/?base={cook3}&department={cook1}&year={cook2}&details=full&type=gel-ime-gen'
    elif school != '#' and year == '#' and base == '#': link: str = f'https://vaseis.iee.ihu.gr/api/index.php/bases/search/?base=20000&department={school}&year=2022&details=full&type=gel-ime-gen'
    elif school == '#' and year != '#' and base == '#': link: str = f'https://vaseis.iee.ihu.gr/api/index.php/bases/search/?base=20000&department=πληροφορική&year={year}&details=full&type=gel-ime-gen'
    elif school == '#' and year == '#' and base != '#': link: str = f'https://vaseis.iee.ihu.gr/api/index.php/bases/search/?base={base}&department=πληροφορική&year=2022&details=full&type=gel-ime-gen'
    else: link: str = f'https://vaseis.iee.ihu.gr/api/index.php/bases/search/?base={base}&department={school}&year={year}&details=full&type=gel-ime-gen'
-   data: dict = bases_departments_year(call_api(link))
-
+   
+   
+   if bases_departments_year(call_api(link)) is not None:
+      data: dict = bases_departments_year(call_api(link))
+      print("this should not run")
+   else:
+      link: str = f'https://vaseis.iee.ihu.gr/api/index.php/bases/search/?base={cook3}&department={cook1}&year={cook3}&details=full&type=gel-ime-gen'
+      data: dict = bases_departments_year(call_api(link))
+      
+   print(link)
    return data
 
 def get_bases_department(code) -> list:

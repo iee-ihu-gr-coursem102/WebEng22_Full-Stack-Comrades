@@ -177,6 +177,7 @@
     position: absolute;
     height:90%;
     top: 5%;
+    padding-top: 1%;
     bottom:10%;
     left: 0px;
     width: 100%;
@@ -186,7 +187,7 @@
     .chart1 {
     /*background: rgb(167, 169, 252);*/
     position: absolute;
-    top: 3%;
+    top: 7%;
     width: 40%;
     bottom: 50%;
     left: 0px;
@@ -196,6 +197,7 @@
     /*background: rgb(62, 233, 176);*/
     position: absolute;
     top: 50%;
+    padding-top: 1%;
     width: 40%;
     bottom: 0px;
     left: 0px;
@@ -204,7 +206,7 @@
     .chart3 {
     /*background: rgb(29, 33, 243);*/
     position: absolute;
-    top: 3%;
+    top: 7%;
     width: 40%;
     bottom: 50%;
     right: 0px;
@@ -214,6 +216,7 @@
     /*background: rgb(26, 230, 179);*/
     position: absolute;
     top: 50%;
+    padding-top: 1%;
     width: 40%;
     bottom: 0px;
     right: 0px;
@@ -222,7 +225,7 @@
     .chart5 {
     /*background: rgb(232, 241, 145);*/
     position: absolute;
-    top: 7%;
+    top: 15%;
     width: 20%;
     bottom: 50%;
     right: 40%;
@@ -305,24 +308,21 @@
                 <a class="nav-link" href="/">Αρχική</a>
               </li>
             </ul>
-          </div>
-
-          <div class="navbar-collapse">
-            <ul class="navbar-nav navbar-collapse ms-auto flex-nowrap">
-              
+            
+            <ul class="navbar-nav flex-nowrap">
                 <li class="nav-item">
                   <div class="form-group">
                     <form method="post">
                       <div class="btn-group">
                         <input id="secret_operator" name="secret_operator" hidden>
-                        <select class="form-control" aria-label="Default select example" id="saved_dashed" name="saved_dashed">
+                        <select title="Αποθηκευμένες προτιμήσεις" class="form-control" aria-label="Default select example" id="saved_dashed" name="saved_dashed">
                             <option value="#" selected disabled>Τα Ταμπλό μου</option>
                             {% for item in saved %}
                             <option>{{ item }}</option>"
                             {% endfor %}
                         </select>
                         <input type="submit" value="Προβολή Ταμπλό" class="btn btn-primary btn-tab" onclick="signalDash()">
-                        <select class="form-control" aria-label="Default select example" id="school_operator" name="school_operator" onchange="fill_school(); disable();">
+                        <select title="Κατηγορίες σχολών" class="form-control" aria-label="Default select example" id="school_operator" name="school_operator" onchange="fill_school(); disable();">
                           <optgroup>
                             <option value="#">{{ persistent1 }}</option>
                           </optgroup>
@@ -351,7 +351,7 @@
                             <option value="Βιολογίας">Βιολογίας</option>
                           </optgroup>
                         </select>
-                        <select class="form-control" aria-label="Default select example" id="base_operator" name="base_operator" onchange="fill_base()">
+                        <select title="Μέγιστη βάση εισαγωγής" class="form-control" aria-label="Default select example" id="base_operator" name="base_operator" onchange="fill_base()">
                           <optgroup>
                             <option value="#">{{ persistent2 }}</option>
                           </optgroup>
@@ -370,7 +370,7 @@
                               <option value="9000">9000</option>
                         </optgroup>
                         </select>
-                        <select class="form-control" aria-label="Default select example" id="year_operator" name="year_operator" onchange="fill_yr(); disable()">
+                        <select title="Έτος" class="form-control" aria-label="Default select example" id="year_operator" name="year_operator" onchange="fill_yr(); disable()">
                           <optgroup>
                             <option value="#">{{ persistent4 }}</option>
                           </optgroup>
@@ -388,7 +388,7 @@
                         </optgroup>
                         </select>
                         <input type="submit" value="Υποβολή Όλων" class="btn btn-primary btn-sub" id="sub_all">
-                        <select class="form-control" aria-label="Default select example" id="more_depts" name="more_depts" onchange="fill_dept()">
+                        <select title="Συγκεκριμένο τμήμα" class="form-control" aria-label="Default select example" id="more_depts" name="more_depts" onchange="fill_dept()">
                           <optgroup>
                             <option value="#">{{ persistent5 }}</option>
                           </optgroup>
@@ -415,21 +415,34 @@
                   
                 </li>        
             </ul>
-            
-        </div>
-
-          <div class="navbar-collapse">
             <ul class="navbar-nav ms-auto flex-nowrap">
               <li class="nav-item">
                 <a class="nav-link" href="/profile">Προφίλ</a>
               </li>
             </ul>
-          </div>
+        </div>
+
+          <!-- <div class="navbar-collapse">
+            <ul class="navbar-nav ms-auto flex-nowrap">
+              <li class="nav-item">
+                <a class="nav-link" href="/profile">Προφίλ</a>
+              </li>
+            </ul>
+          </div> -->
           
         </div>
     </nav>
         
   <div class="charts">
+    {% if get_flashed_messages() %}
+    <h5 style="color: rgb(213, 0, 43); text-align: center;">
+    {% for message in get_flashed_messages() %}
+      {{ message }}
+    {% endfor %}
+    </h5>
+    {% else %}
+    <h4 id="theSchool" style="text-align: center;">{{persistent5}}, Έτος: {{persistent4}}, Βάση: {{persistent2}}, Τμήματα: {{persistent1}}</h4>
+    {% endif%}
     <div class="chart1"> 
       <canvas id="bar_chart"></canvas>
     </div>
@@ -478,7 +491,7 @@
     function signalDash(){
       document.getElementById("secret_operator").value = "true";
       txt = document.getElementById("secret_operator").value = "true";
-      console.log(txt)
+      //console.log(txt)
     }
   </script>
   <script>
@@ -534,7 +547,7 @@
           {% endfor %}
         ],
         datasets: [{
-          label: 'Βάσεις των τελευταίων',
+          label: 'Βάσεις των τελευταίων στα τμήματα, για το έτος',
           data: [
             {% for item in values %}
             "{{ item }}",
@@ -578,7 +591,7 @@
             {% endfor %}
           ],
           datasets: [{
-            label: 'Βάσεις ανά τα έτη',
+            label: 'Βάσεις του τμήματος ανά τα έτη',
             data: [
               {% for item in values2 %}
               "{{ item }}",
@@ -645,6 +658,12 @@
           ]
         },
         options: {
+          plugins:{
+              title: {
+                display: true,
+                text: 'Θέσεις στα μηχανογραφικά για το έτος'
+            }
+          },
           maintainAspectRatio: false,
           scales: {
           y: {
@@ -796,6 +815,15 @@
           ]
         },
         options: {
+          plugins:{
+              legend: {
+                display: false
+              },
+              title: {
+                display: true,
+                text: 'Θέσεις ανά σχολείο για το τμήμα ανά τα έτη'
+            }
+          },
           scales: {
             y: {
               grid: {

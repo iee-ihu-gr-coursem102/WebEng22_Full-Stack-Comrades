@@ -1,4 +1,4 @@
-from flask import render_template, request
+from flask import render_template, request, flash
 from flask import Blueprint, make_response
 import pandas as pd
 from flask_login import login_required, current_user, logout_user
@@ -20,7 +20,7 @@ def index():
     def1 = 'Πληροφορικής'
     def2 = '20000'
     def4 = '2022'
-    def5 = 'ΠΛΗΡΟΦΟΡΙΚΗΣ ΚΑΙ ΤΗΛΕΠΙΚΟΙΝΩΝΙΩΝ (ΤΡΙΠΟΛΗ)'
+    def5 = 'ΜΗΧΑΝΙΚΩΝ ΠΛΗΡΟΦΟΡΙΚΗΣ ΚΑΙ ΗΛΕΚΤΡΟΝΙΚΩΝ ΣΥΣΤΗΜΑΤΩΝ (ΘΕΣΣΑΛΟΝΙΚΗ)'
 
     sl_op1 = request.form.get('school_operator')
     sl_op2 = request.form.get('base_operator')
@@ -61,8 +61,13 @@ def index():
     
     if secret == 'true': df_bs_ds_y: pd.core.frame.DataFrame = ftc.to_dataFrame(ftc.get_bases_departments_year(dashReq[1], dashReq[3], dashReq[2]), cols_bs_ds_y)
     else: df_bs_ds_y: pd.core.frame.DataFrame = ftc.to_dataFrame(ftc.get_bases_departments_year(persistent1, persistent4, persistent2), cols_bs_ds_y)
-    new_list = df_bs_ds_y['departments'][0]
-    print(df_bs_ds_y)
+    try:
+        df_bs_ds_y['departments'][0]
+        new_list = df_bs_ds_y['departments'][0]
+    except:
+        flash("Δεν υπάρχουν δεδομένα για τις επιλογές σας. Δοκιμάστε νέες επιλογές.")
+        df_bs_ds_y: pd.core.frame.DataFrame = ftc.to_dataFrame(ftc.get_bases_departments_year(def1, def4, def2), cols_bs_ds_y)
+        new_list = df_bs_ds_y['departments'][0]
 
     print(f'this is first PERSISTENT5-> {persistent5}\n')
     print(f'just to see the selection...-> {sl_more}\n')    
@@ -99,20 +104,41 @@ def index():
 
     cols_po_y_ex: list = ['year', 'positions', 'specialCat']
     years: list = ['2019', '2020', '2021', '2022']
-    po_y_ex1: pd.core.frame.DataFrame  = ftc.to_dataFrame(ftc.get_positions_year_examType("gel-ime-gen", real_code), cols_po_y_ex)
-    po_y_ex2: pd.core.frame.DataFrame  = ftc.to_dataFrame(ftc.get_positions_year_examType("epal-ime-gen", real_code), cols_po_y_ex)
-    po_y_ex3: pd.core.frame.DataFrame  = ftc.to_dataFrame(ftc.get_positions_year_examType("gel-ime-ten", real_code), cols_po_y_ex)
-    po_y_ex4: pd.core.frame.DataFrame  = ftc.to_dataFrame(ftc.get_positions_year_examType("epal-ime-ten", real_code), cols_po_y_ex)
+    #types: list = ["gel-ime-gen", "epal-ime-gen", "gel-ime-ten", "epal-ime-ten"]
+
+    # po_y_ex1: pd.core.frame.DataFrame  = ftc.to_dataFrame(ftc.get_positions_year_examType("gel-ime-gen", real_code), cols_po_y_ex)
+    # po_y_ex2: pd.core.frame.DataFrame  = ftc.to_dataFrame(ftc.get_positions_year_examType("epal-ime-gen", real_code), cols_po_y_ex)
+    # po_y_ex3: pd.core.frame.DataFrame  = ftc.to_dataFrame(ftc.get_positions_year_examType("gel-ime-ten", real_code), cols_po_y_ex)
+    # po_y_ex4: pd.core.frame.DataFrame  = ftc.to_dataFrame(ftc.get_positions_year_examType("epal-ime-ten", real_code), cols_po_y_ex)
     
+    try:
+        po_y_ex1: pd.core.frame.DataFrame  = ftc.to_dataFrame(ftc.get_positions_year_examType("gel-ime-gen", real_code), cols_po_y_ex)
+    except:
+        po_y_ex1 = None
+    try:
+        po_y_ex2: pd.core.frame.DataFrame  = ftc.to_dataFrame(ftc.get_positions_year_examType("epal-ime-gen", real_code), cols_po_y_ex)
+    except:
+        po_y_ex2 = None
+    try:
+        po_y_ex3: pd.core.frame.DataFrame  = ftc.to_dataFrame(ftc.get_positions_year_examType("gel-ime-ten", real_code), cols_po_y_ex)
+    except:
+        po_y_ex3 = None
+    try:
+        po_y_ex4: pd.core.frame.DataFrame  = ftc.to_dataFrame(ftc.get_positions_year_examType("epal-ime-ten", real_code), cols_po_y_ex)
+    except:
+        po_y_ex4 = None
+
     po_y_ex_title: str = po_y_ex1['specialCat']
     po_y_ex_labels: int = po_y_ex1['year']
     
     po_y_ex_values1: int = po_y_ex1['positions']
     if po_y_ex2 is not None:
         po_y_ex_values2: int = po_y_ex2['positions']
+    else: po_y_ex_values2: int = []
     po_y_ex_values3: int = po_y_ex3['positions']
     if po_y_ex4 is not None:
         po_y_ex_values4: int = po_y_ex4['positions']
+    else: po_y_ex_values4: int = []
 
     line_labels: int = df_bs_d['year']
     line_values: int = df_bs_d['baseLast']
@@ -243,6 +269,10 @@ def trial_index():
                             po_values2 = po_y_ex_values2,
                             po_values3 = po_y_ex_values3,
                             po_values4 = po_y_ex_values4,
+                            schools = def1,
+                            year = def4,
+                            base = def2,
+                            dept = def5
                             )
             )       
 

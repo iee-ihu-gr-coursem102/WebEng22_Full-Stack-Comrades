@@ -157,6 +157,7 @@
     position: absolute;
     height:90%;
     top: 5%;
+    padding-top: 1%;
     bottom:10%;
     left: 0px;
     width: 100%;
@@ -166,7 +167,7 @@
     .chart1 {
     /*background: rgb(167, 169, 252);*/
     position: absolute;
-    top: 3%;
+    top: 7%;
     width: 40%;
     bottom: 50%;
     left: 0px;
@@ -176,6 +177,7 @@
     /*background: rgb(62, 233, 176);*/
     position: absolute;
     top: 50%;
+    padding-top: 1%;
     width: 40%;
     bottom: 0px;
     left: 0px;
@@ -184,7 +186,7 @@
     .chart3 {
     /*background: rgb(29, 33, 243);*/
     position: absolute;
-    top: 3%;
+    top: 7%;
     width: 40%;
     bottom: 50%;
     right: 0px;
@@ -194,6 +196,7 @@
     /*background: rgb(26, 230, 179);*/
     position: absolute;
     top: 50%;
+    padding-top: 1%;
     width: 40%;
     bottom: 0px;
     right: 0px;
@@ -202,7 +205,7 @@
     .chart5 {
     /*background: rgb(232, 241, 145);*/
     position: absolute;
-     top: 7%;
+    top: 15%;
     width: 20%;
     bottom: 50%;
     right: 40%;
@@ -280,6 +283,7 @@
     </nav>
         
   <div class="charts">
+    <h4 id="theSchool" style="text-align: center;">{{dept}}, Έτος: {{year}}, Βάση: {{base}}, Τμήματα: {{schools}}</h4>
     <div class="chart1"> 
       <canvas id="bar_chart"></canvas>
     </div>
@@ -378,7 +382,7 @@
           {% endfor %}
         ],
         datasets: [{
-          label: 'Βάσεις των τελευταίων',
+          label: 'Βάσεις των τελευταίων στα τμήματα, για το έτος',
           data: [
             {% for item in values %}
             "{{ item }}",
@@ -422,7 +426,7 @@
             {% endfor %}
           ],
           datasets: [{
-            label: 'Βάσεις ανά τα έτη',
+            label: 'Βάσεις του τμήματος ανά τα έτη',
             data: [
               {% for item in values2 %}
               "{{ item }}",
@@ -489,6 +493,12 @@
           ]
         },
         options: {
+          plugins:{
+              title: {
+                display: true,
+                text: 'Θέσεις στα μηχανογραφικά για το έτος'
+            }
+          },
           maintainAspectRatio: false,
           scales: {
           y: {
@@ -639,6 +649,15 @@
           ]
         },
         options: {
+          plugins:{
+              legend: {
+                display: false
+              },
+              title: {
+                display: true,
+                text: 'Θέσεις ανά σχολείο για το τμήμα ανά τα έτη'
+            }
+          },
           scales: {
             y: {
               grid: {
