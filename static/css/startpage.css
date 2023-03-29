@@ -76,7 +76,8 @@ top: 0px;
 width: 40%;
 bottom: 0px;
 left: 0px;
-background-image: url("https://www.perrakispapers.gr/media/1586/ice-white.jpeg?mode=pad&width=1200&upscale=false");
+text-transform: capitalize;
+background-image: url("https://abrakadabra.fun/uploads/posts/2022-01/1641241370_2-abrakadabra-fun-p-tekstura-svetlogo-betona-3.jpg");
 }
 
 
@@ -198,4 +199,8 @@ padding: 2px;
   text-decoration: underline;
   /*color:#000000;*/
 
+}
+
+.navbar {
+  background: #3d4e6b;
 }

@@ -31,7 +31,7 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.js"></script>  
 
-  <style>
+  <!-- <style>
 
   html, body{
     margin:0px;
@@ -264,7 +264,34 @@
       color: rgba(var(--bs-white-rgb),var(--bs-text-opacity))!important;
     } 
 
-  </style>
+  </style> -->
+
+  <link rel="stylesheet" type="text/css" href="static/css/trial.css">
+
+  <script type="text/javascript">
+    window.addEventListener("load", function (){
+      changeToLow();
+      changeColors();
+    });
+
+    function changeToLow(){
+      var toLow = document.getElementById("theSchool");
+      var theLow = toLow.textContent.toLocaleLowerCase();
+      toLow.textContent = theLow;
+    }
+
+    var deutColors = false;
+    function changeColors(){
+      if ("{{my_bool_cookie}}" != '1') {
+        deutColors = false;
+        document.querySelector('link[href="static/css/colorblind.css"]').href = "static/css/trial.css";
+      }else {
+        deutColors = true;
+        document.querySelector('link[href="static/css/trial.css"]').href = "static/css/colorblind.css";
+      }
+    }
+  </script>
+
 
 </head>
 
@@ -277,13 +304,29 @@
             <li class="nav-item">
               <a class="nav-link" href="/">Αρχική</a>
             </li>
+            <li class="nav-item">
+              <form id="color_form" action="/trial" method="post">
+                <label class="nav-link" for="col_bli" title="Παλέτα για αχρωματοψία">Χρώματα
+                  <input type="checkbox" name="col_bli" id="col_bli" {% if my_bool_cookie == '1' %}checked{% endif %} onchange="this.form.submit()">
+                </label>
+              </form>
+            </li>
           </ul>
+          <!-- <ul class="navbar-nav ms-auto flex-nowrap">
+            
+          </ul> -->
         </div>
 			</div>
     </nav>
-        
+
+    <!-- <script>
+      document.getElementById('col_bli').addEventListener('change', function() {
+        document.getElementById('color_form').submit();
+      });
+    </script> -->
+
   <div class="charts">
-    <h4 id="theSchool" style="text-align: center;">{{dept}}, Έτος: {{year}}, Βάση: {{base}}, Τμήματα: {{schools}}</h4>
+    <h4 id="theSchool" style="text-align: center;" class="text-capitalize">{{dept}}, Έτος: {{year}}, Βάση: {{base}}, Τμήματα: {{schools}}</h4>
     <div class="chart1"> 
       <canvas id="bar_chart"></canvas>
     </div>
@@ -388,8 +431,8 @@
             "{{ item }}",
             {% endfor %}
           ],
-          borderColor: 'rgb(75, 192, 192)',
-          backgroundColor: 'rgba(75, 192, 192, 0.5)',
+          borderColor: "{{theCols[14]}}",
+          backgroundColor: "{{theCols[10]}}",
           borderWidth: 3,
           borderRadius: 10
         }]
@@ -433,8 +476,8 @@
               {% endfor %}
             ],
             fill: false,
-            borderColor: 'rgb(75, 192, 192)',
-            backgroundColor: 'rgba(75, 192, 192, 0.5)',
+            borderColor: "{{theCols[14]}}",
+            backgroundColor: "{{theCols[10]}}",
             pointStyle: 'circle',
             pointRadius: 10,
             pointHoverRadius: 15
@@ -476,8 +519,8 @@
               {% endfor %}
             ],
             fill: true,
-            borderColor: 'rgb(255, 99, 132)',
-            backgroundColor: 'rgba(255, 99, 132, 0.7)',
+            borderColor: "{{theCols[15]}}",
+            backgroundColor: "{{theCols[1]}}",
             },
             {
             label: '3 Πρώτες επιλογές',
@@ -487,8 +530,8 @@
               {% endfor %}
             ],
             fill: true,
-            borderColor: 'rgb(75, 192, 192)',
-            backgroundColor: 'rgba(75, 192, 192, 0.5)'
+            borderColor: "{{theCols[14]}}",
+            backgroundColor: "{{theCols[10]}}"
             }
           ]
         },
@@ -540,18 +583,18 @@
               {% endfor %}
             ],
             backgroundColor: [
-            'rgba(255, 99, 132, 0.7)',
-            'rgba(54, 162, 235, 0.7)',
-            'rgba(78, 73, 226, 0.7)',
-            'rgba(16, 152, 75, 0.7)',
-            'rgba(132, 155, 15, 0.7)',
-            'rgba(102, 135, 115, 0.7)',
-            'rgba(75, 192, 192, 0.7)',
-            'rgba(163, 46, 230, 0.7)',
-            'rgba(255, 205, 86, 0.7)'
+            "{{theCols[1]}}",
+            "{{theCols[5]}}",
+            "{{theCols[6]}}",
+            "{{theCols[7]}}",
+            "{{theCols[8]}}",
+            "{{theCols[9]}}",
+            "{{theCols[0]}}",
+            "{{theCols[4]}}",
+            "{{theCols[2]}}"
             ],
             fill: true,
-            borderColor: 'rgb(75, 192, 192)',
+            borderColor: "{{theCols[14]}}",
             tension: 0.1
           }]
         },
@@ -606,8 +649,8 @@
               {% endfor %}
             ],
             fill: true,
-            borderColor: 'rgb(255,205,86)',
-            backgroundColor: 'rgba(255,205,86, 0.5)',
+            borderColor: "{{theCols[17]}}",
+            backgroundColor: "{{theCols[12]}}",
             tension: 0.1
             },
             {
@@ -618,8 +661,8 @@
               {% endfor %}
             ],
             fill: true,
-            borderColor: 'rgb(54,162,235)',
-            backgroundColor: 'rgba(54,162,235, 0.5)',
+            borderColor: "{{theCols[16]}}",
+            backgroundColor: "{{theCols[13]}}",
             tension: 0.1
             },
             {
@@ -630,8 +673,8 @@
               {% endfor %}
             ],
             fill: true,
-            borderColor: 'rgb(251,100,132)',
-            backgroundColor: 'rgba(251,100,132, 0.5)',
+            borderColor: "{{theCols[15]}}",
+            backgroundColor: "{{theCols[11]}}",
             tension: 0.1
             },
             {
@@ -642,8 +685,8 @@
               {% endfor %}
             ],
             fill: true,
-            borderColor: 'rgb(75, 192, 192)',
-            backgroundColor: 'rgba(75, 192, 192, 0.5)',
+            borderColor: "{{theCols[14]}}",
+            backgroundColor: "{{theCols[10]}}",
             tension: 0.1
             }
           ]

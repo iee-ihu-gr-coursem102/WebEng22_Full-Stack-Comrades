@@ -1,0 +1,74 @@
+
+    let cyan1 = "rgba(75, 192, 192, 0.7)";
+    let pink1 = "rgba(255, 99, 132, 0.7)";
+    let yellow1 = "rgba(255, 205, 86, 0.7)";
+    let blue1 = "rgba(54, 162, 235, 0.7)";
+
+    let purple1 = "rgba(163, 46, 230, 0.7)";
+    let siel1 = "rgba(54, 162, 235, 0.7)";
+    let purple2 = "rgba(78, 73, 226, 0.7)";
+    let green1 = "rgba(16, 152, 75, 0.7)";
+    let yellow2 = "rgba(132, 155, 15, 0.7)";
+    let grey1 = "rgba(102, 135, 115, 0.7)";
+
+    let cyanP = "rgba(75, 192, 192, 0.5)";
+    let pinkP = "rgba(255, 99, 132, 0.5)";
+    let yellowP = "rgba(255, 205, 86, 0.5)";
+    let blueP = "rgba(54, 162, 235, 0.5)";
+
+    // let pink2P = "rgba(251,100,132, 0.5)";
+
+    let cyanB = "rgb(75, 192, 192)";
+    let pinkB = "rgb(251,100,132)";
+    let blueB = "rgb(54,162,235)";
+    let yellowB = "rgb(255, 205, 86)";
+
+    /*------------------------------------------*/
+
+    let cyanD = "rgba(0, 200, 255, 0.7)";
+    let pinkD = "rgba(224, 222, 177, 0.7)";
+    let yellowD = "rgba(197, 121, 126, 0.7)";
+    let blueD = "rgba(129, 214, 3, 0.7)";
+
+    let purpleD = "rgba(144, 59, 171, 0.7)";
+    let sielD = "rgba(198, 232, 255, 0.7)";
+    let purple2D = "rgba(156, 109, 255, 0.7)";
+    let greenD = "rgba(18, 136, 14, 0.7)";
+    let yellow2D = "rgba(193, 187, 71, 0.7)";
+    let greyD = "rgba(206, 206, 206, 0.7)";
+
+    let cyanDP = "rgba(0, 200, 255, 0.5)";
+    let pinkDP = "rgba(224, 222, 177, 0.5)";
+    let yellowDP = "rgba(197, 121, 126, 0.5)";
+    let blueDP = "rgba(129, 214, 3, 0.5)";
+
+    // let pink2DP = "rgba(221, 22, 177, 0.5)"
+
+    let cyanDB = "rgb(0, 200, 255)";
+    let pinkDB = "rgb(224, 222, 177)";
+    let blueDB = "rgb(197, 121, 126)";
+    let yellowDB = "rgb(129, 214, 3)";
+
+    cyan1 = cyanD;
+    pink1 = pinkD;
+    blue1 = blueD
+    yellow1 = yellowD;
+
+    purple1 = purpleD;
+    siel1 = sielD;
+    purple2 = purple2D;
+    green1 = greenD;
+    yellow2 = yellow2D;
+    grey1 = greyD;
+
+    cyanB = cyanDB;
+    pinkB = pinkDB;
+    blueB = blueDB;
+    yellowB = yellowDB;
+
+    // pink2P = pink2DP;
+
+    cyanP = cyanDP;
+    pinkP = pinkDP;
+    yellowP = yellowDP;
+    blueP = blueDP;

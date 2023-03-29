@@ -9,9 +9,66 @@ main = Blueprint('main', __name__)
 auth = Blueprint('auth', __name__)
 uni = Blueprint('uni', __name__)
 
+col_bool: bool
+colorsA = ["rgba(75, 192, 192, 0.7)", 
+           "rgba(255, 99, 132, 0.7)", 
+           "rgba(255, 205, 86, 0.7)", 
+           "rgba(54, 162, 235, 0.7)", 
+           "rgba(163, 46, 230, 0.7)",
+           "rgba(54, 162, 235, 0.7)",
+           "rgba(78, 73, 226, 0.7)",
+           "rgba(16, 152, 75, 0.7)",
+           "rgba(132, 155, 15, 0.7)",
+           "rgba(102, 135, 115, 0.7)",
+           "rgba(75, 192, 192, 0.5)",
+           "rgba(255, 99, 132, 0.5)",
+           "rgba(255, 205, 86, 0.5)",
+           "rgba(54, 162, 235, 0.5)",
+           "rgb(75, 192, 192)",
+           "rgb(251,100,132)",           
+           "rgb(54,162,235)",
+           "rgb(255, 205, 86)"]
+
+colorsB = ["rgba(0, 200, 255, 0.7)",
+           "rgba(224, 222, 177, 0.7)",
+           "rgba(197, 121, 126, 0.7)",
+           "rgba(129, 214, 3, 0.7)",
+           "rgba(144, 59, 171, 0.7)",
+           "rgba(198, 232, 255, 0.7)",
+           "rgba(156, 109, 255, 0.7)",
+           "rgba(18, 136, 14, 0.7)",
+           "rgba(193, 187, 71, 0.7)",
+           "rgba(206, 206, 206, 0.7)",
+           "rgba(0, 200, 255, 0.5)",
+           "rgba(224, 222, 177, 0.5)",
+           "rgba(197, 121, 126, 0.5)",
+           "rgba(129, 214, 3, 0.5)",
+           "rgb(0, 200, 255)",
+           "rgb(224, 222, 177)",
+           "rgb(197, 121, 126)",
+           "rgb(129, 214, 3)"]
+
 @main.route('/dashboard', methods = ['GET', 'POST'])
 def index():
 
+    if request.method == 'POST':
+        col_bools = request.form.get('col_bli')
+        print(col_bools)
+        if col_bools == 'on':
+            myColors = colorsB
+            my_bool_cookie = '1'
+        else:
+            myColors = colorsA
+            my_bool_cookie = '0' 
+    else:
+        my_bool_cookie = request.cookies.get('col_bool')
+        if my_bool_cookie == '1':
+            myColors = colorsB
+            my_bool_cookie = '1'
+        else:
+            myColors = colorsA
+            my_bool_cookie = '0'
+            
     global persistent1
     global persistent2
     global persistent4
@@ -179,9 +236,13 @@ def index():
                             persistent2 = persistent2,
                             persistent4 = persistent4,
                             persistent5 = persistent5,
-                            saved = tableaus
+                            saved = tableaus,
+                            theCols = myColors,
+                            my_bool_cookie = my_bool_cookie
                             )
             )       
+
+    resp.set_cookie('col_bool', my_bool_cookie, path='/')   
     
     resp.set_cookie('persistent1', persistent1)
     resp.set_cookie('persistent2', persistent2)
@@ -192,6 +253,23 @@ def index():
 
 @main.route('/trial', methods = ['GET', 'POST'])
 def trial_index():
+
+    if request.method == 'POST':
+        col_bools = request.form.get('col_bli')
+        if col_bools == 'on':
+            myColors = colorsB
+            my_bool_cookie = '1'
+        else:
+            myColors = colorsA
+            my_bool_cookie = '0' 
+    else:
+        my_bool_cookie = request.cookies.get('col_bool')
+        if my_bool_cookie == '1':
+            myColors = colorsB
+            my_bool_cookie = '1'
+        else:
+            myColors = colorsA
+            my_bool_cookie = '0'
 
     def1 = 'Πληροφορικής'
     def2 = '20000'
@@ -272,12 +350,40 @@ def trial_index():
                             schools = def1,
                             year = def4,
                             base = def2,
-                            dept = def5
+                            dept = def5,
+                            theCols = myColors,
+                            my_bool_cookie = my_bool_cookie
                             )
             )       
 
+    resp.set_cookie('col_bool', my_bool_cookie, path='/')
+    print(my_bool_cookie)
     return resp
 
+#Could it be done like this? Next time
+
+# @main.route('/colors', methods =['GET', 'POST'])
+# def change_colors() -> None:
+#     if request.method == 'POST':
+#         col_bools = request.form.get('col_bli')
+#         print(col_bools)
+#         if col_bools == 'on':
+#             myColors = colorsB
+#             my_bool_cookie = '1'
+#         else:
+#             myColors = colorsB
+#             my_bool_cookie = '0' 
+#     else:
+#         my_bool_cookie = request.cookies.get('col_bool')
+#         if my_bool_cookie == '1':
+#             myColors = colorsB
+#             my_bool_cookie = '1'
+#         else:
+#             myColors = colorsA
+#             my_bool_cookie = '0' 
+
+    
+#     #resp.set_cookie('col_bool', my_bool_cookie, path='/')
 
 @main.route('/save', methods = ['GET', 'POST'])
 def save_selections() -> None:
@@ -318,25 +424,49 @@ def del_profile() :
 
     return render_template('signup.html')
 
-@main.route('/profile')
+@main.route('/profile', methods = ['GET', 'POST'])
 @login_required
 def profile():
-    stm = db_controller.get_preferences(current_user.id)
-    return render_template('profile.html',
-                           username = current_user.username,
-                           stm = stm)
 
-# @main.route('/', methods = ['GET'])
-# def start():
-#     return render_template('startpage.html')
+    if request.method == 'POST':
+        col_bools = request.form.get('col_bli')
+        print(col_bools)
+        if col_bools == 'on':
+            my_bool_cookie = '1'
+        else:
+            my_bool_cookie = '0' 
+    else:
+        my_bool_cookie = request.cookies.get('col_bool')
+        if my_bool_cookie == '1':
+            my_bool_cookie = '1'
+        else:
+            my_bool_cookie = '0'
+
+    stm = db_controller.get_preferences(current_user.id)
+    resp =  make_response(render_template('profile.html',
+                            my_bool_cookie = my_bool_cookie,
+                            username = current_user.username,
+                            stm = stm))
+    resp.set_cookie('col_bool', my_bool_cookie, path='/')
+    return resp
+
 
 @main.route('/', methods = ['GET', 'POST'])
 def unis():
     
-    # cols_dp_uni: list = ['uni', 'depts']
-    # dp_uni: pd.core.frame.DataFrame  = ftc.to_dataFrame(ftc.get_depts_by_uni(), cols_dp_uni)
-    # du_labels: str = dp_uni['uni']
-    # du_values: int = dp_uni['depts']
+    if request.method == 'POST':
+        col_bools = request.form.get('col_bli')
+        print(col_bools)
+        if col_bools == 'on':
+            my_bool_cookie = '1'
+        else:
+            my_bool_cookie = '0' 
+    else:
+        my_bool_cookie = request.cookies.get('col_bool')
+        if my_bool_cookie == '1':
+            my_bool_cookie = '1'
+        else:
+            my_bool_cookie = '0'    
 
     cols_uni: list = ['id', 'title']
     un_ti: pd.core.frame.DataFrame = ftc.to_dataFrame(ftc.get_uniList(), cols_uni)
@@ -347,7 +477,7 @@ def unis():
     un_dps: list = ftc.get_depts_by_uni(request.form.get('uni-sl'))
 
     resp =  make_response(render_template('startpage.html',
-
+                            my_bool_cookie = my_bool_cookie,
                             uni_tit = un_titles,
                             uni_dps = un_dps,
                             dept_nm = dp_n
@@ -355,6 +485,9 @@ def unis():
                             # values5 = du_values
                         )
     )
+
+    resp.set_cookie('col_bool', my_bool_cookie, path='/')
+    print(my_bool_cookie)
     return resp
     #return render_template('universitypage.html')
 

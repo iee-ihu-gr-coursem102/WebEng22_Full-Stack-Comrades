@@ -31,7 +31,7 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.js"></script>  
 
-  <style>
+  <!-- <style>
 
   html, body{
     margin:0px;
@@ -294,12 +294,38 @@
       background-image: url("https://i.imgur.com/cL07VqT.png");
     }
 
-  </style>
+  </style> -->
+
+  <link rel="stylesheet" type="text/css" href="static/css/dashboard_non_auth.css">
+
+  <script type="text/javascript">
+    window.addEventListener("load", function (){
+      changeToLow();
+      changeColors();
+    });
+
+    function changeToLow(){
+      var toLow = document.getElementById("theSchool");
+      var theLow = toLow.textContent.toLocaleLowerCase();
+      toLow.textContent = theLow;
+    }
+
+    var deutColors = false;
+    function changeColors(){
+      if ("{{my_bool_cookie}}" != '1') {
+        deutColors = false;
+        document.querySelector('link[href="static/css/colorblind.css"]').href = "static/css/dashboard_non_auth.css";
+      }else {
+        deutColors = true;
+        document.querySelector('link[href="static/css/dashboard_non_auth.css"]').href = "static/css/colorblind.css";
+      }
+    }
+  </script>
 
 </head>
 
 <body>
-
+  <form id="color_form_dash" action="/dashboard" method="post">
     <nav class="navbar navbar-expand-md navbar-light fixed-top" style="background-color: #3d4e6b;">
       <div class="container-fluid">
           <div class="navbar-collapse">
@@ -307,12 +333,19 @@
               <li class="nav-item">
                 <a class="nav-link" href="/">Αρχική</a>
               </li>
+              <li class="nav-item">
+                <!-- <form id="color_form_dash" action="/dashboard" method="post"> -->
+                  <label class="nav-link" for="col_bli" title="Παλέτα για αχρωματοψία">Χρώματα
+                    <input type="checkbox" name="col_bli" id="col_bli" {% if my_bool_cookie == '1' %}checked{% endif %} onchange="this.form.submit()">
+                  </label>
+                <!-- </form> -->
+              </li>
             </ul>
             
             <ul class="navbar-nav flex-nowrap">
                 <li class="nav-item">
                   <div class="form-group">
-                    <form method="post">
+                    <!-- <form method="post"> -->
                       <div class="btn-group">
                         <input id="secret_operator" name="secret_operator" hidden>
                         <select title="Αποθηκευμένες προτιμήσεις" class="form-control" aria-label="Default select example" id="saved_dashed" name="saved_dashed">
@@ -399,7 +432,7 @@
                           </optgroup>
                         </select>
                         <input type="submit" value="Διαλέξτε Τμήμα" class="btn btn-primary btn-dept" id="dept_button">
-                      </form>
+    </form>
                         <form method="POST" action="/save">    
                           <input type="hidden" id="school" name="school">
                           <input type="hidden" id="base" name="base">
@@ -553,8 +586,8 @@
             "{{ item }}",
             {% endfor %}
           ],
-          borderColor: 'rgb(75, 192, 192)',
-          backgroundColor: 'rgba(75, 192, 192, 0.5)',
+          borderColor: "{{theCols[14]}}",
+          backgroundColor: "{{theCols[10]}}",
           borderWidth: 3,
           borderRadius: 10
         }]
@@ -598,8 +631,8 @@
               {% endfor %}
             ],
             fill: false,
-            borderColor: 'rgb(75, 192, 192)',
-            backgroundColor: 'rgba(75, 192, 192, 0.5)',
+            borderColor: "{{theCols[14]}}",
+            backgroundColor: "{{theCols[10]}}",
             pointStyle: 'circle',
             pointRadius: 10,
             pointHoverRadius: 15
@@ -641,8 +674,8 @@
               {% endfor %}
             ],
             fill: true,
-            borderColor: 'rgb(255, 99, 132)',
-            backgroundColor: 'rgba(255, 99, 132, 0.7)',
+            borderColor: "{{theCols[15]}}",
+            backgroundColor: "{{theCols[1]}}",
             },
             {
             label: '3 Πρώτες επιλογές',
@@ -652,8 +685,8 @@
               {% endfor %}
             ],
             fill: true,
-            borderColor: 'rgb(75, 192, 192)',
-            backgroundColor: 'rgba(75, 192, 192, 0.5)'
+            borderColor: "{{theCols[14]}}",
+            backgroundColor: "{{theCols[10]}}"
             }
           ]
         },
@@ -705,18 +738,18 @@
               {% endfor %}
             ],
             backgroundColor: [
-            'rgba(255, 99, 132, 0.7)',
-            'rgba(54, 162, 235, 0.7)',
-            'rgba(78, 73, 226, 0.7)',
-            'rgba(16, 152, 75, 0.7)',
-            'rgba(132, 155, 15, 0.7)',
-            'rgba(102, 135, 115, 0.7)',
-            'rgba(75, 192, 192, 0.7)',
-            'rgba(163, 46, 230, 0.7)',
-            'rgba(255, 205, 86, 0.7)'
+            "{{theCols[1]}}",
+            "{{theCols[5]}}",
+            "{{theCols[6]}}",
+            "{{theCols[7]}}",
+            "{{theCols[8]}}",
+            "{{theCols[9]}}",
+            "{{theCols[0]}}",
+            "{{theCols[4]}}",
+            "{{theCols[2]}}"
             ],
             fill: true,
-            borderColor: 'rgb(75, 192, 192)',
+            borderColor: "{{theCols[14]}}",
             tension: 0.1,
             
           }]
@@ -772,8 +805,8 @@
               {% endfor %}
             ],
             fill: true,
-            borderColor: 'rgb(255,205,86)',
-            backgroundColor: 'rgba(255,205,86, 0.5)',
+            borderColor: "{{theCols[17]}}",
+            backgroundColor: "{{theCols[12]}}",
             tension: 0.1
             },
             {
@@ -784,8 +817,8 @@
               {% endfor %}
             ],
             fill: true,
-            borderColor: 'rgb(54,162,235)',
-            backgroundColor: 'rgba(54,162,235, 0.5)',
+            borderColor: "{{theCols[16]}}",
+            backgroundColor: "{{theCols[13]}}",
             tension: 0.1
             },
             {
@@ -796,8 +829,8 @@
               {% endfor %}
             ],
             fill: true,
-            borderColor: 'rgb(251,100,132)',
-            backgroundColor: 'rgba(251,100,132, 0.5)',
+            borderColor: "{{theCols[15]}}",
+            backgroundColor: "{{theCols[11]}}",
             tension: 0.1
             },
             {
@@ -808,8 +841,8 @@
               {% endfor %}
             ],
             fill: true,
-            borderColor: 'rgb(75, 192, 192)',
-            backgroundColor: 'rgba(75, 192, 192, 0.5)',
+            borderColor: "{{theCols[14]}}",
+            backgroundColor: "{{theCols[10]}}",
             tension: 0.1
             }
           ]

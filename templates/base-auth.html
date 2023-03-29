@@ -12,9 +12,38 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="static/css/base-auth.css">
+
+    <script type="text/javascript">
+    window.addEventListener("load", function (){
+        //changeToLow();
+        changeColors();
+    });
+
+    function changeToLow(){
+        var toLow = document.getElementById("depts");
+        var theLow = toLow.textContent.toLocaleLowerCase();
+        toLow.textContent = theLow;
+    }
+
+    var deutColors = false;
+    function changeColors(){
+        if ("{{my_bool_cookie}}" != '1') {
+        deutColors = false;
+        document.querySelector('link[href="static/css/colorblindB.css"]').href = "static/css/base-auth.css";
+        }else {
+        deutColors = true;
+        document.querySelector('link[href="static/css/base-auth.css"]').href = "static/css/colorblindB.css";
+        }
+    }
+    </script>
+
+
+
 </head>
 
-<style>
+<!-- <style>
 
     .title1 {
         color: #ffffff;
@@ -73,20 +102,33 @@
         border: 2px solid white;
         vertical-align: middle;
     }
-  
-  </style>
 
+    .bgimg{
+        background-image: url('https://www.photos-public-domain.com/wp-content/uploads/2018/07/teal-textured-wall-close-up.jpg'); 
+        background-size: cover;
+    }
+  
+  </style> -->
 <body>
 
     
 
-    <section class="hero is-primary is-fullheight" style="background-image: url('https://www.photos-public-domain.com/wp-content/uploads/2018/07/teal-textured-wall-close-up.jpg'); background-size: cover;">
+    <section class="hero is-primary is-fullheight bgimg">
         <nav class="navbar navbar-expand-md navbar-light" style="background-color: #3d4e6b;">
             <div class="navbar-collapse collapse">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
                         <a class="navbar-item" href="/">Αρχική</a>
                     </li>
+                    <li class="nav-item">
+                        <form id="color_form3" action="/profile" method="post">
+                          <a class="navbar-item">
+                            <label for="col_bli" title="Παλέτα για αχρωματοψία">Χρώματα 
+                                <input type="checkbox" name="col_bli" id="col_bli" {% if my_bool_cookie == '1' %}checked{% endif %} onchange="this.form.submit()">
+                            </label>
+                          </a>
+                        </form>
+                      </li>
                 </ul>
                 
                 {% if current_user.is_authenticated %}
@@ -135,7 +177,7 @@
         </nav>
 
 
-        <div class="hero-body">
+        <div class="hero-body bgimg">
             <div class="container has-text-centered">
                {% block content %}
                {% endblock %}

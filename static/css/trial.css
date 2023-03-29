@@ -1,53 +1,205 @@
 html, body{
-    margin:0px;
-    padding:0px;
+  margin:0px;
+  padding:0px;
+}
+      
+  /*
+  .header {
+  background:#657FAB;
+  position: absolute;
+  height:5%;
+  top: 0px;
+  width: 100%;
+  left: 0px;     
+  min-height: 50px;
+  text-align: center;  
+  }*/
+
+  select.form-control:not([size]):not([multiple]) {
+    height: calc(2.25rem + 2px);
+    /* padding: 10px; */
   }
-        
-    /*
-    .header {
-    background:#657FAB;
-    position: absolute;
-    height:5%;
-    top: 0px;
-    width: 100%;
-    left: 0px;     
-    min-height: 50px;
-    text-align: center;  
-    }*/
 
-    select.form-control:not([size]):not([multiple]) {
-      height: calc(2.25rem + 2px);
-      /* padding: 10px; */
-    }
+  #school_operator {
+    margin-inline-start: 1%;
+  }
 
-    #school_operator {
-      margin-inline-start: 1%;
-    }
+  #more_depts {
+    margin-inline-start: 1%;
+  }
 
-    #more_depts {
-      margin-inline-start: 1%;
-    }
 
-    .navbar-light .navbar-nav .nav-link {
-      color: rgb(255 255 255);
-      border-style: solid;
-      border-width: thin;
-      border-color: cadetblue;
-    }
+  .btn-info {
+    color: #000;
+    background-color: #0dff00;
+    border-color: #0000008f;
+    margin-left: 5%;
+  }
 
-    .navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover {
-      color: rgb(255 245 67 / 67%);
-    }
+      /* style for the  class "footer" */
+  .footer {
+  background: #3d4e6b;  
+  position: absolute;
+  width: 100%;   
+  bottom: 0;
+  height: 5%;
+  left: 0px;
+  right: 0px;
+  text-align: center;
+  min-height: 50px;
+  }
 
-    .btn-info {
-      color: #000;
-      background-color: #0dff00;
-      border-color: #0000008f;
-      margin-left: 5%;
-    }
+  .navbar-light .navbar-nav .nav-link {
+    color: rgb(255 255 255);
+  }
 
-        /* style for the  class "footer" */
-    .footer {
+  /* style for the class buttons" */
+  .button {     
+  transition-duration: 0.4s;              
+  border-radius: 4px;
+  padding: 8px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 5px;
+  cursor: pointer;}
+
+
+  /* button transition effect */
+  button:hover {
+  background-color:#dee4de; 
+  color: #2696A3;
+  text-decoration: none;
+  }
+
+  a:hover {
+  text-decoration: none;
+  color: #04070b
+  }
+      
+  /* Uniview button */
+  .button1{
+  background-color: #9a9335;
+  color: white;
+  font-family: "Noto Sans", sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  top: 17%;
+  }
+
+  /* Save Dashboard button*/
+  .button2 {
+  margin-right: 15px;
+  background-color:#414BB2;
+  color: white;
+  font-size: 16px;
+  font-family: Arial, Helvetica, sans-serif;
+  }  
+
+
+  /* Sign up - Log in button*/   
+  .button3 {
+  background-color: #ffffff;  
+  font-family: Arial, Helvetica, sans-serif; 
+  border:1px solid #88b0c0;
+  color: #414BB2; 
+  font-size: 16px;
+  margin-right: 15px 
+  }  
+          
+
+  .button4{
+  background-color: #9510AC;
+  color: white;
+  font-family: "Noto Sans", sans-serif;
+  font-size: 15px;
+  }
+          
+         
+  /* style for the  class "charts" */   
+  .charts{
+  background: white;
+  position: absolute;
+  height:90%;
+  top: 5%;
+  padding-top: 1%;
+  bottom:10%;
+  left: 0px;
+  width: 100%;
+  background-image: url("https://klike.net/uploads/posts/2022-12/1670657143_7-6.jpg");
+  }
+
+  .chart1 {
+  /*background: rgb(167, 169, 252);*/
+  position: absolute;
+  top: 7%;
+  width: 40%;
+  bottom: 50%;
+  left: 0px;
+  }
+
+  .chart2 {
+  /*background: rgb(62, 233, 176);*/
+  position: absolute;
+  top: 50%;
+  padding-top: 1%;
+  width: 40%;
+  bottom: 0px;
+  left: 0px;
+  }
+
+  .chart3 {
+  /*background: rgb(29, 33, 243);*/
+  position: absolute;
+  top: 7%;
+  width: 40%;
+  bottom: 50%;
+  right: 0px;
+  }
+
+  .chart4 {
+  /*background: rgb(26, 230, 179);*/
+  position: absolute;
+  top: 50%;
+  padding-top: 1%;
+  width: 40%;
+  bottom: 0px;
+  right: 0px;
+  }
+
+  .chart5 {
+  /*background: rgb(232, 241, 145);*/
+  position: absolute;
+  top: 15%;
+  width: 20%;
+  bottom: 50%;
+  right: 40%;
+  left: 40%;
+  }
+
+  .chart6 {
+  /*background: rgb(232, 241, 145);*/
+  position: absolute;
+  top: 65%;
+  width: 20%;
+  bottom: 0px;
+  right: 40%;
+  left: 40%;
+  }
+  /*#################################*/
+  #more_depts{
+  width: 100px;
+  text-overflow: ellipsis;
+  }
+
+  .btn-group {
+    position:absolute;
+    top: 15%;
+    right: 15%;
+    left: 15%;
+  }
+
+  .copyright {
     background: #3d4e6b;  
     position: absolute;
     width: 100%;   
@@ -57,181 +209,28 @@ html, body{
     right: 0px;
     text-align: center;
     min-height: 50px;
-    }
+  }
 
-    .navbar-light .navbar-nav .nav-link {
-      color: rgb(255 255 255);
-    }
+  p { 
+  margin: auto;
+  font-family: "Noto Sans", sans-serif;
+  font-style: italic;
+  border-radius: 4px;
+  background-color: #e693a5; 
+  color: #ffffff; 
+  width: 70%;
+  text-align: center;
+  padding: 2px;
+  }
 
-    /* style for the class buttons" */
-    .button {     
-    transition-duration: 0.4s;              
-    border-radius: 4px;
-    padding: 8px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    margin: 5px;
-    cursor: pointer;}
+  .text-white {
+    padding-top: 1.1%;
+    --bs-text-opacity: 1;
+    color: rgba(var(--bs-white-rgb),var(--bs-text-opacity))!important;
+  }
 
-
-    /* button transition effect */
-    button:hover {
-    background-color:#dee4de; 
-    color: #2696A3;
-    text-decoration: none;
-    }
-
-    a:hover {
-    text-decoration: none;
-    color: #04070b
-    }
-        
-    /* Uniview button */
-    .button1{
-    background-color: #9a9335;
-    color: white;
+  h4 {
     font-family: "Noto Sans", sans-serif;
-    font-size: 16px;
-    font-weight: bold;
-    top: 17%;
-    }
-
-    /* Save Dashboard button*/
-    .button2 {
-    margin-right: 15px;
-    background-color:#414BB2;
-    color: white;
-    font-size: 16px;
-    font-family: Arial, Helvetica, sans-serif;
-    }  
-
-
-    /* Sign up - Log in button*/   
-    .button3 {
-    background-color: #ffffff;  
-    font-family: Arial, Helvetica, sans-serif; 
-    border:1px solid #88b0c0;
-    color: #414BB2; 
-    font-size: 16px;
-    margin-right: 15px 
-    }  
-            
-
-    .button4{
-    background-color: #9510AC;
-    color: white;
-    font-family: "Noto Sans", sans-serif;
-    font-size: 15px;
-    }
-            
-           
-    /* style for the  class "charts" */   
-    .charts{
-    background: white;
-    position: absolute;
-    height:90%;
-    top: 5%;
-    bottom:10%;
-    left: 0px;
-    width: 100%;
-    background-image: url("https://klike.net/uploads/posts/2022-12/1670657143_7-6.jpg");
-    }
-
-    .chart1 {
-    /*background: rgb(167, 169, 252);*/
-    position: absolute;
-    top: 3%;
-    width: 40%;
-    bottom: 50%;
-    left: 0px;
-    }
-
-    .chart2 {
-    /*background: rgb(62, 233, 176);*/
-    position: absolute;
-    top: 50%;
-    width: 40%;
-    bottom: 0px;
-    left: 0px;
-    }
-
-    .chart3 {
-    /*background: rgb(29, 33, 243);*/
-    position: absolute;
-    top: 3%;
-    width: 40%;
-    bottom: 50%;
-    right: 0px;
-    }
-
-    .chart4 {
-    /*background: rgb(26, 230, 179);*/
-    position: absolute;
-    top: 50%;
-    width: 40%;
-    bottom: 0px;
-    right: 0px;
-    }
-
-    .chart5 {
-    /*background: rgb(232, 241, 145);*/
-    position: absolute;
-     top: 7%;
-    width: 20%;
-    bottom: 50%;
-    right: 40%;
-    left: 40%;
-    }
-
-    .chart6 {
-    /*background: rgb(232, 241, 145);*/
-    position: absolute;
-    top: 65%;
-    width: 20%;
-    bottom: 0px;
-    right: 40%;
-    left: 40%;
-    }
-    /*#################################*/
-    #more_depts{
-    width: 100px;
-    text-overflow: ellipsis;
-    }
-
-    .btn-group {
-      position:absolute;
-      top: 15%;
-      right: 15%;
-      left: 15%;
-    }
-
-    .copyright {
-      background: #3d4e6b;  
-      position: absolute;
-      width: 100%;   
-      bottom: 0;
-      height: 5%;
-      left: 0px;
-      right: 0px;
-      text-align: center;
-      min-height: 50px;
-    }
-
-    p { 
-    margin: auto;
-    font-family: "Noto Sans", sans-serif;
-    font-style: italic;
-    border-radius: 4px;
-    background-color: #e693a5; 
-    color: #ffffff; 
-    width: 70%;
-    text-align: center;
-    padding: 2px;
-    }
-
-    .text-white {
-      padding-top: 1.1%;
-      --bs-text-opacity: 1;
-      color: rgba(var(--bs-white-rgb),var(--bs-text-opacity))!important;
-    } 
+    color: #203a7e;
+    text-transform: capitalize;
+  }
